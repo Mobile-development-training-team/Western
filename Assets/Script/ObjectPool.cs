@@ -36,7 +36,7 @@ public class ObjectPool
         }
         if (currentObj == null)
         {
-            currentObj = GameManager.getInstance().loadResource<GameObject>(objName);
+            currentObj = loadResource<GameObject>(objName);
             GameObject.Instantiate(currentObj);
         }
         currentObj.transform.position = pos;
@@ -60,5 +60,16 @@ public class ObjectPool
             Debug.Log("does not have objPoolName");
             pool.Add(objPoolName, new List<GameObject>() { obj });
         }
+    }
+
+    public T loadResource<T>(string path) where T : Object
+    {
+        Object obj = Resources.Load(path);
+        if (obj == null)
+        {
+            return null;
+        }
+        Debug.Log(obj.name);
+        return (T)obj;
     }
 }

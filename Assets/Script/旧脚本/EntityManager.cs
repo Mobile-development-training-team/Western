@@ -42,7 +42,7 @@ public class EntityManager
     {
         if (loadObj == null)
         {
-            loadObj = GameManager.getInstance().loadResource<GameObject>(entityName);
+            loadObj = ObjectPool.GetInstant().loadResource<GameObject>(entityName);
         }
         if (objs.Count < maxNum)
         {

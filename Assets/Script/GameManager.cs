@@ -32,16 +32,7 @@ public class GameManager
         return INSTANCE;
     }
 
-    public T loadResource<T>(string path) where T : Object
-    {
-        Object obj = Resources.Load(path);
-        if (obj == null)
-        {
-            return null;
-        }
-        Debug.Log(obj.name);
-        return (T)obj;
-    }
+    
 
     
 }

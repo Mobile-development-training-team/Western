@@ -36,7 +36,7 @@ public class Knight : MonoBehaviour
                 hand = child.gameObject;
             }
         }
-        GameObject swordObj = GameManager.getInstance().loadResource<GameObject>("Sword");
+        GameObject swordObj = ObjectPool.GetInstant().loadResource<GameObject>("Sword");
         Debug.Log(swordObj);
         sword = GameObject.Instantiate(swordObj, hand.transform);
         sword.SetActive(false);
