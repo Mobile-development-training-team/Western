@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - RightHand
+  - Gun
+  - 2Hand-Sword
+  - laser
+  - brave
   layers:
   - Default
   - TransparentFX

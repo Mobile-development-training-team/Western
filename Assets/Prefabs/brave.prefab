@@ -94,7 +94,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9066542947984531454
 Transform:
   m_ObjectHideFlags: 0
@@ -894,7 +894,7 @@ GameObject:
   - component: {fileID: 9066542947636976627}
   m_Layer: 0
   m_Name: brave
-  m_TagString: Untagged
+  m_TagString: brave
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1189,7 +1189,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9066542947753883771
 Transform:
   m_ObjectHideFlags: 0
@@ -1260,8 +1260,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 0.45359886, y: 0.18889989, z: 1.927557}
-  m_Center: {x: -0.1767287, y: -0.16351545, z: 1.2616136}
+  m_Size: {x: 0.45359886, y: 0.32869563, z: 2.393686}
+  m_Center: {x: -0.1767287, y: -0.09361759, z: 1.1868548}
 --- !u!1 &9066542947760206175
 GameObject:
   m_ObjectHideFlags: 0
