@@ -25,7 +25,7 @@ public class ObjectPool
     public GameObject GetObj(string objName, Vector3 pos, Quaternion qua)
     {
         GameObject currentObj = null;
-        Debug.Log("currentObjName is " + objName);
+        //Debug.Log("currentObjName is " + objName);
         if (pool.ContainsKey(objName))
         {
             if(pool[objName].Count>0)
@@ -49,15 +49,15 @@ public class ObjectPool
     {
         obj.SetActive(false);
         string objPoolName = obj.name.Replace("(Clone)", "");
-        Debug.Log("saveobj objname "+objPoolName);
+        //Debug.Log("saveobj objname "+objPoolName);
         if (pool.ContainsKey(objPoolName))
         {
             pool[objPoolName].Add(obj);
-            Debug.Log("pool size "+pool[objPoolName].Count);
+            //Debug.Log("pool size "+pool[objPoolName].Count);
         }
         else
         {
-            Debug.Log("does not have objPoolName");
+            //Debug.Log("does not have objPoolName");
             pool.Add(objPoolName, new List<GameObject>() { obj });
         }
     }
@@ -69,7 +69,18 @@ public class ObjectPool
         {
             return null;
         }
-        Debug.Log(obj.name);
+        //Debug.Log(obj.name);
         return (T)obj;
+    }
+
+
+    public void clearObj(string objName)
+    {
+
+    }
+
+    public void clearAll()
+    {
+
     }
 }

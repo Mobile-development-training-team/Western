@@ -5,32 +5,28 @@ using UnityEngine;
 public class BraveController : MonoBehaviour
 {
     private Animator mAnimator;
+    private GameObject RightHand;
+    private GameObject THandSword;
+    private GameObject Gun;
+    private GameObject laser;
+    private GameObject muzzle;
 
-    bool beDoingSomethings = false;
-
-    bool walking = false;
-    bool running = false;
-    bool death = false;
-
-    int AttackIndex = 0;
-    int WeaponIndex = 0;
-    int Ammunition = 10;
-
-    GameObject RightHand;
-    GameObject THandSword;
-    GameObject Gun;
-    GameObject laser;
-    GameObject muzzle;
-
-    float horizontal = 0;
-    float vertical = 0;
-    bool LeftWalking = false;
-    bool RightWalking = false;
-    bool LeftRunning = false;
-    bool RightRunning = false;
-    bool X = false;
-    bool Y = false;
-    bool Z = false;
+    private bool beDoingSomethings = false;
+    private bool walking = false;
+    private bool running = false;
+    private bool death = false;
+    private int AttackIndex = 0;
+    private int WeaponIndex = 0;
+    private int Ammunition = 10;
+    private float horizontal = 0;
+    private float vertical = 0;
+    private bool LeftWalking = false;
+    private bool RightWalking = false;
+    private bool LeftRunning = false;
+    private bool RightRunning = false;
+    private bool X = false;
+    private bool Y = false;
+    private bool Z = false;
 
     // Start is called before the first frame update
     void Start()
@@ -239,6 +235,7 @@ public class BraveController : MonoBehaviour
     public void XButton() 
     {
         beDoingSomethings = true;
+        mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
         if (WeaponIndex == 0)
         {
             TwoHandSwordAttack();
@@ -250,11 +247,13 @@ public class BraveController : MonoBehaviour
         else
         {
             beDoingSomethings = false;
+            mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
         }
     }
     public void YButton() 
     {
         beDoingSomethings = true;
+        mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
         if (WeaponIndex == 0)
         {
             TwoHandSwordSkill();
@@ -266,11 +265,13 @@ public class BraveController : MonoBehaviour
         else
         {
             beDoingSomethings = false;
+            mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
         }
     }
     public void ZButton() 
     {
         beDoingSomethings = true;
+        mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
         ChangeWeapon();
     }
     ////////////////////////////////////////////////////////////////////<按钮事件/>
@@ -319,6 +320,7 @@ public class BraveController : MonoBehaviour
     {
         THandSword.GetComponent<BoxCollider>().enabled = false;
         beDoingSomethings = false;
+        mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
     }
 
     public void startShooting()
@@ -333,6 +335,7 @@ public class BraveController : MonoBehaviour
         Ammunition = Ammunition - 1;
         mAnimator.SetInteger("Ammunition", Ammunition);
         beDoingSomethings = false;
+        mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
     }
     public void startReload()
     {
@@ -343,6 +346,7 @@ public class BraveController : MonoBehaviour
         mAnimator.SetInteger("Ammunition", 10);
         Ammunition = 10;
         beDoingSomethings = false;
+        mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
     }
     public void startChangeWeapon()
     {
@@ -376,6 +380,7 @@ public class BraveController : MonoBehaviour
 
         }
         beDoingSomethings = false;
+        mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
     }
     ////////////////////////////////////////////////////////////////////<动画的回调函数/>
 
@@ -384,7 +389,7 @@ public class BraveController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //碰到地面
-        if (collision.gameObject.name == "Plane")
+        if (collision.gameObject.name.Equals("Plane"))
         {
             return;
         }
@@ -402,5 +407,13 @@ public class BraveController : MonoBehaviour
 
     }
     ////////////////////////////////////////////////////////////////////<碰撞检测及处理/>
+
+    ////////////////////////////////////////////////////////////////////<回归初始状态>
+    public void clearStatus()
+    {
+        beDoingSomethings = false;
+        AttackIndex = 0;
+    }
+    ////////////////////////////////////////////////////////////////////<回归初始状态/>
 
 }

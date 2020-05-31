@@ -4,18 +4,14 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-    void destoryy()
-    {
-        ObjectPool.GetInstant().SaveObj(transform.gameObject);
-    }
     void OnEnable()
     {
-        Invoke("destoryy", 10);
+        Invoke("SaveBullet", 10);       //10秒后回收子弹
+    }
+    //超出射程回收子弹
+    void SaveBullet()
+    {
+        ObjectPool.GetInstant().SaveObj(transform.gameObject);
     }
 
     // Update is called once per frame
@@ -23,7 +19,7 @@ public class BulletController : MonoBehaviour
     {
         transform.Translate(transform.forward * 10 * Time.deltaTime,Space.World);
     }
-
+    //击中目标
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag.Equals("Enemy"))
@@ -31,6 +27,10 @@ public class BulletController : MonoBehaviour
             Animator enemyAnimator = other.transform.GetComponent<Animator>();
             enemyAnimator.SetTrigger("GetHit");
             ObjectPool.GetInstant().SaveObj(transform.gameObject);
+            if (IsInvoking("SaveBullet"))
+            {
+                CancelInvoke("SaveBullet");
+            }
         }
     }
 }

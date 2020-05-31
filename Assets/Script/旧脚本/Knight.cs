@@ -37,7 +37,7 @@ public class Knight : MonoBehaviour
             }
         }
         GameObject swordObj = ObjectPool.GetInstant().loadResource<GameObject>("Sword");
-        Debug.Log(swordObj);
+        //Debug.Log(swordObj);
         sword = GameObject.Instantiate(swordObj, hand.transform);
         sword.SetActive(false);
     }
@@ -84,7 +84,7 @@ public class Knight : MonoBehaviour
         {
             return;
         }
-        Debug.Log("开始碰撞");
+        //Debug.Log("开始碰撞");
         stopMove();
         if (collision.gameObject == target.gameObject)
         {
@@ -103,7 +103,7 @@ public class Knight : MonoBehaviour
         {
             isCollisionTarget = false;
         }
-        Debug.Log("离开碰撞");
+        //Debug.Log("离开碰撞");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -112,7 +112,7 @@ public class Knight : MonoBehaviour
         {
             return;
         }
-        Debug.Log("开始触发" + other);
+        //Debug.Log("开始触发" + other);
     }
 
     private void OnTriggerExit(Collider other)
@@ -121,7 +121,7 @@ public class Knight : MonoBehaviour
         {
             return;
         }
-        Debug.Log("离开触发");
+        //Debug.Log("离开触发");
     }
 
     void startMove(Vector3 target)
