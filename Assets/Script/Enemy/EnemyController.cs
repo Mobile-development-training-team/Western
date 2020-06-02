@@ -121,6 +121,11 @@ public class EnemyController : MonoBehaviour
     {
         mAnimator.SetTrigger("Attacking");
     }
+    public void GetHit()
+    {
+        if (!death)
+            mAnimator.SetTrigger("GetHit");
+    }
     ////////////////////////////////////////////////////////////////////<控制动画/>
 
     ////////////////////////////////////////////////////////////////////<动画的回调函数>
@@ -160,8 +165,9 @@ public class EnemyController : MonoBehaviour
         {
             if (other.gameObject.tag.Equals("brave"))
             {
-                Animator braveAnimator = other.transform.GetComponent<Animator>();
-                braveAnimator.SetTrigger("GetHit");
+                other.gameObject.SendMessage("GetHit");
+                //Animator braveAnimator = other.transform.GetComponent<Animator>();
+                //braveAnimator.SetTrigger("GetHit");
             }
         }
 
