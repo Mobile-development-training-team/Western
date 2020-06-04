@@ -78,7 +78,7 @@ public class EnemyController : MonoBehaviour
         }
 
         ///////////////////////////////<勇者是否在攻击范围内>
-        if ((brave.transform.position.x - transform.position.x) > -3 && (brave.transform.position.x - transform.position.x) < 3)
+        if ((brave.transform.position.x - transform.position.x) > -2 && (brave.transform.position.x - transform.position.x) < 2)
         {
             meetBrave = true;
         }

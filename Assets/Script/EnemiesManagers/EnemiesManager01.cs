@@ -37,19 +37,19 @@ public class EnemiesManager01 : MonoBehaviour
 
     private void wave1()
     {
-        ObjectPool.GetInstant().GetObj("2Hand-Sword-Enemy", new Vector3(-13, -7, -2), new Quaternion());
+        ObjectPool.GetInstant().GetObj("TwoHandsSwordEnemy", new Vector3(-13, -7, -2), new Quaternion());
     }
 
     private void wave2()
     {
         ObjectPool.GetInstant().GetObj("2Hand-Sword-Enemy", new Vector3(-13, -7, -2), new Quaternion());
-        ObjectPool.GetInstant().GetObj("2Hand-Sword-Enemy", new Vector3(13, -7, -2), new Quaternion());
+        ObjectPool.GetInstant().GetObj("TwoHandsSwordEnemy", new Vector3(13, -7, -2), new Quaternion());
     }
 
     private void wave3()
     {
         ObjectPool.GetInstant().GetObj("2Hand-Sword-Enemy", new Vector3(-13, -7, -2), new Quaternion());
-        ObjectPool.GetInstant().GetObj("2Hand-Sword-Enemy", new Vector3(0, -7, -2), new Quaternion());
+        ObjectPool.GetInstant().GetObj("TwoHandsSwordEnemy", new Vector3(0, -7, -2), new Quaternion());
         ObjectPool.GetInstant().GetObj("2Hand-Sword-Enemy", new Vector3(13, -7, -2), new Quaternion());
     }
 
