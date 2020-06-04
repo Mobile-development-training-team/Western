@@ -6,7 +6,7 @@ public class BulletController : MonoBehaviour
 {
     void OnEnable()
     {
-        Invoke("SaveBullet", 10);       //10秒后回收子弹
+        Invoke("SaveBullet", 3);       //3秒后回收子弹
     }
     //超出射程回收子弹
     void SaveBullet()

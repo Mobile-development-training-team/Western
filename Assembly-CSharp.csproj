@@ -53,6 +53,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\ModularRPGHeroesPolyArt\TPController\Scripts\AnimatorMatcher.cs" />
+     <Compile Include="Assets\ModularRPGHeroesPolyArt\TPController\Scripts\BoolOperator1.cs" />
+     <Compile Include="Assets\ModularRPGHeroesPolyArt\TPController\Scripts\BoolOperator2.cs" />
+     <Compile Include="Assets\ModularRPGHeroesPolyArt\TPController\Scripts\CameraManager.cs" />
+     <Compile Include="Assets\ModularRPGHeroesPolyArt\TPController\Scripts\ControlManager.cs" />
+     <Compile Include="Assets\ModularRPGHeroesPolyArt\TPController\Scripts\ResetTimer.cs" />
      <Compile Include="Assets\RPG Character Animation Pack\Code\CameraController.cs" />
      <Compile Include="Assets\RPG Character Animation Pack\Code\GUIControls.cs" />
      <Compile Include="Assets\RPG Character Animation Pack\Code\IKHands.cs" />
@@ -77,6 +83,7 @@
      <Compile Include="Assets\RPG Character Animation Pack\SuperCharacterController\Code\SuperCharacterController\Math3d.cs" />
      <Compile Include="Assets\Script\Attribute.cs" />
      <Compile Include="Assets\Script\Brave\Ammunition\BulletController.cs" />
+     <Compile Include="Assets\Script\Brave\Ammunition\MagicBallController.cs" />
      <Compile Include="Assets\Script\Brave\BraveController.cs" />
      <Compile Include="Assets\Script\DamageCalculator.cs" />
      <Compile Include="Assets\Script\EnemiesManagers\EnemiesManager01.cs" />
@@ -650,6 +657,10 @@
  <Reference Include="System.Xml.Serialization">
  <HintPath>F:/Unity/Unity2018.4.22f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{6F60CA52-95D5-3D85-0C8B-6E4D6277318A}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
