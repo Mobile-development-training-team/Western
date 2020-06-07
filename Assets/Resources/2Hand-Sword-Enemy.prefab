@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 7003679677272960402}
   - component: {fileID: 1961740356405510713}
   - component: {fileID: 576341100443190432}
+  - component: {fileID: 114360577656242428}
   m_Layer: 0
   m_Name: 2Hand-Sword-Enemy
   m_TagString: Enemy
@@ -91,7 +92,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 71073351267068549}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13, y: -7, z: -2}
+  m_LocalPosition: {x: -13, y: -7, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 71073351266907929}
@@ -160,6 +161,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6db666255393c4240a313ce69abe6677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114360577656242428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71073351267068549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49e5895dfacf8a444820f8e284b720ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTeam: 2
+  mHp: 100
+  mDef: 0
+  hasHp: 1
 --- !u!1 &71073351267068551
 GameObject:
   m_ObjectHideFlags: 0

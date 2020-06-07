@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+
+    private Life mLife;
+    private Attack attack;
+    private LifeCallback callback;
+
     private Animator mAnimator;
     private Collider mcollider;
     private Rigidbody mrigidbody;
@@ -17,8 +22,31 @@ public class EnemyController : MonoBehaviour
     private float deathTime = 5f;
     private float time1 = 3f;
 
+    class LifeCallback : Life.LifeCallback
+    {
+        private EnemyController enemy;
+        public LifeCallback(EnemyController enemy)
+        {
+            this.enemy = enemy;
+        }
+        public void onHurted()
+        {
+            enemy.GetHit();
+        }
+        public void onDead()
+        {
+            enemy.Death();
+        }
+    }
+
     void Awake()
     {
+        attack = new Attack();
+        mLife = GetComponent<Life>();
+        callback = new LifeCallback(this);
+        mLife.registerCallback(callback);
+        attack.mTeam = mLife.mTeam;
+
         mAnimator = GetComponent<Animator>();
         mcollider = GetComponent<CapsuleCollider>();
         mrigidbody = GetComponent<Rigidbody>();
@@ -45,18 +73,34 @@ public class EnemyController : MonoBehaviour
         meetBrave = false;
         deathTime = 5f;
         time1 = 3f;
+
+        mLife.mHp = mLife.MAXHP;
+        mLife.hasHp = true;
+    }
+
+    void Start()
+    {
     }
 
     // Update is called once per frame
     void Update()
     {
         ///////////////////////////////<3秒后死亡>
+        /*
         time1 -= Time.deltaTime;
         if (time1 <= 0)
         {
             death = true;
         }
+         * */
         ///////////////////////////////<3秒后死亡/>
+
+        ///////////////////////////////<掉出场景外回收敌人(保险)>
+        if (transform.position[1] < -100)
+        {
+            Death();
+        }
+        ///////////////////////////////<掉出场景外回收敌人(保险)/>
 
         if (death)
         {
@@ -69,6 +113,7 @@ public class EnemyController : MonoBehaviour
             deathTime -= Time.deltaTime;
             if (deathTime <= 0)
             {
+                transform.gameObject.SetActive(false);
                 ObjectPool.GetInstant().SaveObj(transform.gameObject);
                 deathTime = 3f;
             }
@@ -126,6 +171,10 @@ public class EnemyController : MonoBehaviour
         if (!death)
             mAnimator.SetTrigger("GetHit");
     }
+    public void Death()
+    {
+        death = true;
+    }
     ////////////////////////////////////////////////////////////////////<控制动画/>
 
     ////////////////////////////////////////////////////////////////////<动画的回调函数>
@@ -161,13 +210,29 @@ public class EnemyController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        /*
+        GameObject obj = other.gameObject;
+        Life life = obj.GetComponent<Life>();
+        if (life != null)
+        {
+            attack.attack(life);
+        }
+         * */
+        
         if (beDoingSomethings)
         {
+            /*
             if (other.gameObject.tag.Equals("brave"))
             {
                 other.gameObject.SendMessage("GetHit");
                 //Animator braveAnimator = other.transform.GetComponent<Animator>();
                 //braveAnimator.SetTrigger("GetHit");
+            }
+             * */
+            Life otherLife = other.gameObject.GetComponent<Life>();
+            if (otherLife != null)
+            {
+                attack.attack(otherLife);
             }
         }
 
