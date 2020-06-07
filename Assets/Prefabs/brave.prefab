@@ -7363,6 +7363,7 @@ GameObject:
   - component: {fileID: 8307613560385610422}
   - component: {fileID: 5922192731360122397}
   - component: {fileID: 8813945959708444684}
+  - component: {fileID: 2015627148}
   m_Layer: 0
   m_Name: brave
   m_TagString: brave
@@ -7502,6 +7503,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6097b68d18feae149b6df6c1c339932f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2015627148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7108543177784254413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49e5895dfacf8a444820f8e284b720ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTeam: 1
+  mHp: 100
+  MAXHP: 100
+  mDef: 0
+  hasHp: 1
 --- !u!1 &7108546876508626857
 GameObject:
   m_ObjectHideFlags: 0

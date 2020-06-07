@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
+    private Attack attack;
+
     void OnEnable()
     {
+        attack = new Attack();
+        attack.mTeam = 1;
         Invoke("SaveBullet", 3);       //3秒后回收子弹
     }
     //超出射程回收子弹
@@ -22,6 +26,7 @@ public class BulletController : MonoBehaviour
     //击中目标
     private void OnTriggerEnter(Collider other)
     {
+        /*
         if (other.gameObject.tag.Equals("Enemy"))
         {
             Animator enemyAnimator = other.transform.GetComponent<Animator>();
@@ -31,6 +36,16 @@ public class BulletController : MonoBehaviour
             {
                 CancelInvoke("SaveBullet");
             }
+        }*/
+        Life otherLife = other.gameObject.GetComponent<Life>();
+        if (otherLife != null)
+        {
+            attack.attack(otherLife);
+        }
+        ObjectPool.GetInstant().SaveObj(transform.gameObject);
+        if (IsInvoking("SaveBullet"))
+        {
+            CancelInvoke("SaveBullet");
         }
     }
 }

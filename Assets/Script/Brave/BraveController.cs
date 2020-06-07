@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using LeoLuz.PropertyAttributes;
 
+using UnityEngine.SceneManagement;
 
 namespace LeoLuz.PlugAndPlayJoystick
 {
@@ -17,6 +18,11 @@ namespace LeoLuz.PlugAndPlayJoystick
         private GameObject muzzle;
         private GameObject Wand;
         private GameObject magicCircle;
+
+        private Life mLife;
+        private Attack attack;
+
+        private float deathTime = 3f;
 
         private bool beDoingSomethings = false;
         private bool walking = false;
@@ -41,7 +47,24 @@ namespace LeoLuz.PlugAndPlayJoystick
         private bool Z = false;
         */
 
-
+        class LifeCallback : Life.LifeCallback
+        {
+            private BraveController brave;
+            public LifeCallback(BraveController brave)
+            {
+                this.brave = brave;
+            }
+            public void onHurted()
+            {
+                brave.GetHit();
+            }
+            public void onDead()
+            {
+                brave.Death();
+                //GameManager.getInstance();
+                //GameManager.INSTANCE.GameOver();
+            }
+        }
         
         void Start()
         {
@@ -54,6 +77,14 @@ namespace LeoLuz.PlugAndPlayJoystick
             mAnimator.SetBool("beDoingSomethings", false);
             mAnimator.SetBool("atAir", false);
             mAnimator.SetBool("Death", false);
+
+            mLife = GetComponent<Life>();
+            LifeCallback callback = new LifeCallback(this);
+            mLife.registerCallback(callback);
+            mLife.hasHp = true;
+            mLife.mHp = mLife.MAXHP;
+            attack = new Attack();
+            attack.mTeam = mLife.mTeam;
 
             RightHand = GameObject.FindGameObjectWithTag("RightHand");
             THandSword = RightHand.transform.Find("2Hand-Sword Variant").gameObject;
@@ -78,11 +109,21 @@ namespace LeoLuz.PlugAndPlayJoystick
         {
             if (death)
             {
+                ///////////////////////////////<3秒后复活>
+                
+                deathTime -= Time.deltaTime;
+                if (deathTime <= 0)
+                {
+                    Revive();
+                    deathTime = 3f;
+                }
+                
+                ///////////////////////////////<3秒后复活/>
                 return;
             }
             //手柄输入版本
             horizontal = Input.GetAxis("Horizontal");
-            Debug.Log("horizontal is " + horizontal);
+            //Debug.Log("horizontal is " + horizontal);
             if (horizontal != 0)
             {
                 //将角色旋转至指定方向
@@ -199,8 +240,16 @@ namespace LeoLuz.PlugAndPlayJoystick
             }*/
         }
 
+        private bool quitButton = false;
         void OnGUI()
         {
+            //退出场景按钮（暂用）
+            quitButton = GUI.Button(new Rect(0, 0, 100, 30), "退出关卡");
+            if (quitButton)
+            {
+                SceneManager.LoadScene(0);
+            }
+
             //GUI按钮输入版本（废弃）
             /*
             walking = false;
@@ -462,7 +511,7 @@ namespace LeoLuz.PlugAndPlayJoystick
         }
         public void GetHit()
         {
-            if (reviving || death || atAir)
+            if (reviving || death || atAir || beDoingSomethings)
                 return;
             else
             {
@@ -588,6 +637,8 @@ namespace LeoLuz.PlugAndPlayJoystick
         {
             beDoingSomethings = false;
             reviving = false;
+            mLife.mHp = mLife.MAXHP;
+            mLife.hasHp = true;
             mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
         }
         public void startJump()
@@ -622,12 +673,29 @@ namespace LeoLuz.PlugAndPlayJoystick
         {
             if (beDoingSomethings)
             {
+                Life otherLife = other.gameObject.GetComponent<Life>();
+                if (otherLife != null)
+                {
+                    attack.attack(otherLife);
+                }
+                /*
+                GameObject obj = other.gameObject;
+                Life life = obj.GetComponent<Life>();
+                if (life != null)
+                {
+                    attack.attack(life);
+                }
+                 * */
+
+                /*
                 if (other.gameObject.tag.Equals("Enemy"))
                 {
                     other.gameObject.SendMessage("GetHit");
                     //Animator enemyAnimator = other.transform.GetComponent<Animator>();
                     //enemyAnimator.SetTrigger("GetHit");
                 }
+                 * */
+
             }
 
         }
