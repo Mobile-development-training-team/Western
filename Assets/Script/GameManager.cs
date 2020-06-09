@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEditor;
+using  LeoLuz.PlugAndPlayJoystick;
 public class GameManager:MonoBehaviour
 {
     public  static GameManager INSTANCE;
@@ -12,6 +13,8 @@ public class GameManager:MonoBehaviour
     public Text LevelText;
     public Text GameoverText;
     public GameObject GameOverImage;
+
+    int currentlives = 3;//主角初始化有3条命
     private GameManager() { }
 
     public static GameManager getInstance()
@@ -33,14 +36,17 @@ public class GameManager:MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        DontDestroyOnLoad(gameObject);//不摧毁控制器
     }
+
 
     public void  GameOver()
     {
         Debug.Log("GameOver!");
         GameOverImage.SetActive(true);
         //yield return new WaitForSeconds(2f);
-        StartCoroutine(Wait());
+        //StartCoroutine(Wait());
         LoadStartScene();
         
 
@@ -84,6 +90,7 @@ public class GameManager:MonoBehaviour
         yield return new WaitForSeconds(2);
         //Wait();
          LevelImage.SetActive(false);
+         GameOverImage.SetActive(false);
         // EnemiesManager01.Instance.generatorEnemiesWave();
     }
 
