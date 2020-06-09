@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public float range = 3f;
 
     private Life mLife;
     private Attack attack;
@@ -123,7 +124,7 @@ public class EnemyController : MonoBehaviour
         }
 
         ///////////////////////////////<勇者是否在攻击范围内>
-        if ((brave.transform.position.x - transform.position.x) > -2 && (brave.transform.position.x - transform.position.x) < 2)
+        if ((brave.transform.position.x - transform.position.x) > -range && (brave.transform.position.x - transform.position.x) < range)
         {
             meetBrave = true;
         }
@@ -186,6 +187,15 @@ public class EnemyController : MonoBehaviour
     {
         EnemyWeapon.GetComponent<BoxCollider>().enabled = false;
         beDoingSomethings = false;
+    }
+    public void startBowShooting()
+    {
+        ObjectPool.GetInstant().GetObj("EnemyArrow", EnemyWeapon.transform.position, transform.localRotation);
+        EnemyWeapon.SetActive(false);
+    }
+    public void endBowShooting()
+    {
+        EnemyWeapon.SetActive(true);
     }
     ////////////////////////////////////////////////////////////////////<动画的回调函数/>
 

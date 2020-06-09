@@ -243,13 +243,14 @@ namespace LeoLuz.PlugAndPlayJoystick
         private bool quitButton = false;
         void OnGUI()
         {
+            /*
             //退出场景按钮（暂用）
-            quitButton = GUI.Button(new Rect(0, 0, 100, 30), "退出关卡");
+            quitButton = GUI.Button(new Rect(1180, 0, 100, 30), "退出关卡");
             if (quitButton)
             {
                 SceneManager.LoadScene(0);
             }
-
+            */
             //GUI按钮输入版本（废弃）
             /*
             walking = false;
@@ -325,7 +326,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             running = true;
             mAnimator.SetBool("Walking", walking);
             mAnimator.SetBool("Running", running);
-            //transform.Translate(Vector3.forward * 2 * Time.deltaTime);
+            //transform.Translate(Vector3.forward * 1 * Time.deltaTime);
 
         }
         public void idle()
@@ -643,7 +644,7 @@ namespace LeoLuz.PlugAndPlayJoystick
         }
         public void startJump()
         {
-            this.GetComponent<Rigidbody>().AddForce(new Vector3(0, 10, 0), ForceMode.Impulse);
+            this.GetComponent<Rigidbody>().AddForce(new Vector3(0, 7, 0), ForceMode.Impulse);
         }
         public void AtAir()
         {
