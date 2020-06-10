@@ -45,17 +45,32 @@ public class GameManager:MonoBehaviour
     {
         Debug.Log("GameOver!");
         GameOverImage.SetActive(true);
+        Invoke("Destroyself",2f);
         //yield return new WaitForSeconds(2f);
         //StartCoroutine(Wait());
+
+
+    }
+
+    void Destroyself()
+    {
+        Destroy(gameObject);//游戏结束强行摧毁所有东西，重新开始
         LoadStartScene();
         
-
     }
     public void LoadNextScene()
     {
         int curSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        //Debug.Log(curSceneIndex);
+        if( curSceneIndex == 3)
+        { 
+            GameOver();
+            return;
+        }
         SceneManager.LoadScene(curSceneIndex + 1);
-        SetUpUI (curSceneIndex +1);
+        SetUpUI(curSceneIndex + 1);
+        Invoke("CloseUI",2f);
+
     }
     public void LoadCurScene()
     {
@@ -79,18 +94,25 @@ public class GameManager:MonoBehaviour
     public void SetUpUI(int nxtIndex)
     {
         //修改text文本内容
+        LevelText.text = "Level " + nxtIndex;
         LevelImage.SetActive(true);
 
+    }
+
+    public void CloseUI()
+    {
+        LevelImage.SetActive(false);
     }
 
   // Start is called before the first frame update
     IEnumerator  Start()
     {
-        SetUpUI(1);
+        //SetUpUI(1);
+        LevelImage.SetActive(true);
         yield return new WaitForSeconds(2);
         //Wait();
-         LevelImage.SetActive(false);
-         GameOverImage.SetActive(false);
+        LevelImage.SetActive(false);
+        GameOverImage.SetActive(false);
         // EnemiesManager01.Instance.generatorEnemiesWave();
     }
 
@@ -98,12 +120,6 @@ public class GameManager:MonoBehaviour
     {
 
     }
-
-    IEnumerator Wait()
-    {
-        yield return new WaitForSeconds(4);
-    }
-
 
 
 
