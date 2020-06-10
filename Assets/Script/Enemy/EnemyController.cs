@@ -6,6 +6,8 @@ public class EnemyController : MonoBehaviour
 {
     public float range = 3f;
 
+   // private int deaths = 0;//敌人死亡数量
+
     private Life mLife;
     private Attack attack;
     private LifeCallback callback;
@@ -175,6 +177,7 @@ public class EnemyController : MonoBehaviour
     public void Death()
     {
         death = true;
+        EnemiesManager01.Instance.EnemiesDestory();
     }
     ////////////////////////////////////////////////////////////////////<控制动画/>
 
