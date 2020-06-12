@@ -66,6 +66,10 @@ public class LevelSelection : MonoBehaviour
         {
              SceneManager.LoadScene(LevelId);
         }
+        else
+        {
+            return;
+        }
     }
 
 
