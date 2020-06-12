@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public float range = 3f;
+    public float range = 3f;    //敌人攻击范围
 
     private Life mLife;
     private Attack attack;
@@ -79,11 +79,6 @@ public class EnemyController : MonoBehaviour
         mLife.hasHp = true;
     }
 
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
     void Update()
     {
         ///////////////////////////////<3秒后死亡>
@@ -175,6 +170,7 @@ public class EnemyController : MonoBehaviour
     public void Death()
     {
         death = true;
+        EnemiesManager01.Instance.EnemiesDestory();
     }
     ////////////////////////////////////////////////////////////////////<控制动画/>
 
@@ -219,33 +215,15 @@ public class EnemyController : MonoBehaviour
         }
     }
     private void OnTriggerEnter(Collider other)
-    {
-        /*
-        GameObject obj = other.gameObject;
-        Life life = obj.GetComponent<Life>();
-        if (life != null)
-        {
-            attack.attack(life);
-        }
-         * */
-        
+    {    
         if (beDoingSomethings)
         {
-            /*
-            if (other.gameObject.tag.Equals("brave"))
-            {
-                other.gameObject.SendMessage("GetHit");
-                //Animator braveAnimator = other.transform.GetComponent<Animator>();
-                //braveAnimator.SetTrigger("GetHit");
-            }
-             * */
             Life otherLife = other.gameObject.GetComponent<Life>();
             if (otherLife != null)
             {
                 attack.attack(otherLife);
             }
         }
-
     }
     ////////////////////////////////////////////////////////////////////<碰撞检测及处理/>
 

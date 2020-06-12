@@ -1,9 +1,11 @@
 Android
 PlayerPath?
-F:/UnityTestCode/Western/apkForGameProgram/game09.2.apk
+F:/UnityTestCode/Western/apkForGameProgram/game10.3.apk
 SceneListBegin?
-Assets/Scenes/MainScene.unity
+Assets/Scenes/LevelScene.unity
 Assets/Scenes/Scene01.unity
+Assets/Scenes/Scene02.unity
+Assets/Scenes/Scene03.unity
 SceneListEnd?
 4887afe81cd3591d5a292bf81b23453a Assembly-CSharp.dll:.Parallax
 3c08375166df118bd1801438fc36b92f Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
@@ -59,8 +61,6 @@ abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.Tou
 e01f6905e4742cc10204e823c021c618 Assembly-CSharp.dll:RPGCharacterAnims.RPGCharacterWeaponController
 d3c76b14a25eebd3a3323dd43297919c Unity.TextMeshPro.dll:TMPro.TMP_InputField
 beb32a07dd690af1f470894c3aebf12b Assembly-CSharp.dll:RPGCharacterAnims.IKHands
-71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
-71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
 cf9f5cf2c3145a37ac07f00e50e460f9 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 507174d46dacbc5fe45e28485db5dd1e UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -125,7 +125,7 @@ ad9173d3a69d99153f38ed4b62226129 UnityEngine.Networking.dll:UnityEngine.Networki
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 a1a5d4c218fc55e16e506e660dfa6827 Assembly-CSharp.dll:.EnemyController
 b8a5e8091ab0b8861d2add371082c5e0 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
-7025bbd79d7b5bc5f9485cec61abddab Assembly-CSharp.dll:.GameManager
+6eee79c77246203d8e0c1e418b26e6c4 Assembly-CSharp.dll:.GameManager
 135f200ed215b4ab62976f28b14fd0ce Assembly-CSharp.dll:.SimpleStateMachine
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp-firstpass.dll:.Projectile
 b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
@@ -137,6 +137,7 @@ b32441fc1d28848e915ee71888fd61ba Assembly-CSharp.dll:RPGCharacterAnims.GUIContro
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.MagicBallController
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.Math3d
 bd851356430480ff49df57371b719737 Assembly-CSharp.dll:RPGCharacterAnims.RPGCharacterController
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.LevelManager
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.EnterScene01
 6a644668495e6012fcaf66acd264b4b2 Assembly-CSharp-firstpass.dll:LeoLuz.PlugAndPlayJoystick.AnalogicKnob
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer
@@ -190,13 +191,14 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:LeoLuz.PlugAndPlayJoystick.BraveController
 38b08a887a876e9c826dee55fc7daca8 Assembly-CSharp.dll:.Gravity
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.EnemiesManager01
+d1b536dc759bdc4879b86ac8df6c099d Assembly-CSharp.dll:.EnemiesManager01
 87b4234182395bb5b2c7f52247a4bd8e Assembly-CSharp.dll:.BoolOperator1
 915dd57d88eb745e04d569f269413313 Assembly-CSharp.dll:DM.CameraManager
 df434544c9f7b33d1cc7e635b180d279 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:DM.AnimatorMatcher
 921b6b8265703d7c113ec8b5c3299df5 Assembly-CSharp-firstpass.dll:LeoLuz.PlugAndPlayJoystick.DisableOnOrientation
+eb0ec9595d5e94ffab329ce69e66e98c Assembly-CSharp.dll:.LevelSelection
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 a0b90ca9b57ca50a01d311479eda61c2 Assembly-CSharp-firstpass.dll:LeoLuz.PlugAndPlayJoystick.SimpleController
 87b4234182395bb5b2c7f52247a4bd8e Assembly-CSharp.dll:.BoolOperator2

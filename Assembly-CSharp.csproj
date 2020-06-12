@@ -94,6 +94,8 @@
      <Compile Include="Assets\Script\Enemy\Ammunition\EnemyArrowController.cs" />
      <Compile Include="Assets\Script\Enemy\EnemyController.cs" />
      <Compile Include="Assets\Script\GameManager.cs" />
+     <Compile Include="Assets\Script\LevelSelection\LevelManager.cs" />
+     <Compile Include="Assets\Script\LevelSelection\LevelSelection.cs" />
      <Compile Include="Assets\Script\life\Attack.cs" />
      <Compile Include="Assets\Script\life\DamageCalculation.cs" />
      <Compile Include="Assets\Script\life\Life.cs" />

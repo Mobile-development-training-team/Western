@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObjectPool
 {
     private static ObjectPool _instant;
+    //private int AINum = 0;
 
     public static ObjectPool GetInstant()
     {
@@ -42,6 +43,7 @@ public class ObjectPool
         currentObj.transform.position = pos;
         currentObj.transform.rotation = qua;
         currentObj.SetActive(true);
+        //AINum++;//产生AI的数量增加1
         return currentObj;
     }
 
@@ -53,7 +55,7 @@ public class ObjectPool
         if (pool.ContainsKey(objPoolName))
         {
             pool[objPoolName].Add(obj);
-            //Debug.Log("pool size "+pool[objPoolName].Count);
+            //Debug.Log("pool size of "+objPoolName+" is "+pool[objPoolName].Count);
         }
         else
         {
@@ -73,14 +75,20 @@ public class ObjectPool
         return (T)obj;
     }
 
-
+    /*
     public void clearObj(string objName)
     {
-
+        AINum--;
     }
 
     public void clearAll()
     {
-
+        AINum = 0;
     }
+
+    public int GetAINum( )
+    {
+        return AINum;
+    }
+    */
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using LeoLuz.PropertyAttributes;
-
 using UnityEngine.SceneManagement;
 
 namespace LeoLuz.PlugAndPlayJoystick
@@ -18,12 +17,6 @@ namespace LeoLuz.PlugAndPlayJoystick
         private GameObject muzzle;
         private GameObject Wand;
         private GameObject magicCircle;
-
-        private Life mLife;
-        private Attack attack;
-
-        private float deathTime = 3f;
-
         private bool beDoingSomethings = false;
         private bool walking = false;
         private bool running = false;
@@ -35,6 +28,12 @@ namespace LeoLuz.PlugAndPlayJoystick
         private int Ammunition = 10;
         private float horizontal = 0;
         private float vertical = 0;
+
+        private Life mLife;
+        private Attack attack;
+
+        private float deathTime = 3f;
+        private int deaths = 0;//主角死亡次数
 
         //(GUI按钮控制版本-废弃)
         /*
@@ -61,8 +60,6 @@ namespace LeoLuz.PlugAndPlayJoystick
             public void onDead()
             {
                 brave.Death();
-                //GameManager.getInstance();
-                //GameManager.INSTANCE.GameOver();
             }
         }
         
@@ -123,6 +120,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             }
             //手柄输入版本
             horizontal = Input.GetAxis("Horizontal");
+            vertical = Input.GetAxis("Vertical");
             //Debug.Log("horizontal is " + horizontal);
             if (horizontal != 0)
             {
@@ -151,6 +149,18 @@ namespace LeoLuz.PlugAndPlayJoystick
             {
                 idle();
             }
+
+            //手柄向上抬控制跳跃
+            if (vertical > 0.5)
+            {
+                if (!beDoingSomethings && !atAir)
+                {
+                    beDoingSomethings = true;
+                    mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
+                    Jump();
+                }
+            }
+
             //键盘输入版本（废弃）
 
             /*
@@ -158,20 +168,16 @@ namespace LeoLuz.PlugAndPlayJoystick
             //vertical = Input.GetAxis("Vertical");
             walking = false;
             running = false;
-
             //算出方向向量
             Vector3 direction = new Vector3(horizontal, 0, vertical);
-
             if (direction != Vector3.zero)
             {
                 //行走
                 walking = true;
                 mAnimator.SetBool("Walking", walking);
                 AttackIndex = 0;
-
                 //将角色旋转至指定方向
                 transform.rotation = Quaternion.LookRotation(direction);
-
                 //加速
                 if (Input.GetKey(KeyCode.Z))
                 {
@@ -185,7 +191,6 @@ namespace LeoLuz.PlugAndPlayJoystick
                     running = false;
                     mAnimator.SetBool("Running", running);
                 }
-
             }
             else
             {
@@ -255,7 +260,6 @@ namespace LeoLuz.PlugAndPlayJoystick
             /*
             walking = false;
             running = false;
-
             LeftWalking = GUI.RepeatButton(new Rect(0, 0, 100, 30), "LeftWalk");
             RightWalking = GUI.RepeatButton(new Rect(100, 0, 100, 30), "RightWalk");
             LeftRunning = GUI.RepeatButton(new Rect(0, 30, 100, 30), "LeftRun");
@@ -263,7 +267,6 @@ namespace LeoLuz.PlugAndPlayJoystick
             X = GUI.RepeatButton(new Rect(0, 60, 100, 30), "X");
             Y = GUI.RepeatButton(new Rect(0, 90, 100, 30), "Y");
             Z = GUI.RepeatButton(new Rect(0, 120, 100, 30), "Z");
-
             if (LeftWalking)
             {
                 walk(new Vector3(-1, 0, 0));
@@ -444,12 +447,14 @@ namespace LeoLuz.PlugAndPlayJoystick
         }
         public void WButton()
         {
+            /*
             if (!beDoingSomethings && !atAir)
             {
                 beDoingSomethings = true;
                 mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
                 Jump();
             }
+            */
         }
         ////////////////////////////////////////////////////////////////////<按钮事件/>
 
@@ -503,6 +508,12 @@ namespace LeoLuz.PlugAndPlayJoystick
             mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
             death = true;
             mAnimator.SetBool("Death", death);
+            deaths++;
+            //暂定主角有三条命。如果死了三次就游戏结束
+            if (deaths >= 3)
+            {
+                GameManager.INSTANCE.GameOver(false);
+            }
         }
         public void Revive()
         {
@@ -679,29 +690,9 @@ namespace LeoLuz.PlugAndPlayJoystick
                 {
                     attack.attack(otherLife);
                 }
-                /*
-                GameObject obj = other.gameObject;
-                Life life = obj.GetComponent<Life>();
-                if (life != null)
-                {
-                    attack.attack(life);
-                }
-                 * */
-
-                /*
-                if (other.gameObject.tag.Equals("Enemy"))
-                {
-                    other.gameObject.SendMessage("GetHit");
-                    //Animator enemyAnimator = other.transform.GetComponent<Animator>();
-                    //enemyAnimator.SetTrigger("GetHit");
-                }
-                 * */
-
             }
-
         }
         ////////////////////////////////////////////////////////////////////<碰撞检测及处理/>
-
     }
 
 }
