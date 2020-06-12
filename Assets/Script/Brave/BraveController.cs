@@ -1,8 +1,7 @@
-﻿  using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using LeoLuz.PropertyAttributes;
-
 using UnityEngine.SceneManagement;
 
 namespace LeoLuz.PlugAndPlayJoystick
@@ -18,24 +17,23 @@ namespace LeoLuz.PlugAndPlayJoystick
         private GameObject muzzle;
         private GameObject Wand;
         private GameObject magicCircle;
-
-        private Life mLife;
-        private Attack attack;
-
-        private float deathTime = 3f;
-
         private bool beDoingSomethings = false;
         private bool walking = false;
         private bool running = false;
         private bool atAir = false;
         private bool death = false;
-        private int deaths = 0;//主角死亡次数
         private bool reviving = false;
         private int AttackIndex = 0;
         private int WeaponIndex = 0;
         private int Ammunition = 10;
         private float horizontal = 0;
         private float vertical = 0;
+
+        private Life mLife;
+        private Attack attack;
+
+        private float deathTime = 3f;
+        private int deaths = 0;//主角死亡次数
 
         //(GUI按钮控制版本-废弃)
         /*
@@ -108,10 +106,6 @@ namespace LeoLuz.PlugAndPlayJoystick
         {
             if (death)
             {
-                if(deaths>=3)//暂定主角有三条命。如果死了三次就游戏结束
-                {
-                    GameManager.INSTANCE.GameOver();
-                }
                 ///////////////////////////////<3秒后复活>
                 
                 deathTime -= Time.deltaTime;
@@ -126,6 +120,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             }
             //手柄输入版本
             horizontal = Input.GetAxis("Horizontal");
+            vertical = Input.GetAxis("Vertical");
             //Debug.Log("horizontal is " + horizontal);
             if (horizontal != 0)
             {
@@ -154,6 +149,18 @@ namespace LeoLuz.PlugAndPlayJoystick
             {
                 idle();
             }
+
+            //手柄向上抬控制跳跃
+            if (vertical > 0.5)
+            {
+                if (!beDoingSomethings && !atAir)
+                {
+                    beDoingSomethings = true;
+                    mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
+                    Jump();
+                }
+            }
+
             //键盘输入版本（废弃）
 
             /*
@@ -440,12 +447,14 @@ namespace LeoLuz.PlugAndPlayJoystick
         }
         public void WButton()
         {
+            /*
             if (!beDoingSomethings && !atAir)
             {
                 beDoingSomethings = true;
                 mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
                 Jump();
             }
+            */
         }
         ////////////////////////////////////////////////////////////////////<按钮事件/>
 
@@ -500,6 +509,11 @@ namespace LeoLuz.PlugAndPlayJoystick
             death = true;
             mAnimator.SetBool("Death", death);
             deaths++;
+            //暂定主角有三条命。如果死了三次就游戏结束
+            if (deaths >= 3)
+            {
+                GameManager.INSTANCE.GameOver(false);
+            }
         }
         public void Revive()
         {
@@ -676,29 +690,9 @@ namespace LeoLuz.PlugAndPlayJoystick
                 {
                     attack.attack(otherLife);
                 }
-                /*
-                GameObject obj = other.gameObject;
-                Life life = obj.GetComponent<Life>();
-                if (life != null)
-                {
-                    attack.attack(life);
-                }
-                 * */
-
-                /*
-                if (other.gameObject.tag.Equals("Enemy"))
-                {
-                    other.gameObject.SendMessage("GetHit");
-                    //Animator enemyAnimator = other.transform.GetComponent<Animator>();
-                    //enemyAnimator.SetTrigger("GetHit");
-                }
-                 * */
-
             }
-
         }
         ////////////////////////////////////////////////////////////////////<碰撞检测及处理/>
-
     }
 
 }
