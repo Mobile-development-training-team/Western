@@ -68,6 +68,10 @@ public class GameManager:MonoBehaviour
             return;
         }
         SceneManager.LoadScene(curSceneIndex + 1);
+        if(curSceneIndex+1>PlayerPrefs.GetInt("level"))
+        {
+            PlayerPrefs.SetInt(PlayerPrefs.GetString("level"),curSceneIndex + 1);
+        }
         SetUpUI(curSceneIndex + 1);
         Invoke("CloseUI",2f);
 
@@ -79,7 +83,7 @@ public class GameManager:MonoBehaviour
     }
     public void LoadStartScene()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(4);
     }
      public void QuitGame() {
         Application.Quit();
