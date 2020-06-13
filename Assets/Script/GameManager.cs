@@ -61,8 +61,6 @@ public class GameManager:MonoBehaviour
     {
         //Debug.Log("GameOver!");
         //Invoke("LoadStartScene", 2f);
-        //yield return new WaitForSeconds(2f);
-        //StartCoroutine(Wait());
         CloseUI();
         GameOverImage.SetActive(true);
         if (!judge)
@@ -145,6 +143,7 @@ public class GameManager:MonoBehaviour
     }
      public void QuitGame() {
         Application.Quit();
+        Debug.Log("退出游戏");
     }
     public int getLevelIndex() { 
         return SceneManager.GetActiveScene().buildIndex; ;
