@@ -268,9 +268,10 @@ namespace LeoLuz.PlugAndPlayJoystick
         void TouchBegan(Vector2 TouchPosition)
         {
             Released = false;
-            StartPosition = TouchPosition;
+            //StartPosition = TouchPosition;
+            StartPosition = KnobBackground.transform.position;
             //  rectTransform.anchoredPosition = UnityEngine.Input.mousePosition * ScreenToAnchorPositionConversionConstant.y;
-            transform.position = canvasInitialPoint + (Vector3)TouchPosition * ScreenUnitsToWorldUnitsConversionConstant;
+            //transform.position = canvasInitialPoint + (Vector3)TouchPosition * ScreenUnitsToWorldUnitsConversionConstant;
 
             if (autoHide)
             {

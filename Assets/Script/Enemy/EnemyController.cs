@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public float range = 3f;    //敌人攻击范围
+    public float atk = 20f;
 
     private Life mLife;
     private Attack attack;
@@ -47,6 +48,7 @@ public class EnemyController : MonoBehaviour
         callback = new LifeCallback(this);
         mLife.registerCallback(callback);
         attack.mTeam = mLife.mTeam;
+        attack.mAtk = atk;
 
         mAnimator = GetComponent<Animator>();
         mcollider = GetComponent<CapsuleCollider>();
@@ -169,9 +171,12 @@ public class EnemyController : MonoBehaviour
     }
     public void Death()
     {
-        death = true;
-        EnemiesManager01.Instance.EnemiesDestory();
-        GameObject.Find("Main Camera").GetComponent<ShakeCamera>().isShake = true;
+        if (!death)
+        {
+            death = true;
+            EnemiesManager01.Instance.EnemiesDestory();
+            GameObject.Find("Main Camera").GetComponent<ShakeCamera>().isShake = true;
+        }
     }
     ////////////////////////////////////////////////////////////////////<控制动画/>
 

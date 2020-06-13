@@ -38,6 +38,7 @@ public class ObjectPool
         if (currentObj == null)
         {
             currentObj = loadResource<GameObject>(objName);
+            //currentObj = GameManager.INSTANCE.loadResource<GameObject>(objName);
             GameObject.Instantiate(currentObj);
         }
         currentObj.transform.position = pos;
@@ -63,7 +64,7 @@ public class ObjectPool
             pool.Add(objPoolName, new List<GameObject>() { obj });
         }
     }
-
+    
     public T loadResource<T>(string path) where T : Object
     {
         Object obj = Resources.Load(path);
@@ -74,7 +75,7 @@ public class ObjectPool
         //Debug.Log(obj.name);
         return (T)obj;
     }
-
+    
     /*
     public void clearObj(string objName)
     {
