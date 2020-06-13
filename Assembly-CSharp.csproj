@@ -87,6 +87,7 @@
      <Compile Include="Assets\RPG Character Animation Pack\SuperCharacterController\Code\SuperCharacterController\Math3d.cs" />
      <Compile Include="Assets\Script\Background\CamController.cs" />
      <Compile Include="Assets\Script\Background\Parallax.cs" />
+     <Compile Include="Assets\Script\Background\ShakeCamera.cs" />
      <Compile Include="Assets\Script\Brave\Ammunition\BulletController.cs" />
      <Compile Include="Assets\Script\Brave\Ammunition\MagicBallController.cs" />
      <Compile Include="Assets\Script\Brave\BraveController.cs" />

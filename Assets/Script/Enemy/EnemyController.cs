@@ -171,6 +171,7 @@ public class EnemyController : MonoBehaviour
     {
         death = true;
         EnemiesManager01.Instance.EnemiesDestory();
+        GameObject.Find("Main Camera").GetComponent<ShakeCamera>().isShake = true;
     }
     ////////////////////////////////////////////////////////////////////<控制动画/>
 
