@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    private Attack attack;
+    public Attack attack;
+    public float atk = 20f;
+    public float speed = 10f;
+    public float flyTime = 3f;
 
     void OnEnable()
     {
         attack = new Attack();
         attack.mTeam = 1;
-        Invoke("SaveBullet", 3);       //3秒后回收子弹
+        attack.mAtk = atk;
+        Invoke("SaveBullet", flyTime);       //3秒后回收子弹
     }
     //超出射程回收子弹
     void SaveBullet()
@@ -21,7 +25,7 @@ public class BulletController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(transform.forward * 10 * Time.deltaTime,Space.World);
+        transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
     }
     //击中目标
     private void OnTriggerEnter(Collider other)

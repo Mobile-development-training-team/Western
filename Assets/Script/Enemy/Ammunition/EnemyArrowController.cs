@@ -5,12 +5,16 @@ using UnityEngine;
 public class EnemyArrowController : MonoBehaviour
 {
     private Attack attack;
+    public float atk = 20f;
+    public float speed = 10f;
+    public float flyTime = 0.7f;
 
     void OnEnable()
     {
         attack = new Attack();
         attack.mTeam = 2;
-        Invoke("SaveArrow", 0.7f);       //1秒后回收弓箭
+        attack.mAtk = atk;
+        Invoke("SaveArrow", flyTime);       //1秒后回收弓箭
     }
     //超出射程回收弓箭
     void SaveArrow()
@@ -21,7 +25,7 @@ public class EnemyArrowController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(transform.forward * 10 * Time.deltaTime, Space.World);
+        transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
     }
     //击中目标
     private void OnTriggerEnter(Collider other)

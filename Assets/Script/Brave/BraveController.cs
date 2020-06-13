@@ -13,7 +13,7 @@ namespace LeoLuz.PlugAndPlayJoystick
         private GameObject RightHand;
         private GameObject THandSword;
         private GameObject Gun;
-        private GameObject laser;
+        //private GameObject laser;
         private GameObject muzzle;
         private GameObject Wand;
         private GameObject magicCircle;
@@ -28,6 +28,14 @@ namespace LeoLuz.PlugAndPlayJoystick
         private int Ammunition = 10;
         private float horizontal = 0;
         private float vertical = 0;
+
+        private int mainWeaponIndex = 0;
+        private int secondaryWeaponIndex = 1;
+        private bool usingMainWeapon = true;
+        private GameObject mainWeapon;
+        private GameObject secondaryWeapon;
+        private Attack mainWeaponAttack;
+        private Attack secondaryWeaponAttack;
 
         private Life mLife;
         private Attack attack;
@@ -87,17 +95,47 @@ namespace LeoLuz.PlugAndPlayJoystick
             THandSword = RightHand.transform.Find("2Hand-Sword Variant").gameObject;
             Gun = RightHand.transform.Find("2Hand-Rifle").gameObject;
             Wand = RightHand.transform.Find("Wand").gameObject;
-            laser = Gun.transform.Find("laser").gameObject;
+            //laser = Gun.transform.Find("laser").gameObject;
             muzzle = Gun.transform.Find("muzzle").gameObject;
             magicCircle = transform.Find("MagicCircle").gameObject;
 
-            THandSword.SetActive(true);
+            THandSword.SetActive(false);
             THandSword.GetComponent<BoxCollider>().enabled = false;
-
             Gun.SetActive(false);
             Wand.SetActive(false);
-            laser.SetActive(false);
+            //laser.SetActive(false);
             magicCircle.SetActive(false);
+
+            ArmdeMyselfe();
+            usingMainWeapon = true;
+        }
+
+        public void ArmdeMyselfe()
+        {
+            if (mainWeaponIndex == 0)
+            {
+                mainWeapon = THandSword;
+            }
+            else
+            {
+                mainWeapon = THandSword;
+                mainWeaponIndex = 0;
+            }
+
+            if (secondaryWeaponIndex == 1)
+            {
+                secondaryWeapon = Gun;
+            }
+            else if (secondaryWeaponIndex == 2)
+            {
+                secondaryWeapon = Wand;
+            }
+            else
+            {
+                secondaryWeapon = mainWeapon;
+                secondaryWeaponIndex = mainWeaponIndex;
+            }
+            mainWeapon.SetActive(true);
         }
 
         // Update is called once per frame
@@ -245,7 +283,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             }*/
         }
 
-        private bool quitButton = false;
+        //private bool quitButton = false;
         void OnGUI()
         {
             /*
@@ -363,7 +401,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             }
             */
 
-            if (!beDoingSomethings)
+            if (!beDoingSomethings && !death && !reviving&&!atAir)
             {
                 beDoingSomethings = true;
                 mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
@@ -407,7 +445,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             }
             */
 
-            if (!beDoingSomethings)
+            if (!beDoingSomethings && !death && !reviving&&!atAir)
             {
                 beDoingSomethings = true;
                 mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
@@ -438,7 +476,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             ChangeWeapon();
             */
 
-            if (!beDoingSomethings)
+            if (!beDoingSomethings&&!death&&!reviving&&!atAir)
             {
                 beDoingSomethings = true;
                 mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
@@ -504,15 +542,19 @@ namespace LeoLuz.PlugAndPlayJoystick
         }
         public void Death()
         {
-            beDoingSomethings = true;
-            mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
-            death = true;
-            mAnimator.SetBool("Death", death);
-            deaths++;
-            //暂定主角有三条命。如果死了三次就游戏结束
-            if (deaths >= 3)
+            if (!death)
             {
-                GameManager.INSTANCE.GameOver(false);
+                magicCircle.SetActive(false);
+                beDoingSomethings = true;
+                mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
+                death = true;
+                mAnimator.SetBool("Death", death);
+                deaths++;
+                //暂定主角有三条命。如果死了三次就游戏结束
+                if (deaths >= 3)
+                {
+                    GameManager.INSTANCE.GameOver(false);
+                }
             }
         }
         public void Revive()
@@ -548,11 +590,10 @@ namespace LeoLuz.PlugAndPlayJoystick
         {
             //laser.SetActive(true);
             ObjectPool.GetInstant().GetObj("Bullet", muzzle.transform.position, transform.localRotation);
-
         }
         public void endShooting()
         {
-            laser.SetActive(false);
+            //laser.SetActive(false);
             Ammunition = Ammunition - 1;
             mAnimator.SetInteger("Ammunition", Ammunition);
             beDoingSomethings = false;
@@ -596,6 +637,23 @@ namespace LeoLuz.PlugAndPlayJoystick
         }
         public void startChangeWeapon()
         {
+            
+            if (usingMainWeapon)
+            {
+                mainWeapon.SetActive(false);
+                WeaponIndex = secondaryWeaponIndex;
+                mAnimator.SetInteger("WeaponIndex", WeaponIndex);
+                usingMainWeapon = false;
+            }
+            else
+            {
+                secondaryWeapon.SetActive(false);
+                WeaponIndex = mainWeaponIndex;
+                mAnimator.SetInteger("WeaponIndex", WeaponIndex);
+                usingMainWeapon = true;
+            }
+            
+            /*
             if (WeaponIndex == 0)
             {
                 THandSword.SetActive(false);
@@ -612,11 +670,28 @@ namespace LeoLuz.PlugAndPlayJoystick
             {
 
             }
+            WeaponIndex = (WeaponIndex + 1) % 3;
+            mAnimator.SetInteger("WeaponIndex", WeaponIndex);
+            */
         }
         public void endChangeWeapon()
         {
+            
+            if (usingMainWeapon)
+            {
+                mainWeapon.SetActive(true);
+            }
+            else
+            {
+                secondaryWeapon.SetActive(true);
+            }
+            
+
+            /*
             WeaponIndex = (WeaponIndex + 1) % 3;
             mAnimator.SetInteger("WeaponIndex", WeaponIndex);
+            */
+            /*
             if (WeaponIndex == 0)
             {
                 THandSword.SetActive(true);
@@ -633,8 +708,10 @@ namespace LeoLuz.PlugAndPlayJoystick
             {
 
             }
+            */
             beDoingSomethings = false;
             mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
+
         }
         public void startDeath()
         {
@@ -651,6 +728,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             reviving = false;
             mLife.mHp = mLife.MAXHP;
             mLife.hasHp = true;
+            endChangeWeapon();
             mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
         }
         public void startJump()

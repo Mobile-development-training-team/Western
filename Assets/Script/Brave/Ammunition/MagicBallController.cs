@@ -5,12 +5,16 @@ using UnityEngine;
 public class MagicBallController : MonoBehaviour
 {
     private Attack attack;
+    public float atk = 20f;
+    public float speed = 6f;
+    public float flyTime = 1f;
 
     void OnEnable()
     {
         attack = new Attack();
         attack.mTeam = 1;
-        Invoke("SaveMagicBall", 1);       //1秒后回收魔法球
+        attack.mAtk = atk;
+        Invoke("SaveMagicBall", flyTime);       //1秒后回收魔法球
     }
     //超出射程回收魔法球
     void SaveMagicBall()
@@ -19,7 +23,7 @@ public class MagicBallController : MonoBehaviour
     }
     void Update()
     {
-        transform.Translate(transform.forward * 6 * Time.deltaTime, Space.World);
+        transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
     }
     //击中目标
     private void OnTriggerEnter(Collider other)
