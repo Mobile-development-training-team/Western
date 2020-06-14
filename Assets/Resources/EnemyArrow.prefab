@@ -138,3 +138,4 @@ MonoBehaviour:
   atk: 20
   speed: 10
   flyTime: 0.7
+  mhit: {fileID: 2827453198976755541, guid: 0ee45d90c39c5314f9b1aeeb41e36a42, type: 3}

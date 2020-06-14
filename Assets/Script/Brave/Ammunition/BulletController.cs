@@ -8,6 +8,7 @@ public class BulletController : MonoBehaviour
     public float atk = 20f;
     public float speed = 10f;
     public float flyTime = 3f;
+    public GameObject mhit;
 
     void OnEnable()
     {
@@ -46,10 +47,31 @@ public class BulletController : MonoBehaviour
         {
             attack.attack(otherLife);
         }
+        Hit(other);
         ObjectPool.GetInstant().SaveObj(transform.gameObject);
         if (IsInvoking("SaveBullet"))
         {
             CancelInvoke("SaveBullet");
         }
     }
+    ////////////////////////////////////////////////////////////////////<攻击特效>
+    public void Hit(Collider collider)
+    {
+        if (mhit != null)
+        {
+            Vector3 pos = collider.transform.position;
+            var hitInstance = Instantiate(mhit, new Vector3(pos[0], pos[1] + 1f, pos[2]), Quaternion.identity);
+            var hitPs = hitInstance.GetComponent<ParticleSystem>();
+            if (hitPs != null)
+            {
+                Destroy(hitInstance, hitPs.main.duration);
+            }
+            else
+            {
+                var hitPsParts = hitInstance.transform.GetChild(0).GetComponent<ParticleSystem>();
+                Destroy(hitInstance, hitPsParts.main.duration);
+            }
+        }
+    }
+    ////////////////////////////////////////////////////////////////////<攻击特效/>
 }

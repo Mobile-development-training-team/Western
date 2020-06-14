@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 208, y: 121.899994}
+  m_AnchoredPosition: {x: 179, y: 145}
   m_SizeDelta: {x: 240.9, y: 240.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222204534041541196
@@ -759,7 +759,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 206.79883, y: 121.8}
+  m_AnchoredPosition: {x: 177.79883, y: 144.90001}
   m_SizeDelta: {x: 83, y: 83}
   m_Pivot: {x: 0.5, y: 0.607}
 --- !u!222 &222492473435356270
@@ -821,11 +821,11 @@ MonoBehaviour:
   KnobBackground: {fileID: 114179251583348072}
   knobBackgroundFollowKnob: 0
   AnchoredAreaBounds:
-    m_Center: {x: 82.991104, y: 177.94482, z: 0}
-    m_Extent: {x: 292.9892, y: 303.6705, z: 0}
+    m_Center: {x: -0.7999038, y: 6.4672213, z: 0}
+    m_Extent: {x: 177.05945, y: 144.60382, z: 0}
   NormalizedAnchoredAreaBounds:
-    m_Center: {x: 0.07780416, y: 0.2965747, z: 0}
-    m_Extent: {x: 0.2746774, y: 0.5061175, z: 0}
+    m_Center: {x: -0.00074990984, y: 0.010778702, z: 0}
+    m_Extent: {x: 0.16599324, y: 0.24100637, z: 0}
   MinScreenAreaBounds: {x: 0, y: 0}
   MaxScreenAreaBounds: {x: 0, y: 0}
   ScreenCenterAreaBounds: {x: 0, y: 0}
