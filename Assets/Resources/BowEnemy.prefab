@@ -60,6 +60,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 7
+  atk: 20
+  mhit: {fileID: 5642229094556118159, guid: b1831b20846b2ff41acdbb5e7eb3b0e9, type: 3}
 --- !u!1001 &8994656404878564600
 PrefabInstance:
   m_ObjectHideFlags: 0

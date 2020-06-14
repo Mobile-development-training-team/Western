@@ -38,7 +38,9 @@ public class ObjectPool
         if (currentObj == null)
         {
             currentObj = loadResource<GameObject>(objName);
-            GameObject.Instantiate(currentObj);
+            //GameObject.Instantiate(currentObj);
+            GameObject.Instantiate(currentObj, pos, qua);
+            //currentObj = LoadObj(objName); ;
         }
         currentObj.transform.position = pos;
         currentObj.transform.rotation = qua;
@@ -63,7 +65,14 @@ public class ObjectPool
             pool.Add(objPoolName, new List<GameObject>() { obj });
         }
     }
-
+    /*
+    public GameObject LoadObj(string objName)
+    {
+        GameObject currentPrefab = Resources.Load<GameObject>(objName);
+        return GameObject.Instantiate(currentPrefab);
+    }
+    */
+    
     public T loadResource<T>(string path) where T : Object
     {
         Object obj = Resources.Load(path);
@@ -74,7 +83,7 @@ public class ObjectPool
         //Debug.Log(obj.name);
         return (T)obj;
     }
-
+    
     /*
     public void clearObj(string objName)
     {

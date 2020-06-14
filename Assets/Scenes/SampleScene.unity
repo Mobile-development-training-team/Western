@@ -495,6 +495,31 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 114683065625397926, guid: a4f56e5a78e284f4a8f6aeac97ff2d77,
+        type: 3}
+      propertyPath: knobBackgroundFollowKnob
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114683065625397926, guid: a4f56e5a78e284f4a8f6aeac97ff2d77,
+        type: 3}
+      propertyPath: AnchoredAreaBounds.m_Center.x
+      value: 111.771416
+      objectReference: {fileID: 0}
+    - target: {fileID: 114683065625397926, guid: a4f56e5a78e284f4a8f6aeac97ff2d77,
+        type: 3}
+      propertyPath: AnchoredAreaBounds.m_Center.y
+      value: 176.52724
+      objectReference: {fileID: 0}
+    - target: {fileID: 114683065625397926, guid: a4f56e5a78e284f4a8f6aeac97ff2d77,
+        type: 3}
+      propertyPath: AnchoredAreaBounds.m_Extent.x
+      value: 264.20886
+      objectReference: {fileID: 0}
+    - target: {fileID: 114683065625397926, guid: a4f56e5a78e284f4a8f6aeac97ff2d77,
+        type: 3}
+      propertyPath: NormalizedAnchoredAreaBounds.m_Center.x
+      value: 0.1047857
+      objectReference: {fileID: 0}
     - target: {fileID: 114699324690579290, guid: a4f56e5a78e284f4a8f6aeac97ff2d77,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

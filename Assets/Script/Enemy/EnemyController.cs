@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public float range = 3f;    //敌人攻击范围
+    public float atk = 20f;
 
     private Life mLife;
     private Attack attack;
@@ -22,6 +23,8 @@ public class EnemyController : MonoBehaviour
     private bool meetBrave = false;
     private float deathTime = 5f;
     private float time1 = 3f;
+
+    public GameObject mhit;
 
     class LifeCallback : Life.LifeCallback
     {
@@ -47,6 +50,7 @@ public class EnemyController : MonoBehaviour
         callback = new LifeCallback(this);
         mLife.registerCallback(callback);
         attack.mTeam = mLife.mTeam;
+        attack.mAtk = atk;
 
         mAnimator = GetComponent<Animator>();
         mcollider = GetComponent<CapsuleCollider>();
@@ -169,8 +173,12 @@ public class EnemyController : MonoBehaviour
     }
     public void Death()
     {
-        death = true;
-        EnemiesManager01.Instance.EnemiesDestory();
+        if (!death)
+        {
+            death = true;
+            EnemiesManager01.Instance.EnemiesDestory();
+            GameObject.Find("Main Camera").GetComponent<ShakeCamera>().isShake = true;
+        }
     }
     ////////////////////////////////////////////////////////////////////<控制动画/>
 
@@ -222,9 +230,34 @@ public class EnemyController : MonoBehaviour
             if (otherLife != null)
             {
                 attack.attack(otherLife);
+                if (otherLife.mHp > 0 && otherLife.mTeam != attack.mTeam)
+                {
+                    Hit(other);
+                }
             }
         }
     }
     ////////////////////////////////////////////////////////////////////<碰撞检测及处理/>
+
+    ////////////////////////////////////////////////////////////////////<攻击特效>
+    public void Hit(Collider collider)
+    {
+        if (mhit != null)
+        {
+            Vector3 pos = collider.transform.position;
+            var hitInstance = Instantiate(mhit, new Vector3(pos[0], pos[1] + 1f, pos[2]), Quaternion.identity);
+            var hitPs = hitInstance.GetComponent<ParticleSystem>();
+            if (hitPs != null)
+            {
+                Destroy(hitInstance, hitPs.main.duration);
+            }
+            else
+            {
+                var hitPsParts = hitInstance.transform.GetChild(0).GetComponent<ParticleSystem>();
+                Destroy(hitInstance, hitPsParts.main.duration);
+            }
+        }
+    }
+    ////////////////////////////////////////////////////////////////////<攻击特效/>
 
 }

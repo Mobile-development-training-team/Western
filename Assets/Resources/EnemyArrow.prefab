@@ -86,8 +86,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7985727026857649741}
-  - component: {fileID: 114088195801476822}
   - component: {fileID: 6976120161763243921}
+  - component: {fileID: 114088195801476822}
   m_Layer: 0
   m_Name: EnemyArrow
   m_TagString: Untagged
@@ -110,18 +110,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114088195801476822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7987397285370427109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94502dd05f81dcb4e882d5ef59b1b612, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &6976120161763243921
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -135,3 +123,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.41274238, y: 0.32158232, z: 1.3726159}
   m_Center: {x: -0.007831395, y: -0.0049166977, z: 0.5652004}
+--- !u!114 &114088195801476822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7987397285370427109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94502dd05f81dcb4e882d5ef59b1b612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atk: 20
+  speed: 10
+  flyTime: 0.7
+  mhit: {fileID: 2827453198976755541, guid: 0ee45d90c39c5314f9b1aeeb41e36a42, type: 3}

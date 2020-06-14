@@ -5,12 +5,17 @@ using UnityEngine;
 public class EnemyArrowController : MonoBehaviour
 {
     private Attack attack;
+    public float atk = 20f;
+    public float speed = 10f;
+    public float flyTime = 0.7f;
+    public GameObject mhit;
 
     void OnEnable()
     {
         attack = new Attack();
         attack.mTeam = 2;
-        Invoke("SaveArrow", 0.7f);       //1秒后回收弓箭
+        attack.mAtk = atk;
+        Invoke("SaveArrow", flyTime);       //1秒后回收弓箭
     }
     //超出射程回收弓箭
     void SaveArrow()
@@ -21,7 +26,7 @@ public class EnemyArrowController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(transform.forward * 10 * Time.deltaTime, Space.World);
+        transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
     }
     //击中目标
     private void OnTriggerEnter(Collider other)
@@ -32,6 +37,10 @@ public class EnemyArrowController : MonoBehaviour
             if (otherLife != null)
             {
                 attack.attack(otherLife);
+                if (otherLife.mHp > 0 && otherLife.mTeam != attack.mTeam)
+                {
+                    Hit(other);
+                }
             }
             ObjectPool.GetInstant().SaveObj(transform.gameObject);
             if (IsInvoking("SaveArrow"))
@@ -40,4 +49,24 @@ public class EnemyArrowController : MonoBehaviour
             }
         }
     }
+    ////////////////////////////////////////////////////////////////////<攻击特效>
+    public void Hit(Collider collider)
+    {
+        if (mhit != null)
+        {
+            Vector3 pos = collider.transform.position;
+            var hitInstance = Instantiate(mhit, new Vector3(pos[0], pos[1] + 1f, pos[2]), Quaternion.identity);
+            var hitPs = hitInstance.GetComponent<ParticleSystem>();
+            if (hitPs != null)
+            {
+                Destroy(hitInstance, hitPs.main.duration);
+            }
+            else
+            {
+                var hitPsParts = hitInstance.transform.GetChild(0).GetComponent<ParticleSystem>();
+                Destroy(hitInstance, hitPsParts.main.duration);
+            }
+        }
+    }
+    ////////////////////////////////////////////////////////////////////<攻击特效/>
 }
