@@ -14,8 +14,12 @@ namespace LeoLuz.PlugAndPlayJoystick
         public GameObject THandSword;
         public GameObject Gun;
         private GameObject muzzle;
+        public GameObject CrossBow;
+        private GameObject crossBowMuzzle;
         public GameObject Wand;
         private GameObject magicCircle;
+        //public GameObject magic;
+
         private bool beDoingSomethings = false;
         private bool walking = false;
         private bool running = false;
@@ -42,8 +46,6 @@ namespace LeoLuz.PlugAndPlayJoystick
 
         private float deathTime = 3f;
         private int deaths = 0;//主角死亡次数
-
-        public GameObject magic;
 
         //(GUI按钮控制版本-废弃)
         /*
@@ -99,14 +101,19 @@ namespace LeoLuz.PlugAndPlayJoystick
             //THandSword = RightHand.transform.Find("2Hand-Sword Variant").gameObject;
             //Gun = RightHand.transform.Find("2Hand-Rifle").gameObject;
             //Wand = RightHand.transform.Find("Wand").gameObject;
+            //Crossbow = RightHand.transform.Find("Crossbow").gameObject;
             muzzle = Gun.transform.Find("muzzle").gameObject;
+            crossBowMuzzle = CrossBow.transform.Find("CrossbowMuzzle").gameObject;
             magicCircle = transform.Find("MagicCircle").gameObject;
 
             THandSword.SetActive(false);
-            THandSword.GetComponent<BoxCollider>().enabled = false;
             Gun.SetActive(false);
             Wand.SetActive(false);
-            //magicCircle.SetActive(false);
+            CrossBow.SetActive(false);
+            THandSword.GetComponent<BoxCollider>().enabled = false;
+            muzzle.SetActive(true);
+            crossBowMuzzle.SetActive(true);
+            magicCircle.SetActive(true);
 
             ArmdeMyselfe();
             usingMainWeapon = true;
@@ -126,7 +133,8 @@ namespace LeoLuz.PlugAndPlayJoystick
 
             if (secondaryWeaponIndex == 1)
             {
-                secondaryWeapon = Gun;
+                //secondaryWeapon = Gun;
+                secondaryWeapon = CrossBow;
             }
             else if (secondaryWeaponIndex == 2)
             {
@@ -562,13 +570,14 @@ namespace LeoLuz.PlugAndPlayJoystick
         }
         public void Revive()
         {
+            mAnimator.SetTrigger("Revive");
             death = false;
             reviving = true;
             mAnimator.SetBool("Death", death);
         }
         public void GetHit()
         {
-            if (reviving || death || atAir || beDoingSomethings)
+            if (reviving || death || atAir || beDoingSomethings || running)
                 return;
             else
             {
@@ -593,7 +602,8 @@ namespace LeoLuz.PlugAndPlayJoystick
         }
         public void startShooting()
         {
-            ObjectPool.GetInstant().GetObj("Bullet", muzzle.transform.position, transform.localRotation);
+            //ObjectPool.GetInstant().GetObj("Bullet", muzzle.transform.position, transform.localRotation);
+            ObjectPool.GetInstant().GetObj("BraveCrossBowArrow", crossBowMuzzle.transform.position, transform.localRotation);
         }
         public void endShooting()
         {
