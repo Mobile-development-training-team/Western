@@ -36,11 +36,11 @@ public class CrossBowArrowController : MonoBehaviour
             Life otherLife = other.gameObject.GetComponent<Life>();
             if (otherLife != null)
             {
-                attack.attack(otherLife);
                 if (otherLife.mHp > 0 && otherLife.mTeam != attack.mTeam)
                 {
                     Hit(other);
                 }
+                attack.attack(otherLife);
             }
             ObjectPool.GetInstant().SaveObj(transform.gameObject);
             if (IsInvoking("SaveArrow"))

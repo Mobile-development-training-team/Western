@@ -592,6 +592,7 @@ namespace LeoLuz.PlugAndPlayJoystick
         {
             //THandSword.GetComponent<BoxCollider>().enabled = true;
             mainWeapon.GetComponent<BoxCollider>().enabled = true;
+            ObjectPool.GetInstant().GetObj("SlashWaveBlue", magicCircle.transform.position, transform.localRotation);
         }
         public void endHit()
         {

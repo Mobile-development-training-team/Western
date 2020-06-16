@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-F:/UnityTestCode/Western/apkForGameProgram/game12.2.apk
+F:/UnityTestCode/Western/apkForGameProgram/game12.5.apk
 SceneListBegin?
 Assets/Scenes/LevelScene.unity
 Assets/Scenes/Scene01.unity
@@ -93,6 +93,7 @@ aa165095bcf0f4d99594ea33df01c81b UnityEngine.UI.dll:UnityEngine.UI.Slider
 0fd6822f6177297bd0eb4d83cc7a9030 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 64e54c0cbb0177c5ea26f340efb9ff85 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
+3e109c6c26138fe0fc3e8dde3d0ea67d Assembly-CSharp.dll:.CrossBowArrowController
 ebe4619662441f55c3364269bb5622e9 Assembly-CSharp.dll:.SuperCollisionType
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BruteForceMesh
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
@@ -124,6 +125,7 @@ ad9173d3a69d99153f38ed4b62226129 UnityEngine.Networking.dll:UnityEngine.Networki
 5887ef1bc706b22b773d253fd443ceef UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 c066b6aa1564ad70c37ead364348a818 Assembly-CSharp.dll:.MagicBulletController
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.SkillManager
 2046a769735b5a7196e56bb0bb66cba9 Assembly-CSharp.dll:.EnemyController
 b8a5e8091ab0b8861d2add371082c5e0 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
 6eee79c77246203d8e0c1e418b26e6c4 Assembly-CSharp.dll:.GameManager
@@ -193,7 +195,7 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 4f7795902bd682d4d1c7dbf0c4ab4f0b Assembly-CSharp.dll:RPGCharacterAnims.RPGCharacterInputController
 7d4f2220645154481dbfa15b5766e50b Assembly-CSharp-firstpass.dll:LeoLuz.PlugAndPlayJoystick.Swipe
 2f7044710c2917a7bb1dbb2157757948 Assembly-CSharp.dll:.Life
-ae3b7e18e116f1123dc471e24dbe923a Assembly-CSharp.dll:LeoLuz.PlugAndPlayJoystick.BraveController
+c9e26b121d1776a045c461f116ad20b7 Assembly-CSharp.dll:LeoLuz.PlugAndPlayJoystick.BraveController
 38b08a887a876e9c826dee55fc7daca8 Assembly-CSharp.dll:.Gravity
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 d1b536dc759bdc4879b86ac8df6c099d Assembly-CSharp.dll:.EnemiesManager01
@@ -210,3 +212,5 @@ a0b90ca9b57ca50a01d311479eda61c2 Assembly-CSharp-firstpass.dll:LeoLuz.PlugAndPla
 761c71fe565631b7b05616cf39a1a258 Assembly-CSharp.dll:.SuperCharacterController
 59e13e042c3d0abe89ab483417fdcc34 Assembly-CSharp.dll:.ShakeCamera
 36c8f18bc5d3fe1484699fc45c89e2b9 Assembly-CSharp.dll:.CamController
+3e109c6c26138fe0fc3e8dde3d0ea67d Assembly-CSharp.dll:.SlashWaveBlueController
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BufferManager
