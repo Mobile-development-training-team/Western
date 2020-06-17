@@ -67,6 +67,10 @@ public class Life : MonoBehaviour
         if (hasHp)
         {
             float dmg = DamageCalculate.calDam(attack,this);
+
+            GameObject HPLabel = ObjectPool.GetInstant().GetObj("HPParticle", new Vector3(transform.position[0], transform.position[1] + 2f, transform.position[2]), Quaternion.identity).transform.Find("HPLabel").gameObject;
+            HPLabel.GetComponent<TextMesh>().text = "-" + dmg;
+            HPLabel.GetComponent<MeshRenderer>().sortingOrder = 10;
             if (dmg > 0)
             {
                 mHp -= dmg;

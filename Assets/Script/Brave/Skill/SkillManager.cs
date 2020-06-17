@@ -32,7 +32,7 @@ public class SkillManager : MonoBehaviour
         {
             ObjectPool.GetInstant().GetObj("SlashWaveBlue", magicCircle.transform.position, transform.localRotation).GetComponent<SlashWaveBlueController>().atk = skill_01_atk;
             if(needBack)
-                ObjectPool.GetInstant().GetObj("SlashWaveBlue", magicCircleBack.transform.position, magicCircleBack.transform.localRotation).GetComponent<SlashWaveBlueController>().atk = skill_01_atk;
+                ObjectPool.GetInstant().GetObj("SlashWaveBlue", magicCircleBack.transform.position, magicCircleBack.transform.rotation).GetComponent<SlashWaveBlueController>().atk = skill_01_atk;
         }
     }
 }

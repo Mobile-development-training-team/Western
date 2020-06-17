@@ -179,8 +179,17 @@ namespace LeoLuz.PlugAndPlayJoystick
                 //将角色旋转至指定方向
                 //transform.rotation = Quaternion.LookRotation(direction);
                 //transform.Translate(Vector3.forward * horizontal *horizontal*10* Time.deltaTime);
+                if (horizontal > -0.5 && horizontal < 0.5)
+                {
+                    walk(new Vector3(horizontal, 0, 0));
+                }
+                else
+                {
+                    run(new Vector3(horizontal, 0, 0));
+                }
                 if (!atAir)
                 {
+                    /*
                     if (horizontal > -0.5 && horizontal < 0.5)
                     {
                         walk(new Vector3(horizontal, 0, 0));
@@ -189,6 +198,7 @@ namespace LeoLuz.PlugAndPlayJoystick
                     {
                         run(new Vector3(horizontal, 0, 0));
                     }
+                    */
                 }
                 else
                 {
@@ -365,6 +375,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             transform.rotation = Quaternion.LookRotation(vector);
             //行走
             AttackIndex = 0;
+            mAnimator.SetInteger("AttackIndex", AttackIndex);
             walking = true;
             running = false;
             mAnimator.SetBool("Walking", walking);
@@ -377,6 +388,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             transform.rotation = Quaternion.LookRotation(vector);
             //奔跑
             AttackIndex = 0;
+            mAnimator.SetInteger("AttackIndex", AttackIndex);
             walking = true;
             running = true;
             mAnimator.SetBool("Walking", walking);
