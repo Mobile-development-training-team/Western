@@ -10,6 +10,8 @@ namespace LeoLuz.PlugAndPlayJoystick
     public class BraveController : MonoBehaviour
     {
         private Animator mAnimator;
+        private SkillManager skillManager;
+        private BufferManager bufferManager;
         private GameObject RightHand;
         public GameObject THandSword;
         public GameObject Gun;
@@ -18,7 +20,6 @@ namespace LeoLuz.PlugAndPlayJoystick
         private GameObject crossBowMuzzle;
         public GameObject Wand;
         private GameObject magicCircle;
-        //public GameObject magic;
 
         private bool beDoingSomethings = false;
         private bool walking = false;
@@ -88,6 +89,9 @@ namespace LeoLuz.PlugAndPlayJoystick
             mAnimator.SetBool("beDoingSomethings", false);
             mAnimator.SetBool("atAir", false);
             mAnimator.SetBool("Death", false);
+
+            skillManager = GetComponent<SkillManager>();
+            bufferManager = GetComponent<BufferManager>();
 
             mLife = GetComponent<Life>();
             LifeCallback callback = new LifeCallback(this);
@@ -592,7 +596,12 @@ namespace LeoLuz.PlugAndPlayJoystick
         {
             //THandSword.GetComponent<BoxCollider>().enabled = true;
             mainWeapon.GetComponent<BoxCollider>().enabled = true;
-            ObjectPool.GetInstant().GetObj("SlashWaveBlue", magicCircle.transform.position, transform.localRotation);
+            //ObjectPool.GetInstant().GetObj("SlashWaveBlue", magicCircle.transform.position, transform.localRotation);
+            skillManager.Use_Skill_01(false);
+        }
+        public void skillLooping()
+        {
+            skillManager.Use_Skill_01(true);
         }
         public void endHit()
         {
