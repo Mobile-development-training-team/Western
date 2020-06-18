@@ -21,7 +21,7 @@ public class SkillManager : MonoBehaviour
     private float skill_01_timer = 3f;
     */
     //概率型技能实现
-    private float skill_01_percent = 100f;
+    private float skill_01_percent = 50f;
     ///////////////////////////////////////<skill01/>
 
     ///////////////////////////////////////<skill05>
@@ -29,9 +29,9 @@ public class SkillManager : MonoBehaviour
     //public float skill_05_atk = 10f;
     //冷却+持续型技能实现
     private bool skill_05 = false;
-    private float skill_05_coolTime = 30f;
+    private float skill_05_coolTime = 3f;
     private float skill_05_stayedTime = 5f;
-    private float skill_05_timer = 30f;
+    private float skill_05_timer = 3f;
     private float preDef = 0;
     ///////////////////////////////////////<skill05/>
 
@@ -78,6 +78,12 @@ public class SkillManager : MonoBehaviour
                     skill_05 = true;
                     skill_05_timer = skill_05_stayedTime;
                     mLife.mDef += 99999;
+                    GameObject buffer = ObjectPool.GetInstant().loadResource<GameObject>("armor-increase-buff");
+                    buffer = Instantiate(buffer);
+                    buffer.transform.position = new Vector3(transform.position[0], transform.position[1] + 0.7f, transform.position[2]);
+                    buffer.SetActive(true);
+                    buffer.transform.parent = brave.transform;
+                    Destroy(buffer, skill_05_stayedTime);
                 }
             }
         }

@@ -7312,7 +7312,7 @@ MonoBehaviour:
   mTeam: 1
   mHp: 100
   MAXHP: 100
-  mDef: 0
+  mDef: 1
   hasHp: 1
 --- !u!114 &5835254057271576925
 MonoBehaviour:
@@ -7328,7 +7328,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magicCircle: {fileID: 1054523006}
   magicCircleBack: {fileID: 8270734879287141176}
-  skill_01: 1
+  select_skill_01: 1
+  skill_01_atk: 10
+  select_skill_05: 1
 --- !u!114 &7175568914914189998
 MonoBehaviour:
   m_ObjectHideFlags: 0

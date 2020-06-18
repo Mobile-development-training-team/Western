@@ -90,7 +90,7 @@ public class Life : MonoBehaviour
                     mCallback.onHurted();
                 }
             }
-            GameObject HPLabel = ObjectPool.GetInstant().GetObj("HPParticle", new Vector3(transform.position[0], transform.position[1] + 2f, transform.position[2]), Quaternion.identity).transform.Find("HPLabel").gameObject;
+            GameObject HPLabel = ObjectPool.GetInstant().GetObj("HPParticle", new Vector3(transform.position[0], transform.position[1] + 2.5f, transform.position[2]), Quaternion.identity).transform.Find("HPLabel").gameObject;
             HPLabel.GetComponent<TextMesh>().text = "-" + dmg;
             HPLabel.GetComponent<MeshRenderer>().sortingOrder = 10;
             return dmg;

@@ -105,7 +105,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             //从外面拿数据
             mLife.MAXHP = 100f;
             mLife.mHp = mLife.MAXHP;
-            mLife.mDef = 0;
+            mLife.mDef = 1;
             baseAtk = 20f;
             currAtk = baseAtk;
             attack.mAtk = currAtk;
@@ -852,6 +852,7 @@ namespace LeoLuz.PlugAndPlayJoystick
         public void setAtk(float setatk)
         {
             currAtk = setatk;
+            attack.mAtk = currAtk;
         }
         public float getBaseAtk()
         {
