@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEditor;
-using  LeoLuz.PlugAndPlayJoystick;
+//using  LeoLuz.PlugAndPlayJoystick;
 public class GameManager:MonoBehaviour
 {
     public  static GameManager INSTANCE;

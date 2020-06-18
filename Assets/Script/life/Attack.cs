@@ -7,11 +7,15 @@ public class Attack
     public int mTeam = 1;
     public float mAtk = 20f;
 
-    public void attack(Life life)
+    public float attack(Life life)
     {
         if (mTeam != life.mTeam)
         {
-            life.beAttacked(this);
+            return life.beAttacked(this);
+        }
+        else
+        {
+            return -1;
         }
     }
 }

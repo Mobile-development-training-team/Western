@@ -4,9 +4,10 @@ using UnityEngine;
 using LeoLuz.PropertyAttributes;
 using UnityEngine.SceneManagement;
 
+/*
 namespace LeoLuz.PlugAndPlayJoystick
 {
-
+*/
     public class BraveController : MonoBehaviour
     {
         private Animator mAnimator;
@@ -43,6 +44,8 @@ namespace LeoLuz.PlugAndPlayJoystick
 
         private Life mLife;
         private Attack attack;
+        private float baseAtk;
+        private float currAtk;
         public GameObject mhit;
 
         private float deathTime = 3f;
@@ -78,7 +81,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             }
         }
         
-        void Start()
+        void Awake()
         {
             mAnimator = GetComponent<Animator>();
             mAnimator.SetInteger("AttackIndex", 0);
@@ -96,10 +99,16 @@ namespace LeoLuz.PlugAndPlayJoystick
             mLife = GetComponent<Life>();
             LifeCallback callback = new LifeCallback(this);
             mLife.registerCallback(callback);
-            mLife.hasHp = true;
-            mLife.mHp = mLife.MAXHP;
             attack = new Attack();
+            mLife.hasHp = true;
             attack.mTeam = mLife.mTeam;
+            //从外面拿数据
+            mLife.MAXHP = 100f;
+            mLife.mHp = mLife.MAXHP;
+            mLife.mDef = 0;
+            baseAtk = 20f;
+            currAtk = baseAtk;
+            attack.mAtk = currAtk;
 
             RightHand = GameObject.FindGameObjectWithTag("RightHand");
             //THandSword = RightHand.transform.Find("2Hand-Sword Variant").gameObject;
@@ -570,15 +579,15 @@ namespace LeoLuz.PlugAndPlayJoystick
         {
             if (!death)
             {
-                mainWeapon.GetComponent<BoxCollider>().enabled = false;
                 beDoingSomethings = true;
+                mainWeapon.GetComponent<BoxCollider>().enabled = false;
                 mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
                 death = true;
                 mAnimator.SetBool("Death", death);
                 Hit(transform.GetComponent<CapsuleCollider>());
                 deaths++;
-                //暂定主角有三条命。如果死了三次就游戏结束
-                if (deaths >= 3)
+                //暂定主角有10条命。如果死了10次就游戏结束
+                if (deaths >= 10)
                 {
                     GameManager.INSTANCE.GameOver(false);
                 }
@@ -809,7 +818,8 @@ namespace LeoLuz.PlugAndPlayJoystick
                 Life otherLife = other.gameObject.GetComponent<Life>();
                 if (otherLife != null)
                 {
-                    attack.attack(otherLife);
+                    //attack.attack(otherLife);
+                    bufferManager.Use_Buffer_04(attack,otherLife);
                     Hit(other);
                 }
             }
@@ -836,6 +846,26 @@ namespace LeoLuz.PlugAndPlayJoystick
             }
         }
         ////////////////////////////////////////////////////////////////////<攻击特效/>
+
+
+        ////////////////////////////////////////////////////////////////////<技能和buff相关>
+        public void setAtk(float setatk)
+        {
+            currAtk = setatk;
+        }
+        public float getBaseAtk()
+        {
+            return baseAtk;
+        }
+        public float getCurrAtk()
+        {
+            return currAtk;
+        }
+        public Life getLife()
+        {
+            return mLife;
+        }
+        ////////////////////////////////////////////////////////////////////<技能和buff相关/>
     }
 
-}
+//}
