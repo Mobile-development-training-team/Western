@@ -11,7 +11,8 @@ public class DamageCalculate
     {
         if ((atk.mTeam != def.mTeam) || friendlyFire == true)
         {
-            return atk.mAtk - def.mDef;
+            int dmg = (int)(atk.mAtk - def.mDef + 0.5);
+            return (float)dmg;
         }
         return 0f;
     }

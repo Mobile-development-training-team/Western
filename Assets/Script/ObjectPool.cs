@@ -44,6 +44,9 @@ public class ObjectPool
         }
         currentObj.transform.position = pos;
         currentObj.transform.rotation = qua;
+        //currentObj.transform.localRotation = qua;
+
+        //Debug.Log("currentObj.transform.localRotation=" + currentObj.transform.localRotation + "    %%%%    currentObj.transform.rotation=" + currentObj.transform.rotation + "    %%%%    qua=" + qua);
         currentObj.SetActive(true);
         //AINum++;//产生AI的数量增加1
         return currentObj;

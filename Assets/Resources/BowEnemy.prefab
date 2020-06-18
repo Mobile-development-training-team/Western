@@ -73,6 +73,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BowEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 1500168017719090, guid: a870ede8308e8714d828a645d956ef4e, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 4158162170571520, guid: a870ede8308e8714d828a645d956ef4e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13

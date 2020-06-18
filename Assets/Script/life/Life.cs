@@ -62,17 +62,20 @@ public class Life : MonoBehaviour
         }
     }
     
-    public void beAttacked(Attack attack)
+    public float beAttacked(Attack attack)
     {
         if (hasHp)
         {
             float dmg = DamageCalculate.calDam(attack,this);
-            if (dmg > 0)
+
+            if (dmg <= 0)
             {
-                mHp -= dmg;
+                return 0;
             }
-            if (mHp <= 0f)
+
+            if (mHp <= dmg)
             {
+                dmg = mHp;
                 mHp = 0f;
                 if (mCallback != null)
                 {
@@ -81,18 +84,21 @@ public class Life : MonoBehaviour
             }
             else
             {
+                mHp -= dmg;
                 if (mCallback != null)
                 {
                     mCallback.onHurted();
                 }
             }
+            GameObject HPLabel = ObjectPool.GetInstant().GetObj("HPParticle", new Vector3(transform.position[0], transform.position[1] + 2.5f, transform.position[2]), Quaternion.identity).transform.Find("HPLabel").gameObject;
+            HPLabel.GetComponent<TextMesh>().text = "-" + dmg;
+            HPLabel.GetComponent<MeshRenderer>().sortingOrder = 10;
+            return dmg;
         }
-            /*
         else
         {
-            mCallback.onHurted();
+            return 0;
         }
-             * */
     }
 
     private LifeCallback mCallback;
