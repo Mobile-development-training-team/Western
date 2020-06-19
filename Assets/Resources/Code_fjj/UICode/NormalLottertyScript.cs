@@ -26,7 +26,7 @@ public class NormalLottertyScript : MonoBehaviour
 
     private void Rebuild()
     {
-        GameScript.NormalPool = GameScript.NormalPool.AddSeconds(10);
+        GameScript.NormalPool = GameScript.NormalPool.AddMinutes(30);
         InvokeRepeating("TimeGo", 0, 1);
     }
 

@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-F:/UnityTestCode/Western/apkForGameProgram/game15.7.apk
+/Users/fengjiajun/Desktop/NewWestern.apk
 SceneListBegin?
 Assets/Scenes/MainScene_fjj.unity
 Assets/Scenes/Level01.unity
@@ -182,7 +182,6 @@ ad9173d3a69d99153f38ed4b62226129 UnityEngine.Networking.dll:UnityEngine.Networki
 9b895dcabbc1faf095c000c32d471fd0 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 5887ef1bc706b22b773d253fd443ceef UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BagUIResolveMessageButtonScript
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.GameScript
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BagUIMessageMaterialRareEarthScript
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BufferManager
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BagUIMessageBackScript
@@ -223,6 +222,7 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 820b12286cae52be5fb63439e5a14f6e Assembly-CSharp.dll:.ProjectileMover
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BagUIMessageDownScript
 dd54d4657875aaa22690ebe9af08240e Assembly-CSharp.dll:.SkillUIListScript
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.GameData
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.RoleMessageScript
 3e109c6c26138fe0fc3e8dde3d0ea67d Assembly-CSharp.dll:.BulletController
 4f7795902bd682d4d1c7dbf0c4ab4f0b Assembly-CSharp.dll:RPGCharacterAnims.RPGCharacterInputController

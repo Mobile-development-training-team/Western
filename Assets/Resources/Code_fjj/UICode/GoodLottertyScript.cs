@@ -14,12 +14,29 @@ public class GoodLottertyScript : MonoBehaviour
         InvokeRepeating("TimeGo", 0, 1);
     }
 
+    private void Update()
+    {
+        if (LotteryMessageButtonScript.HadLotteryMessage)
+        {
+            Rebuild();
+            LotteryMessageButtonScript.HadLotteryMessage = false;
+        }
+    }
+
+    private void Rebuild()
+    {
+        GameScript.GoodPool = GameScript.GoodPool.AddMinutes(30);
+        InvokeRepeating("TimeGo", 0, 1);
+    }
+
+
     private void TimeGo()
     {
         GameScript.GoodPool = GameScript.GoodPool.AddSeconds(-1);
         if (GameScript.GoodPool < Check)
         {
             CancelInvoke();
+            GameScript.GoodPool = Check.Date;
             return;
         }
         transform.Find("Text").GetComponent<Text>().text = "高级抽奖" + '\n' + '\n' + GameScript.GoodPool.TimeOfDay.ToString().Substring(0, 8);
