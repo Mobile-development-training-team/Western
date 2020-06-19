@@ -109,6 +109,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             baseAtk = 20f;
             currAtk = baseAtk;
             attack.mAtk = currAtk;
+            skillManager.skill_00_num = 30;
             //从外面拿数据
             /*
             mLife.MAXHP = GameScript.GameRoleAttribute.HealthPointLimit;
@@ -550,6 +551,7 @@ namespace LeoLuz.PlugAndPlayJoystick
                 Jump();
             }
             */
+            skillManager.Use_Skill_00();
         }
         ////////////////////////////////////////////////////////////////////<按钮事件/>
 
@@ -640,13 +642,13 @@ namespace LeoLuz.PlugAndPlayJoystick
             //THandSword.GetComponent<BoxCollider>().enabled = true;
             mainWeapon.GetComponent<BoxCollider>().enabled = true;
             //ObjectPool.GetInstant().GetObj("SlashWaveBlue", magicCircle.transform.position, transform.localRotation);
-            skillManager.Use_Skill_01();
             skillManager.Use_Skill_02(false);
+            skillManager.Use_Skill_03(false);
         }
         public void skillLooping()
         {
-            skillManager.Use_Skill_01();
             skillManager.Use_Skill_02(true);
+            skillManager.Use_Skill_03(true);
         }
         public void endHit()
         {
@@ -844,6 +846,7 @@ namespace LeoLuz.PlugAndPlayJoystick
                 {
                     //attack.attack(otherLife);
                     bufferManager.Use_Buffer_04(attack,otherLife);
+                    skillManager.Use_Skill_01();
                     Hit(other);
                 }
             }

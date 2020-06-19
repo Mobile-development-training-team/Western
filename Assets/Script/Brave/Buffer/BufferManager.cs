@@ -36,11 +36,11 @@ public class BufferManager : MonoBehaviour
             }
         }
     }
-    int bufferIndex = 0;
+    int bufferIndex = Random.Range(0, 6);
     public void getBuffer()
     {
         //int bufferIndex = Random.Range(0, 6);
-        if (bufferIndex == 5)
+        if (bufferIndex == 6)
         {
             bufferIndex = 0;
         }
@@ -63,7 +63,14 @@ public class BufferManager : MonoBehaviour
         else if (bufferIndex == 2)
         {
             //钢筋铁骨
-            tempLife.mDef *= 1.3f;
+            if (tempLife.mDef >= 99999)
+            {
+                tempLife.mDef += (tempLife.mDef - 99999) * 0.3f;
+            }
+            else
+            {
+                tempLife.mDef *= 1.3f;
+            }
             loadBuffer("armor-increase-target-large");
         }
         else if (bufferIndex == 3)

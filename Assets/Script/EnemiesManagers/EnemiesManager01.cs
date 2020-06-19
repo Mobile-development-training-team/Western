@@ -23,7 +23,7 @@ public class EnemiesManager01 : MonoBehaviour
     }
     void Start()
     {
-        brave.GetComponent<BufferManager>().getBuffer();
+        //brave.GetComponent<BufferManager>().getBuffer();
     }
     void Update()
     {

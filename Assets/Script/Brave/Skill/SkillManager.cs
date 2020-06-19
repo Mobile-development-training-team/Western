@@ -9,27 +9,45 @@ public class SkillManager : MonoBehaviour
     public GameObject magicCircleBack;
     private BraveController brave;
     private Life mLife;
+
+
+    //引天雷（大招）
+    ///////////////////////////////////////<skill00>
+    public int skill_00_num = 30;
+    private float skill_00_coolTime = 3f;
+    private float skill_00_timer = 3f;
+    ///////////////////////////////////////<skill00/>
+
     //嗜血封魔
     ///////////////////////////////////////<skill01>
     public bool select_skill_01 = true;
-    public float skill_01_num = 0.08f;
+    private float skill_01_num = 0.08f;
     //概率型技能实现
     private float skill_01_percent = 10f;
     ///////////////////////////////////////<skill01/>
 
     //剑气
     ///////////////////////////////////////<skill02>
-    public bool select_skill_02 = true;
-    public float skill_02_atk = 10f;
-    public float skill_02_num = 0.5f;
+    public bool select_skill_02 = true ;
+    private float skill_02_atk = 10f;
+    private float skill_02_num = 0.5f;
     //概率型技能实现
-    private float skill_02_percent = 50f;
+    private float skill_02_percent = 80f;
     ///////////////////////////////////////<skill02/>
+
+    //地火
+    ///////////////////////////////////////<skill03>
+    public bool select_skill_03 = true;
+    private float skill_03_atk = 10f;
+    private float skill_03_num = 2f;
+    //概率型技能实现
+    private float skill_03_percent = 10f;
+    ///////////////////////////////////////<skill03/>
 
     //血战天虹
     ///////////////////////////////////////<skill04>
     public bool select_skill_04 = true;
-    public float skill_04_num = 0.2f;
+    private float skill_04_num = 0.2f;
     private float skill_04_percent = 10f;
     private bool use_skill_04 = false;
     private GameObject skill_04_buff;
@@ -54,6 +72,14 @@ public class SkillManager : MonoBehaviour
 
     void Update()
     {
+        if (skill_00_num > 0)
+        {
+            if (skill_00_timer > 0)
+            {
+                skill_00_timer -= Time.deltaTime;
+            }
+        }
+
         if (select_skill_04)
         {
             if (use_skill_04)
@@ -106,6 +132,22 @@ public class SkillManager : MonoBehaviour
         }
     }
 
+    public void Use_Skill_00()
+    {
+        if (skill_00_timer <= 0)
+        {
+            skill_00_timer = skill_00_coolTime;
+            skill_00_num--;
+            //
+            GameObject[] lightningPonts = GameObject.FindGameObjectsWithTag("LightningPoint");
+            //Debug.Log("lightningponts num is " + lightningPonts.Length);
+            for (int i = 0; i < lightningPonts.Length;i++ )
+            {
+                ObjectPool.GetInstant().GetObj("LightningBeamStart", lightningPonts[i].transform.position, lightningPonts[i].transform.rotation);
+            }
+        }
+    }
+
     public void Use_Skill_01()
     {
         //概率型技能实现
@@ -131,9 +173,24 @@ public class SkillManager : MonoBehaviour
         {
             if (judgePercent(skill_02_percent))
             {
-                ObjectPool.GetInstant().GetObj("SlashWaveBlue", magicCircle.transform.position, transform.localRotation).GetComponent<SlashWaveBlueController>().atk = brave.getCurrAtk() * skill_01_num;
+                ObjectPool.GetInstant().GetObj("SlashWaveBlue", magicCircle.transform.position, transform.localRotation).GetComponent<SlashWaveBlueController>().atk = brave.getCurrAtk() * skill_02_num;
                 if (needBack)
-                    ObjectPool.GetInstant().GetObj("SlashWaveBlue", magicCircleBack.transform.position, magicCircleBack.transform.rotation).GetComponent<SlashWaveBlueController>().atk = brave.getCurrAtk() * skill_01_num;
+                    ObjectPool.GetInstant().GetObj("SlashWaveBlue", magicCircleBack.transform.position, magicCircleBack.transform.rotation).GetComponent<SlashWaveBlueController>().atk = brave.getCurrAtk() * skill_02_num;
+            }
+        }
+    }
+    public void Use_Skill_03(bool needBack)
+    {
+        //概率型技能实现
+        if (select_skill_03)
+        {
+            if (judgePercent(skill_03_percent))
+            {
+                ObjectPool.GetInstant().GetObj("GroundFire", new Vector3(magicCircle.transform.position[0], magicCircle.transform.position[1] - 0.777f, magicCircle.transform.position[2]), transform.localRotation).GetComponent<GroundFireController>().atk = brave.getCurrAtk() * skill_03_num;
+                if (needBack)
+                {
+                    ObjectPool.GetInstant().GetObj("GroundFire", new Vector3(magicCircleBack.transform.position[0], magicCircleBack.transform.position[1] - 0.777f, magicCircleBack.transform.position[2]), magicCircleBack.transform.rotation).GetComponent<GroundFireController>().atk = brave.getCurrAtk() * skill_03_num;
+                }
             }
         }
     }

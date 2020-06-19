@@ -140,7 +140,7 @@ public class Life : MonoBehaviour
     public void ShowShield()
     {
         usingShield = true;
-        Shield = ObjectPool.GetInstant().loadResource<GameObject>("armor-increase-zone");
+        Shield = ObjectPool.GetInstant().loadResource<GameObject>("EarthShield");
         Shield = Instantiate(Shield);
         Shield.transform.position = new Vector3(transform.position[0], transform.position[1] , transform.position[2]);
         Shield.SetActive(true);

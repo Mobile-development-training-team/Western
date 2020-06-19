@@ -4407,11 +4407,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   centerText: {fileID: 1165474216}
   pauseButton: {fileID: 1514547895}
-  nextLevelButton: {fileID: 0}
-  reviveButton: {fileID: 0}
+  nextLevelButton: {fileID: 1035588232}
+  reviveButton: {fileID: 1422629916}
   pauseFront: {fileID: 239487058}
-  endGameFront: {fileID: 0}
-  enemiesMessageFront: {fileID: 0}
+  endGameFront: {fileID: 1623507192}
+  enemiesMessageFront: {fileID: 1867209408}
 --- !u!4 &1879808281
 Transform:
   m_ObjectHideFlags: 0
