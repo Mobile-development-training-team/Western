@@ -21,6 +21,10 @@ public class EnemiesManager01 : MonoBehaviour
         gameManager.setEnemiesManager(this);
         Instance = this;
     }
+    void Start()
+    {
+        brave.GetComponent<BufferManager>().getBuffer();
+    }
     void Update()
     {
         if (waveTimer > 0)
@@ -35,7 +39,10 @@ public class EnemiesManager01 : MonoBehaviour
         {
             if (curDisplayedEnemies == 0)
             {
-                brave.GetComponent<BufferManager>().getBuffer();
+                if (waveNum % 2 == 0)
+                {
+                    brave.GetComponent<BufferManager>().getBuffer();
+                }
                 waveTimer = 5f;
             }
         }
@@ -198,7 +205,7 @@ public class EnemiesManager01 : MonoBehaviour
     {
         curDisplayedEnemies--;
         totalGeneratedEnemies--;
-        Debug.Log("EnemiesManager totalFenerateEnemies = " + totalGeneratedEnemies);
+        //Debug.Log("EnemiesManager totalFenerateEnemies = " + totalGeneratedEnemies);
         if (totalGeneratedEnemies <= 0)
         {
             GameManager.INSTANCE.GameOver(true);
