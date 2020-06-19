@@ -11,6 +11,26 @@ using UnityEngine.SceneManagement;
 
 public class GameInitScript : MonoBehaviour
 {
+    public GameObject MainWeaponModel1;
+    public GameObject MainWeaponModel2;
+    public GameObject MainWeaponModel3;
+    public GameObject MainWeaponModel4;
+
+    public GameObject AlternateWeaponModel1;
+    public GameObject AlternateWeaponModel2;
+    public GameObject AlternateWeaponModel3;
+    public GameObject AlternateWeaponModel4;
+
+    public GameObject CuirassModel1;
+    public GameObject CuirassModel2;
+    public GameObject CuirassModel3;
+    public GameObject CuirassModel4;
+
+    public GameObject HelmModel1;
+    public GameObject HelmModel2;
+    public GameObject HelmModel3;
+    public GameObject HelmModel4;
+
     private void Awake()
     {
         GameDataInit();
@@ -73,6 +93,7 @@ public class GameInitScript : MonoBehaviour
         {
             GameLoad();
         }
+        GameModelLoad();
         transform.parent.Find("GameData").gameObject.SetActive(true);
         transform.parent.Find("MainUI").gameObject.SetActive(true);
     }
@@ -435,6 +456,85 @@ public class GameInitScript : MonoBehaviour
             }
         }
     }
+    public void GameModelLoad()
+    {
+        GameScript.EquipmentModel = new GameObject[4];
+        GameScript.MainWeaponModelIndex = new GameObject[4];
+        GameScript.AlternateWeaponModelIndex = new GameObject[4];
+        GameScript.CuirassModelIndex = new GameObject[4];
+        GameScript.HelmModelIndex = new GameObject[4];
+
+        GameScript.MainWeaponModelIndex[0] = MainWeaponModel1;
+        GameScript.MainWeaponModelIndex[1] = MainWeaponModel2;
+        GameScript.MainWeaponModelIndex[2] = MainWeaponModel3;
+        GameScript.MainWeaponModelIndex[3] = MainWeaponModel4;
+
+        GameScript.AlternateWeaponModelIndex[0] = AlternateWeaponModel1;
+        GameScript.AlternateWeaponModelIndex[1] = AlternateWeaponModel2;
+        GameScript.AlternateWeaponModelIndex[2] = AlternateWeaponModel3;
+        GameScript.AlternateWeaponModelIndex[3] = AlternateWeaponModel4;
+
+        GameScript.CuirassModelIndex[0] = CuirassModel1;
+        GameScript.CuirassModelIndex[1] = CuirassModel2;
+        GameScript.CuirassModelIndex[2] = CuirassModel3;
+        GameScript.CuirassModelIndex[3] = CuirassModel4;
+
+        GameScript.HelmModelIndex[0] = HelmModel1;
+        GameScript.HelmModelIndex[1] = HelmModel2;
+        GameScript.HelmModelIndex[2] = HelmModel3;
+        GameScript.HelmModelIndex[3] = HelmModel4;
+
+        if (DataManager.roleEquipment.HadMainWeapon())
+        {
+            GameScript.EquipmentModel[0] = GameScript.MainWeaponModelIndex[(int)DataManager.roleEquipment.GetMainWeapon().item.GetQuality()];
+        }
+        else
+        {
+            GameScript.EquipmentModel[0] = null;
+        }
+
+        if (DataManager.roleEquipment.HadAlternateWeapon())
+        {
+            GameScript.EquipmentModel[1] = GameScript.AlternateWeaponModelIndex[(int)DataManager.roleEquipment.GetAlternateWeapon().item.GetQuality()];
+        }
+        else
+        {
+            GameScript.EquipmentModel[1] = null;
+        }
+
+        if (DataManager.roleEquipment.HadCuirass())
+        {
+            GameScript.EquipmentModel[2] = GameScript.CuirassModelIndex[(int)DataManager.roleEquipment.GetCuirass().item.GetQuality()];
+        }
+        else
+        {
+            GameScript.EquipmentModel[2] = null;
+        }
+
+        if (DataManager.roleEquipment.HadHelm())
+        {
+            GameScript.EquipmentModel[3] = GameScript.HelmModelIndex[(int)DataManager.roleEquipment.GetHelm().item.GetQuality()];
+        }
+        else
+        {
+            GameScript.EquipmentModel[3] = null;
+        }
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (GameScript.EquipmentModel[i] != null)
+            {
+                if (i == 1)
+                {
+                    if (GameScript.EquipmentModel[0] != null)
+                    {
+                        continue;
+                    }
+                }
+                GameScript.EquipmentModel[i].SetActive(true);
+            }
+        }
+    }
 
     public void GameLoad()
     {
@@ -447,6 +547,7 @@ public class GameInitScript : MonoBehaviour
         RoleLoad();
         BagLoad();
         LevelOutputLoad();
+        //GameModelLoad();
 
         GameScript.QualityNormal = GameScript.GetSprite("UI/Normal.png");
         GameScript.QualityExcellent = GameScript.GetSprite("UI/Excellent.png");

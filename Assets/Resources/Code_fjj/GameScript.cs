@@ -8,6 +8,12 @@ using UnityEngine.UI;
 
 public class GameScript
 {
+    public static GameObject[] EquipmentModel;
+    public static GameObject[] MainWeaponModelIndex;
+    public static GameObject[] AlternateWeaponModelIndex;
+    public static GameObject[] CuirassModelIndex;
+    public static GameObject[] HelmModelIndex;
+
     public static DataManager dataManager;
     public static Attribute GameRoleAttribute;
     public static DateTime NormalPool;

@@ -160,6 +160,11 @@ public class BagRoleEquipmentScript : MonoBehaviour
                 if (DataManager.roleEquipment.HadMainWeapon())
                 {
                     Buf = DataManager.roleEquipment.GetMainWeapon();
+                    if (GameScript.EquipmentModel[1] != null)
+                    {
+                        GameScript.EquipmentModel[1].SetActive(false);
+                    }
+                    GameScript.EquipmentModel[0].SetActive(true);
                 }
                 else
                 {
@@ -170,6 +175,11 @@ public class BagRoleEquipmentScript : MonoBehaviour
                 if (DataManager.roleEquipment.HadAlternateWeapon())
                 {
                     Buf = DataManager.roleEquipment.GetAlternateWeapon();
+                    if (GameScript.EquipmentModel[0] != null)
+                    {
+                        GameScript.EquipmentModel[0].SetActive(false);
+                    }
+                    GameScript.EquipmentModel[1].SetActive(true);
                 }
                 else
                 {

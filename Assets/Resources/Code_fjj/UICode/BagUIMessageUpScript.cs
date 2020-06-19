@@ -12,6 +12,14 @@ public class BagUIMessageUpScript : MonoBehaviour
             case EquipmentType.MainWeapon:
                 if (DataManager.roleEquipment.HadMainWeapon())
                 {
+                    GameScript.EquipmentModel[0].SetActive(false);
+                    GameScript.EquipmentModel[0] = GameScript.MainWeaponModelIndex[(int)Buf.item.GetQuality()];
+                    GameScript.EquipmentModel[0].SetActive(true);
+                    if (GameScript.EquipmentModel[1] != null)
+                    {
+                        GameScript.EquipmentModel[1].SetActive(false);
+                    }
+
                     BagItem eBuf = new BagItem();
                     eBuf.item = new Item();
                     eBuf.item = DataManager.roleEquipment.GetMainWeapon().item;
@@ -22,6 +30,13 @@ public class BagUIMessageUpScript : MonoBehaviour
                 }
                 else
                 {
+                    GameScript.EquipmentModel[0] = GameScript.MainWeaponModelIndex[(int)Buf.item.GetQuality()];
+                    GameScript.EquipmentModel[0].SetActive(true);
+                    if (GameScript.EquipmentModel[1] != null)
+                    {
+                        GameScript.EquipmentModel[1].SetActive(false);
+                    }
+
                     BagItem eBuf = new BagItem();
                     eBuf.item = new Item();
                     eBuf.item = Buf.item;
@@ -34,6 +49,14 @@ public class BagUIMessageUpScript : MonoBehaviour
             case EquipmentType.AlternateWeapon:
                 if (DataManager.roleEquipment.HadAlternateWeapon())
                 {
+                    GameScript.EquipmentModel[1].SetActive(false);
+                    GameScript.EquipmentModel[1] = GameScript.AlternateWeaponModelIndex[(int)Buf.item.GetQuality()];
+                    GameScript.EquipmentModel[1].SetActive(true);
+                    if (GameScript.EquipmentModel[0] != null)
+                    {
+                        GameScript.EquipmentModel[0].SetActive(false);
+                    }
+
                     BagItem eBuf = new BagItem();
                     eBuf.item = new Item();
                     eBuf.item = DataManager.roleEquipment.GetAlternateWeapon().item;
@@ -44,6 +67,13 @@ public class BagUIMessageUpScript : MonoBehaviour
                 }
                 else
                 {
+                    GameScript.EquipmentModel[1] = GameScript.AlternateWeaponModelIndex[(int)Buf.item.GetQuality()];
+                    GameScript.EquipmentModel[1].SetActive(true);
+                    if (GameScript.EquipmentModel[0] != null)
+                    {
+                        GameScript.EquipmentModel[0].SetActive(false);
+                    }
+
                     BagItem eBuf = new BagItem();
                     eBuf.item = new Item();
                     eBuf.item = Buf.item;
@@ -56,6 +86,10 @@ public class BagUIMessageUpScript : MonoBehaviour
             case EquipmentType.Cuirass:
                 if (DataManager.roleEquipment.HadCuirass())
                 {
+                    GameScript.EquipmentModel[2].SetActive(false);
+                    GameScript.EquipmentModel[2] = GameScript.CuirassModelIndex[(int)Buf.item.GetQuality()];
+                    GameScript.EquipmentModel[2].SetActive(true);
+
                     BagItem eBuf = new BagItem();
                     eBuf.item = new Item();
                     eBuf.item = DataManager.roleEquipment.GetCuirass().item;
@@ -66,6 +100,9 @@ public class BagUIMessageUpScript : MonoBehaviour
                 }
                 else
                 {
+                    GameScript.EquipmentModel[2] = GameScript.CuirassModelIndex[(int)Buf.item.GetQuality()];
+                    GameScript.EquipmentModel[2].SetActive(true);
+
                     BagItem eBuf = new BagItem();
                     eBuf.item = new Item();
                     eBuf.item = Buf.item;
@@ -78,6 +115,10 @@ public class BagUIMessageUpScript : MonoBehaviour
             case EquipmentType.Helm:
                 if (DataManager.roleEquipment.HadHelm())
                 {
+                    GameScript.EquipmentModel[3].SetActive(false);
+                    GameScript.EquipmentModel[3] = GameScript.HelmModelIndex[(int)Buf.item.GetQuality()];
+                    GameScript.EquipmentModel[3].SetActive(true);
+
                     BagItem eBuf = new BagItem();
                     eBuf.item = new Item();
                     eBuf.item = DataManager.roleEquipment.GetHelm().item;
@@ -88,6 +129,9 @@ public class BagUIMessageUpScript : MonoBehaviour
                 }
                 else
                 {
+                    GameScript.EquipmentModel[3] = GameScript.HelmModelIndex[(int)Buf.item.GetQuality()];
+                    GameScript.EquipmentModel[3].SetActive(true);
+
                     BagItem eBuf = new BagItem();
                     eBuf.item = new Item();
                     eBuf.item = Buf.item;

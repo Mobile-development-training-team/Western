@@ -212,7 +212,7 @@ fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.LotteryMessageDoneButtonScript
 f92bed0118fad5c277e62fd4703487e3 Assembly-CSharp.dll:.DemoShooting
 a80fac49832270c158ed18c23335c5a7 Assembly-CSharp.dll:.PerfectLookAt
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.GameInitScript
+86dde957c753896b9f68cae003a91240 Assembly-CSharp.dll:.GameInitScript
 97d77b3ac6198dc2bf0c1559c50e56c7 Assembly-CSharp.dll:.ResetTimer
 3b760e6526e13f7504f59e210145899a Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 507174d46dacbc5fe45e28485db5dd1e Unity.Analytics.DataPrivacy.dll:UnityEngine.Analytics.DataPrivacyButton
