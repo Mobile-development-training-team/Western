@@ -8,36 +8,18 @@ using UnityEditor;
 public class GameManager:MonoBehaviour
 {
     public  static GameManager INSTANCE;
-    
-    public GameObject LevelImage;
-    public Text LevelText;
-    public Text GameoverText;
-    public GameObject GameOverImage;
-
     public int currentSceneIndex;
-
-    int currentlives = 3;//主角初始化有3条命
+    private GameUIController gameUIController;
+    private EnemiesManager01 enemiesManager;
 
     private GameManager() { }
-
-    /*
-    public static GameManager getInstance()
-    {
-        if (INSTANCE == null)
-        {
-            //INSTANCE = new GameManager();
-            Debug.Log("you shouldn'ts get there");
-        }
-        return INSTANCE;
-    }
-    */
 
     public void Awake()
     {
         if (INSTANCE == null)
         {
             INSTANCE = this;
-            currentSceneIndex = 0;
+            currentSceneIndex = getCurrentSceneIndex();
         }
         else if (INSTANCE != this)
         {
@@ -45,24 +27,48 @@ public class GameManager:MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);//不摧毁控制器
     }
-    /*
-    IEnumerator Start()
+
+    ///////////////////////////////////////////////////////////////<页面跳转相关>
+    public int getCurrentSceneIndex()
     {
-        //SetUpUI(1);
-        LevelImage.SetActive(true);
-        yield return new WaitForSeconds(2);
-        //Wait();
-        LevelImage.SetActive(false);
-        GameOverImage.SetActive(false);
-        // EnemiesManager01.Instance.generatorEnemiesWave();
+        return SceneManager.GetActiveScene().buildIndex; ;
     }
-    */
-    public void  GameOver(bool judge)
+    public void LoadTargetScene(int targetSceneIndex)
     {
-        //Debug.Log("GameOver!");
-        //Invoke("LoadStartScene", 2f);
-        CloseUI();
-        GameOverImage.SetActive(true);
+        currentSceneIndex = targetSceneIndex;
+        SceneManager.LoadScene(currentSceneIndex);
+    }
+    public void LoadGameSelectScene()
+    {
+        LoadTargetScene(4);
+    }
+    public void LoadNextScene()
+    {
+        if (currentSceneIndex == 4)
+        {
+            return;
+        }
+        currentSceneIndex += 1;
+        if (currentSceneIndex > PlayerPrefs.GetInt("level"))
+        {
+            PlayerPrefs.SetInt(PlayerPrefs.GetString("level"), currentSceneIndex );
+        }
+        SceneManager.LoadScene(currentSceneIndex);
+    }
+    public void LoadCurScene()
+    {
+        int curSceneIndex = getCurrentSceneIndex();
+        SceneManager.LoadScene(curSceneIndex);
+    }
+     public void LoadMainScene() {
+         SceneManager.LoadScene("MainScene_fjj");
+         Destroy(gameObject);
+    }
+    ///////////////////////////////////////////////////////////////<页面跳转相关/>
+
+    ///////////////////////////////////////////////////////////////<关卡控制相关>
+    public void GameOver(bool judge)
+    {
         if (!judge)
         {
             //主角死亡
@@ -70,20 +76,23 @@ public class GameManager:MonoBehaviour
             //do something
             //else if 重开此关卡
             //Invoke("LoadCurScene", 2f);
-            //else 结束关卡返回起始界面
-            Invoke("LoadStartScene", 2f);
+            //else 结束关卡返回关卡选择界面
+            //Invoke("LoadGameSelectScene", 2f);
+            gameUIController.ShowDeathEnd();
         }
         else
         {
             //关卡获胜
-            currentSceneIndex = getLevelIndex();
+            gameUIController.ShowWinEnd();
+            /*
+            currentSceneIndex = getCurrentSceneIndex();
             if (currentSceneIndex == 3)
             {
                 //全部通关
                 //if 重开此关卡
                 //Invoke("LoadCurScene", 2f);
-                //else 结束关卡返回起始界面
-                Invoke("LoadStartScene", 2f);
+                //else 结束关卡返回关卡选择界面
+                Invoke("LoadGameSelectScene", 2f);
             }
             else
             {
@@ -91,76 +100,19 @@ public class GameManager:MonoBehaviour
                 Invoke("LoadNextScene", 2f);
                 //else if 重开此关卡
                 //Invoke("LoadCurScene", 2f);
-                //else 结束关卡返回起始界面
-                //Invoke("LoadStartScene", 2f);
+                //else 结束关卡返回关卡选择界面
+                //Invoke("LoadGameSelectScene", 2f);
             }
+            */
         }
     }
-    /*
-    public void Destroyself()
+    public void setUIController(GameUIController uic)
     {
-        //Destroy(gameObject);//游戏结束强行摧毁所有东西，重新开始
-        if (IsInvoking("Destroyself"))
-        {
-            CancelInvoke("Destroyself");
-        }
-        LoadStartScene();
+        gameUIController = uic;
     }
-    */
-    public void LoadStartScene()
+    public void setEnemiesManager(EnemiesManager01 em)
     {
-        GameOverImage.SetActive(false);
-        currentSceneIndex = 0;
-        SceneManager.LoadScene(0);
+        enemiesManager = em;
     }
-    public void LoadNextScene()
-    {
-        //int curSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        //Debug.Log(curSceneIndex);
-        /*
-        if (currentSceneIndex == 3)
-        { 
-            //GameOver();
-            currentSceneIndex = 0;
-            //return;
-        }
-        */
-        GameOverImage.SetActive(false);
-        SceneManager.LoadScene((currentSceneIndex + 1) % 4);
-        if (currentSceneIndex + 1 > PlayerPrefs.GetInt("level"))
-        {
-            PlayerPrefs.SetInt(PlayerPrefs.GetString("level"), currentSceneIndex + 1);
-        }
-        SetUpUI(currentSceneIndex + 1);
-        Invoke("CloseUI",2f);
-
-    }
-    public void LoadCurScene()
-    {
-        GameOverImage.SetActive(false);
-        int curSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(curSceneIndex);
-    }
-     public void QuitGame() {
-        Application.Quit();
-        Debug.Log("退出游戏");
-    }
-    public int getLevelIndex() { 
-        return SceneManager.GetActiveScene().buildIndex; ;
-    }
-    //level config
-    public void SetUpUI(int nxtIndex)
-    {
-        //修改text文本内容
-        LevelText.text = "Level " + nxtIndex;
-        LevelImage.SetActive(true);
-    }
-    public void CloseUI()
-    {
-        LevelImage.SetActive(false);
-    }
-    public void SetUpScene()
-    {
-
-    }
+    ///////////////////////////////////////////////////////////////<关卡控制相关/>
 }
