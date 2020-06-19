@@ -33,6 +33,8 @@ namespace LeoLuz.PlugAndPlayJoystick
         private int Ammunition = 10;
         private float horizontal = 0;
         private float vertical = 0;
+        private bool canUse_secondAttack = false;
+        private float secondAttack_coolTime = 20f;
 
         public int mainWeaponIndex = 0;
         public int secondaryWeaponIndex = 1;
@@ -102,14 +104,21 @@ namespace LeoLuz.PlugAndPlayJoystick
             attack = new Attack();
             mLife.hasHp = true;
             attack.mTeam = mLife.mTeam;
+            //自定义测试数据
+            mLife.mHp = mLife.MAXHP;
+            baseAtk = 20f;
+            currAtk = baseAtk;
+            attack.mAtk = currAtk;
+            skillManager.skill_00_num = 30;
             //从外面拿数据
+            /*
             mLife.MAXHP = GameScript.GameRoleAttribute.HealthPointLimit;
             mLife.mHp = mLife.MAXHP;
             mLife.mDef = GameScript.GameRoleAttribute.Defence;
             baseAtk = GameScript.GameRoleAttribute.Attack;
             currAtk = baseAtk;
             attack.mAtk = currAtk;
-
+            */
             RightHand = GameObject.FindGameObjectWithTag("RightHand");
             //THandSword = RightHand.transform.Find("2Hand-Sword Variant").gameObject;
             //Gun = RightHand.transform.Find("2Hand-Rifle").gameObject;
@@ -178,6 +187,14 @@ namespace LeoLuz.PlugAndPlayJoystick
                 
                 ///////////////////////////////<3秒后复活/>
                 return;
+            }
+            if (secondAttack_coolTime > 0)
+            {
+                secondAttack_coolTime -= Time.deltaTime;
+                if (secondAttack_coolTime <= 0)
+                {
+                    canUse_secondAttack = true;
+                }
             }
             //手柄输入版本
             horizontal = Input.GetAxis("Horizontal");
@@ -479,9 +496,15 @@ namespace LeoLuz.PlugAndPlayJoystick
                 mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
             }
             */
+            if (!canUse_secondAttack)
+            {
+                return;
+            }
 
             if (!beDoingSomethings && !death && !reviving&&!atAir)
             {
+                secondAttack_coolTime = 20f;
+                canUse_secondAttack = false;
                 beDoingSomethings = true;
                 mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
                 if (WeaponIndex == 0)
@@ -528,6 +551,7 @@ namespace LeoLuz.PlugAndPlayJoystick
                 Jump();
             }
             */
+            skillManager.Use_Skill_00();
         }
         ////////////////////////////////////////////////////////////////////<按钮事件/>
 
@@ -618,11 +642,13 @@ namespace LeoLuz.PlugAndPlayJoystick
             //THandSword.GetComponent<BoxCollider>().enabled = true;
             mainWeapon.GetComponent<BoxCollider>().enabled = true;
             //ObjectPool.GetInstant().GetObj("SlashWaveBlue", magicCircle.transform.position, transform.localRotation);
-            skillManager.Use_Skill_01(false);
+            skillManager.Use_Skill_02(false);
+            skillManager.Use_Skill_03(false);
         }
         public void skillLooping()
         {
-            skillManager.Use_Skill_01(true);
+            skillManager.Use_Skill_02(true);
+            skillManager.Use_Skill_03(true);
         }
         public void endHit()
         {
@@ -820,6 +846,7 @@ namespace LeoLuz.PlugAndPlayJoystick
                 {
                     //attack.attack(otherLife);
                     bufferManager.Use_Buffer_04(attack,otherLife);
+                    skillManager.Use_Skill_01();
                     Hit(other);
                 }
             }

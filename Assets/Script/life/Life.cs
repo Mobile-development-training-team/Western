@@ -10,14 +10,19 @@ public class Life : MonoBehaviour
     public float mHp = 100f;
     public float MAXHP = 100f;
     public float mDef = 0f;
+    public float mShield = 0f;
 
     private GameObject mHpBar;
     private Slider slider;
     private GameObject HpCanvas;
+    private BraveController brave;
+    private GameObject Shield;
+    private bool usingShield = false;
 
     public bool hasHp = true;
     void Awake()
     {
+        brave = transform.gameObject.GetComponent<BraveController>();
         if (hasHp)
         {
             HpCanvas = GameObject.Find("HpCanvas");
@@ -60,6 +65,22 @@ public class Life : MonoBehaviour
                 hasHp = false;
             }
         }
+        if (mShield > 0)
+        {
+            if (!usingShield)
+            {
+                ShowShield();
+            }
+        }
+        else
+        {
+            if (Shield != null && usingShield)
+            {
+                DisappearShield();
+            }
+            usingShield = false;
+            mShield = 0f;
+        }
     }
     
     public float beAttacked(Attack attack)
@@ -75,7 +96,7 @@ public class Life : MonoBehaviour
 
             if (mHp <= dmg)
             {
-                dmg = mHp;
+                dmg = (float)((int)(mHp + 0.5));
                 mHp = 0f;
                 if (mCallback != null)
                 {
@@ -114,5 +135,21 @@ public class Life : MonoBehaviour
     {
         void onHurted();
         void onDead();
+    }
+
+    public void ShowShield()
+    {
+        usingShield = true;
+        Shield = ObjectPool.GetInstant().loadResource<GameObject>("EarthShield");
+        Shield = Instantiate(Shield);
+        Shield.transform.position = new Vector3(transform.position[0], transform.position[1] , transform.position[2]);
+        Shield.SetActive(true);
+        Shield.transform.parent = brave.transform;
+    }
+    public void DisappearShield()
+    {
+        usingShield = false;
+        mShield = 0f;
+        Destroy(Shield);
     }
 }

@@ -12,14 +12,12 @@ public class BufferManager : MonoBehaviour
     private float buffer_03_timer = 30f;
     private bool buffer_04 = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         brave = transform.GetComponent<BraveController>();
         tempLife = brave.getLife();
     }
 
-    // Update is called once per frame
     void Update()
     {
         //冷却+触发型技能实现
@@ -35,69 +33,53 @@ public class BufferManager : MonoBehaviour
                 }
                 buffer_03_timer = buffer_03_coolTime;
                 loadBuffer("heal-sphere");
-                /*
-                GameObject buffer = ObjectPool.GetInstant().loadResource<GameObject>("heal-sphere");
-                buffer = Instantiate(buffer);
-                buffer.transform.position = new Vector3(transform.position[0], transform.position[1] + 0.7f, transform.position[2]);
-                buffer.SetActive(true);
-                buffer.transform.parent = brave.transform;
-                Destroy(buffer, 5f);
-                 * */
             }
         }
     }
-
+    int bufferIndex = Random.Range(0, 6);
     public void getBuffer()
     {
-        float bufferIndex = Random.Range(0, 5);
+        //int bufferIndex = Random.Range(0, 6);
+        if (bufferIndex == 6)
+        {
+            bufferIndex = 0;
+        }
+
+
         if (bufferIndex == 0)
         {
             //黑暗权能
-            float tempAtk = brave.getCurrAtk() * 1.4f;
+            float tempAtk = brave.getCurrAtk() * 1.3f;
             brave.setAtk(tempAtk);
             loadBuffer("fist-target-large");
-            /*
-            //GameObject buffer = ObjectPool.GetInstant().GetObj("fist-buff", new Vector3(transform.position[0], transform.position[1] + 0.7f, transform.position[2]), brave.transform.localRotation);
-            GameObject buffer = ObjectPool.GetInstant().loadResource<GameObject>("fist-buff");
-            buffer = Instantiate(buffer);
-            buffer.transform.position = new Vector3(transform.position[0], transform.position[1] + 0.7f, transform.position[2]);
-            buffer.SetActive(true);
-            buffer.transform.parent = brave.transform;
-            Destroy(buffer, 5f);
-             * */
         }
         else if (bufferIndex == 1)
         {
             //血气旺盛
-            tempLife.MAXHP *= 1.4f;
-            tempLife.mHp *= 1.4f;
+            tempLife.mHp += tempLife.MAXHP * 0.3f;
+            tempLife.MAXHP *= 1.3f;
             loadBuffer("heal-target-large");
-            /*
-            //GameObject buffer = ObjectPool.GetInstant().GetObj("heal-target-large", new Vector3(transform.position[0], transform.position[1] + 0.7f, transform.position[2]), brave.transform.localRotation);
-            GameObject buffer = ObjectPool.GetInstant().loadResource<GameObject>("heal-target-large");
-            buffer = Instantiate(buffer);
-            buffer.transform.position = new Vector3(transform.position[0], transform.position[1] + 0.7f, transform.position[2]);
-            buffer.SetActive(true);
-            buffer.transform.parent = brave.transform;
-            Destroy(buffer, 5f);
-             * */
         }
         else if (bufferIndex == 2)
         {
             //钢筋铁骨
-            tempLife.mDef *= 1.4f;
+            if (tempLife.mDef >= 99999)
+            {
+                tempLife.mDef += (tempLife.mDef - 99999) * 0.3f;
+            }
+            else
+            {
+                tempLife.mDef *= 1.3f;
+            }
             loadBuffer("armor-increase-target-large");
-            /*
-            //GameObject buffer = ObjectPool.GetInstant().GetObj("armor-increase-buff", new Vector3(transform.position[0], transform.position[1] + 0.7f, transform.position[2]), brave.transform.localRotation);
-            GameObject buffer = ObjectPool.GetInstant().loadResource<GameObject>("armor-increase-buff");
-            buffer = Instantiate(buffer);
-            buffer.transform.position = new Vector3(transform.position[0], transform.position[1] + 0.7f, transform.position[2]);
-            buffer.SetActive(true);
-            buffer.transform.parent = brave.transform;
-            Destroy(buffer, 5f); ;
-             * */
         }
         else if (bufferIndex == 3)
+        {
+            //圣洁之力
+            tempLife.mShield += tempLife.MAXHP * 0.2f;
+            //特效
+        }
+        else if (bufferIndex == 4)
         {
             //天堂谐音
             buffer_03 = true;
@@ -108,18 +90,19 @@ public class BufferManager : MonoBehaviour
             }
             loadBuffer("heal-sphere");
         }
-        else if (bufferIndex == 4)
+        else if (bufferIndex == 5)
         {
             //一刀入魂
             buffer_04 = true;
             loadBuffer("armor-decrease-target-large");
         }
+        bufferIndex++;
     }
 
     
     public void Use_Buffer_04(Attack attack,Life otherLife)
     {
-        if (buffer_04 && judgePercent(6f))
+        if (buffer_04 && judgePercent(10f))
         {
             Attack bufferAttack = new Attack();
             bufferAttack.mAtk = attack.mAtk * 4f;

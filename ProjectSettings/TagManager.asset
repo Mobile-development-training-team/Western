@@ -10,6 +10,10 @@ TagManager:
   - 2Hand-Sword
   - laser
   - brave
+  - meteor
+  - Wand
+  - Effect
+  - LightningPoint
   layers:
   - Default
   - TransparentFX
