@@ -103,10 +103,10 @@ namespace LeoLuz.PlugAndPlayJoystick
             mLife.hasHp = true;
             attack.mTeam = mLife.mTeam;
             //从外面拿数据
-            mLife.MAXHP = 100f;
+            mLife.MAXHP = GameScript.GameRoleAttribute.HealthPointLimit;
             mLife.mHp = mLife.MAXHP;
-            mLife.mDef = 1;
-            baseAtk = 20f;
+            mLife.mDef = GameScript.GameRoleAttribute.Defence;
+            baseAtk = GameScript.GameRoleAttribute.Attack;
             currAtk = baseAtk;
             attack.mAtk = currAtk;
 
