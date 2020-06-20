@@ -7,6 +7,7 @@ public class SkillManager : MonoBehaviour
 {
     public GameObject magicCircle;
     public GameObject magicCircleBack;
+    public GameObject LightningLight;
     private BraveController brave;
     private Life mLife;
 
@@ -98,6 +99,7 @@ public class SkillManager : MonoBehaviour
                     brave.setAtk(brave.getCurrAtk() - brave.getBaseAtk() * skill_04_num);
                     ShowBuff04();
                     use_skill_04 = true;
+                    GameUIController.AddRythmCount(2f);
                 }
             }
         }
@@ -119,6 +121,7 @@ public class SkillManager : MonoBehaviour
                     skill_05_timer = skill_05_stayedTime;
                     mLife.mDef += 99999;
                     loadBuffer("armor-increase-buff", skill_05_stayedTime);
+                    GameUIController.AddRythmCount(2f);
                     /*
                     GameObject buffer = ObjectPool.GetInstant().loadResource<GameObject>("armor-increase-buff");
                     buffer = Instantiate(buffer);
@@ -138,6 +141,16 @@ public class SkillManager : MonoBehaviour
         {
             skill_00_timer = skill_00_coolTime;
             skill_00_num--;
+            GameUIController.AddRythmCount(5f);
+            if (LightningLight != null)
+            {
+                var hitInstance3 = Instantiate(LightningLight, new Vector3(transform.position[0], transform.position[1] , transform.position[2]), transform.rotation);
+                var hitPs = hitInstance3.GetComponent<ParticleSystem>();
+                if (hitPs != null)
+                {
+                    Destroy(hitInstance3, 1.2f);
+                }
+            }
             //
             GameObject[] lightningPonts = GameObject.FindGameObjectsWithTag("LightningPoint");
             //Debug.Log("lightningponts num is " + lightningPonts.Length);
@@ -156,6 +169,7 @@ public class SkillManager : MonoBehaviour
             if (judgePercent(skill_01_percent))
             {
                 mLife.mHp += mLife.MAXHP * skill_01_num;
+                GameUIController.AddRythmCount(2f);
                 if (mLife.mHp > mLife.MAXHP)
                 {
                     mLife.mHp = mLife.MAXHP;
@@ -173,6 +187,7 @@ public class SkillManager : MonoBehaviour
         {
             if (judgePercent(skill_02_percent))
             {
+                GameUIController.AddRythmCount(1f);
                 ObjectPool.GetInstant().GetObj("SlashWaveBlue", magicCircle.transform.position, transform.localRotation).GetComponent<SlashWaveBlueController>().atk = brave.getCurrAtk() * skill_02_num;
                 if (needBack)
                     ObjectPool.GetInstant().GetObj("SlashWaveBlue", magicCircleBack.transform.position, magicCircleBack.transform.rotation).GetComponent<SlashWaveBlueController>().atk = brave.getCurrAtk() * skill_02_num;
@@ -186,6 +201,7 @@ public class SkillManager : MonoBehaviour
         {
             if (judgePercent(skill_03_percent))
             {
+                GameUIController.AddRythmCount(1f);
                 ObjectPool.GetInstant().GetObj("GroundFire", new Vector3(magicCircle.transform.position[0], magicCircle.transform.position[1] - 0.777f, magicCircle.transform.position[2]), transform.localRotation).GetComponent<GroundFireController>().atk = brave.getCurrAtk() * skill_03_num;
                 if (needBack)
                 {

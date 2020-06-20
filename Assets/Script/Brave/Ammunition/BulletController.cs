@@ -46,6 +46,7 @@ public class BulletController : MonoBehaviour
         if (otherLife != null)
         {
             attack.attack(otherLife);
+            GameUIController.AddRythmCount(3f);
         }
         Hit(other);
         ObjectPool.GetInstant().SaveObj(transform.gameObject);

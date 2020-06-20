@@ -45,6 +45,7 @@ public class GroundFireController : MonoBehaviour
                     Hit(other);
                 }
                 attack.attack(otherLife);
+                GameUIController.AddRythmCount(3f);
             }
         }
     }
@@ -58,12 +59,7 @@ public class GroundFireController : MonoBehaviour
             var hitPs = hitInstance.GetComponent<ParticleSystem>();
             if (hitPs != null)
             {
-                Destroy(hitInstance, hitPs.main.duration);
-            }
-            else
-            {
-                var hitPsParts = hitInstance.transform.GetChild(0).GetComponent<ParticleSystem>();
-                Destroy(hitInstance, hitPsParts.main.duration);
+                Destroy(hitInstance, 3f);
             }
         }
     }

@@ -41,6 +41,7 @@ public class CrossBowArrowController : MonoBehaviour
                     Hit(other);
                 }
                 attack.attack(otherLife);
+                GameUIController.AddRythmCount(3f);
             }
             ObjectPool.GetInstant().SaveObj(transform.gameObject);
             if (IsInvoking("SaveArrow"))
