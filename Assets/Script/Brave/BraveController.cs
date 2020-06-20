@@ -34,7 +34,7 @@ namespace LeoLuz.PlugAndPlayJoystick
         private float horizontal = 0;
         private float vertical = 0;
         private bool canUse_secondAttack = false;
-        private float secondAttack_coolTime = 20f;
+        private float secondAttack_coolTime = 5f;
 
         public int mainWeaponIndex = 0;
         public int secondaryWeaponIndex = 1;
@@ -75,11 +75,13 @@ namespace LeoLuz.PlugAndPlayJoystick
             {
                 //if(!brave.death&&!brave.reviving&&!brave.atAir)
                 brave.GetHit();
+                GameUIController.SubtractRythmCount(20f);
             }
             public void onDead()
             {
                 //if (!brave.death && !brave.reviving && !brave.atAir)
                 brave.Death();
+                GameUIController.SubtractRythmCount(999f);
             }
         }
         
@@ -503,7 +505,7 @@ namespace LeoLuz.PlugAndPlayJoystick
 
             if (!beDoingSomethings && !death && !reviving&&!atAir)
             {
-                secondAttack_coolTime = 20f;
+                secondAttack_coolTime = 5f;
                 canUse_secondAttack = false;
                 beDoingSomethings = true;
                 mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
@@ -871,6 +873,7 @@ namespace LeoLuz.PlugAndPlayJoystick
                     Destroy(hitInstance, hitPsParts.main.duration);
                 }
             }
+            GameUIController.AddRythmCount(3f);
         }
         ////////////////////////////////////////////////////////////////////<攻击特效/>
 

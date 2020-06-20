@@ -64,8 +64,11 @@ public class SkyLightningController : MonoBehaviour
     ////////////////////////////////////////////////////////////////////<攻击特效>
     public void Hit1(Life otherLife,Vector3 pos)
     {
-        if(otherLife!=null)
+        if (otherLife != null)
+        {
             attack1.attack(otherLife);
+            GameUIController.AddRythmCount(3f);
+        }
         if (mhit1 != null&&mhit1_1!=null)
         {
             var hitInstance1 = Instantiate(mhit1, new Vector3(pos[0], pos[1] + 1f, pos[2]), Quaternion.identity);
@@ -73,7 +76,7 @@ public class SkyLightningController : MonoBehaviour
             var hitPs = hitInstance1.GetComponent<ParticleSystem>();
             if (hitPs != null)
             {
-                Destroy(hitInstance1, hitPs.main.duration);
+                Destroy(hitInstance1, 1.2f);
             }
             Destroy(hitInstance1_1, 1.2f);
         }
@@ -82,14 +85,17 @@ public class SkyLightningController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.4f);
         if (otherLife != null)
-        attack2.attack(otherLife);
+        {
+            attack2.attack(otherLife);
+            GameUIController.AddRythmCount(3f);
+        }
         if (mhit2 != null)
         {
             var hitInstance2 = Instantiate(mhit2, new Vector3(pos[0], pos[1] + 1f, pos[2]), Quaternion.identity);
             var hitPs = hitInstance2.GetComponent<ParticleSystem>();
             if (hitPs != null)
             {
-                Destroy(hitInstance2, hitPs.main.duration);
+                Destroy(hitInstance2, 1.2f);
             }
         }
     }
@@ -97,14 +103,17 @@ public class SkyLightningController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.8f);
         if (otherLife != null)
-        attack3.attack(otherLife);
+        {
+            attack3.attack(otherLife);
+            GameUIController.AddRythmCount(3f);
+        }
         if (mhit3 != null)
         {
             var hitInstance3 = Instantiate(mhit3, new Vector3(pos[0], pos[1] + 1f, pos[2]), Quaternion.identity);
             var hitPs = hitInstance3.GetComponent<ParticleSystem>();
             if (hitPs != null)
             {
-                Destroy(hitInstance3, hitPs.main.duration);
+                Destroy(hitInstance3, 1.2f);
             }
         }
     }
@@ -112,14 +121,17 @@ public class SkyLightningController : MonoBehaviour
     {
         yield return new WaitForSeconds(1.2f);
         if (otherLife != null)
+        {
             attack4.attack(otherLife);
+            GameUIController.AddRythmCount(3f);
+        }
         if (mhit3 != null)
         {
             var hitInstance3 = Instantiate(mhit4, new Vector3(pos[0], pos[1] + 1f, pos[2]), Quaternion.identity);
             var hitPs = hitInstance3.GetComponent<ParticleSystem>();
             if (hitPs != null)
             {
-                Destroy(hitInstance3, hitPs.main.duration);
+                Destroy(hitInstance3, 1.2f);
             }
         }
     }

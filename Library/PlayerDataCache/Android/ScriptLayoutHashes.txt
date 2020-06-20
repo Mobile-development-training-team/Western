@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-F:/UnityTestCode/Western/apkForGameProgram/game18.1.apk
+F:/UnityTestCode/Western/apkForGameProgram/game19.2.apk
 SceneListBegin?
 Assets/Scenes/MainScene_fjj.unity
 Assets/Scenes/Level01.unity
@@ -142,7 +142,7 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 c066b6aa1564ad70c37ead364348a818 Assembly-CSharp.dll:.MagicBulletController
 09b31d50a8885ff0947d3bfb1e20c078 Assembly-CSharp.dll:MagicArsenal.MagicEffectCycler
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.DebrisTextScript
-43c9aeff6d6eb57a16af463c81487b94 Assembly-CSharp.dll:.SkillManager
+c822ada007d637656603e4c2f7a7f4f6 Assembly-CSharp.dll:.SkillManager
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BagSelectedScript
 2890c468cf196dca883ea02bde96343e Assembly-CSharp.dll:MagicArsenal.MagicLightFade
 2046a769735b5a7196e56bb0bb66cba9 Assembly-CSharp.dll:.EnemyController
@@ -159,7 +159,7 @@ b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp-firstpass.dll:LeoLuz.PlugAndPlayJoystick.ButtonBase
 b32441fc1d28848e915ee71888fd61ba Assembly-CSharp.dll:RPGCharacterAnims.GUIControls
 79566861074b80c5467fa81dddcf4f5a Assembly-CSharp.dll:MagicArsenal.MagicRotation
-59189892271725c8e1af8bd6823252a0 Assembly-CSharp.dll:.GameUIController
+97b6d6c0e787fb72b9eabe1b452f9d63 Assembly-CSharp.dll:.GameUIController
 56c90168bc19fe9aee4ba7e6b19350e3 Assembly-CSharp.dll:MagicArsenal.MagicBeamScript
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.LottertyMessageBackScript
 3e109c6c26138fe0fc3e8dde3d0ea67d Assembly-CSharp.dll:.SlashWaveBlueController
