@@ -408,7 +408,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: f0e7fffffce9ffff1ceaffffc2ebffff9aefffff72f3ffff7cf3ffff48f7ffffdefbffff
+      m_ExpandedIDs: 84e2ffff90e4ffffb0e4ffff56e6ffff32eaffff0eeeffff1ceeffffecf1ffffdefbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -470,7 +470,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Script/Brave
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
@@ -507,7 +507,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 2005.454}
+    scrollPos: {x: 0, y: 2113.3242}
     m_SelectedIDs: 
     m_LastClickedID: 0
     m_ExpandedIDs: ffffffff00000000482c00001c2d0000442e0000502f00006e310000ba31000098320000123300007a3300008c330000b0330000e8330000483500005a350000a8350000243600002836000098370000b0390000483a0000ce3a00000c3b00001e3b0000463b0000ba3b0000ca3b0000f23b0000d03c0000423d0000ac3d0000ee3d0000063e0000083e0000983e0000a43e0000003f0000403f0000d83f00002e400000ec420000264300002e4400002e450000e64e0000e84e0000ea4e0000ec4e0000ee4e0000

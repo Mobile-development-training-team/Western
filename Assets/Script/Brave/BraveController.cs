@@ -228,7 +228,7 @@ namespace LeoLuz.PlugAndPlayJoystick
                 {
                     run(new Vector3(horizontal, 0, 0));
                 }
-                if (walking && running)
+                if (walking && running && !beDoingSomethings)
                 {
                     dashCoolTime -= Time.deltaTime;
                 }
