@@ -215,7 +215,22 @@ public class GameData : MonoBehaviour
             ExitTimeRow.Add(GameScript.DisableTime.ToString());
             writer.WriteRow(ExitTimeRow);
         }
-    } 
+    }
+
+    public void VITSave()
+    {
+        using (CsvFileWriter writer = new CsvFileWriter(GetPersistentFilePath("Data/VIT.csv")))
+        {
+            CsvRow VITRow = new CsvRow();
+            VITRow.Add("体力");
+            VITRow.Add("每体力恢复所需分钟");
+            writer.WriteRow(VITRow);
+            CsvRow row = new CsvRow();
+            row.Add(GameScript.VIT.ToString());
+            row.Add(GameScript.PerVITMinute.ToString());
+            writer.WriteRow(row);
+        }
+    }
 
     public void GameSave()
     {
@@ -225,6 +240,7 @@ public class GameData : MonoBehaviour
         LottertySave();
         LevelOutputSave();
         ExitTimeSave();
+        VITSave();
     }
 
     private void OnEnable()
@@ -251,6 +267,40 @@ public class GameData : MonoBehaviour
                 GameScript.GoodPool = GameScript.GoodPool.AddHours(-(DateTime.Now - GameScript.DisableTime).Hours);
                 GameScript.GoodPool = GameScript.GoodPool.AddMinutes(-(DateTime.Now - GameScript.DisableTime).Minutes);
                 GameScript.GoodPool = GameScript.GoodPool.AddSeconds(-(DateTime.Now - GameScript.DisableTime).Seconds);
+            }
+
+            if ((DateTime.Now - GameScript.DisableTime) > GameScript.VITCounter.TimeOfDay)
+            {
+                TimeSpan Buf = DateTime.Now - GameScript.DisableTime;
+                while (Buf.Minutes >= GameScript.PerVITMinute)
+                {
+                    if (GameScript.VIT == 999)
+                    {
+                        break;
+                    }
+                    GameScript.VIT++;
+                    Buf = Buf.Add(DateTime.Now.Date.AddMinutes(GameScript.PerVITMinute).TimeOfDay.Negate());
+                }
+                if (Buf > GameScript.VITCounter.TimeOfDay)
+                {
+                    if (GameScript.VIT == 999)
+                    {
+                    }
+                    else
+                    {
+                        GameScript.VIT++;
+                        Buf = Buf.Add(GameScript.VITCounter.TimeOfDay.Negate());
+                        GameScript.VITCounter = GameScript.VITCounter.Date.AddMinutes(GameScript.PerVITMinute).Add(Buf.Negate());
+                    }
+                }
+                else
+                {
+                    GameScript.VITCounter = GameScript.VITCounter.Add(Buf.Negate());
+                }
+            }
+            else
+            {
+                GameScript.VITCounter = GameScript.VITCounter.Add((DateTime.Now - GameScript.DisableTime).Negate());
             }
         }
         GameScript.IfInit = true;
@@ -319,6 +369,40 @@ public class GameData : MonoBehaviour
                     GameScript.GoodPool = GameScript.GoodPool.AddHours(-(DateTime.Now - GameScript.DisableTime).Hours);
                     GameScript.GoodPool = GameScript.GoodPool.AddMinutes(-(DateTime.Now - GameScript.DisableTime).Minutes);
                     GameScript.GoodPool = GameScript.GoodPool.AddSeconds(-(DateTime.Now - GameScript.DisableTime).Seconds);
+                }
+
+                if ((DateTime.Now - GameScript.DisableTime) > GameScript.VITCounter.TimeOfDay)
+                {
+                    TimeSpan Buf = DateTime.Now - GameScript.DisableTime;
+                    while (Buf.Minutes >= GameScript.PerVITMinute)
+                    {
+                        if (GameScript.VIT == 999)
+                        {
+                            break;
+                        }
+                        GameScript.VIT++;
+                        Buf = Buf.Add(DateTime.Now.Date.AddMinutes(GameScript.PerVITMinute).TimeOfDay.Negate());
+                    }
+                    if (Buf > GameScript.VITCounter.TimeOfDay)
+                    {
+                        if (GameScript.VIT == 999)
+                        {
+                        }
+                        else
+                        {
+                            GameScript.VIT++;
+                            Buf = Buf.Add(GameScript.VITCounter.TimeOfDay.Negate());
+                            GameScript.VITCounter = GameScript.VITCounter.Date.AddMinutes(GameScript.PerVITMinute).Add(Buf.Negate());
+                        }
+                    }
+                    else
+                    {
+                        GameScript.VITCounter = GameScript.VITCounter.Add(Buf.Negate());
+                    }
+                }
+                else
+                {
+                    GameScript.VITCounter = GameScript.VITCounter.Add((DateTime.Now - GameScript.DisableTime).Negate());
                 }
             }
         }

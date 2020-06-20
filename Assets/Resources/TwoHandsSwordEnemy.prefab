@@ -3201,7 +3201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 2
-  atk: 20
+  atk: 65
   mhit: {fileID: 5642229094556118159, guid: b1831b20846b2ff41acdbb5e7eb3b0e9, type: 3}
 --- !u!114 &114557858188307970
 MonoBehaviour:
@@ -3218,7 +3218,7 @@ MonoBehaviour:
   mTeam: 2
   mHp: 100
   MAXHP: 100
-  mDef: 0
+  mDef: 90
   hasHp: 1
 --- !u!1 &2534877826695573606
 GameObject:

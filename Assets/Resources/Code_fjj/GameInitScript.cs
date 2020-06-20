@@ -545,29 +545,39 @@ public class GameInitScript : MonoBehaviour
             {
                 if (row[0] == "")
                 {
+                    GameScript.DisableTime = DateTime.Now;
                     break;
                 }
                 GameScript.DisableTime = DateTime.Parse(row[0]);
-                if ((DateTime.Now - GameScript.DisableTime) > GameScript.NormalPool.TimeOfDay)
+            }
+        }
+    }
+
+    public void VITLoad()
+    {
+        using (CsvFileReader reader = new CsvFileReader(GetPersistentFilePath("Data/VIT.csv")))
+        {
+            CsvRow row = new CsvRow();
+            bool first = true;
+            while (reader.ReadRow(row))
+            {
+                if (first)
                 {
-                    GameScript.NormalPool = GameScript.NormalPool.Date;
+                    first = false;
+                    continue;
                 }
-                else
+                if (row[0] == "")
                 {
-                    GameScript.NormalPool = GameScript.NormalPool.AddHours(-(DateTime.Now - GameScript.DisableTime).Hours);
-                    GameScript.NormalPool = GameScript.NormalPool.AddMinutes(-(DateTime.Now - GameScript.DisableTime).Minutes);
-                    GameScript.NormalPool = GameScript.NormalPool.AddSeconds(-(DateTime.Now - GameScript.DisableTime).Seconds);
+                    break;
                 }
-                if ((DateTime.Now - GameScript.DisableTime) > GameScript.GoodPool.TimeOfDay)
-                {
-                    GameScript.GoodPool = GameScript.GoodPool.Date;
-                }
-                else
-                {
-                    GameScript.GoodPool = GameScript.GoodPool.AddHours(-(DateTime.Now - GameScript.DisableTime).Hours);
-                    GameScript.GoodPool = GameScript.GoodPool.AddMinutes(-(DateTime.Now - GameScript.DisableTime).Minutes);
-                    GameScript.GoodPool = GameScript.GoodPool.AddSeconds(-(DateTime.Now - GameScript.DisableTime).Seconds);
-                }
+                GameScript.VIT = int.Parse(row[0]);
+                GameScript.PerVITMinute = double.Parse(row[1]);
+                //GameScript.VIT += (DateTime.Now - GameScript.DisableTime).Minutes / (int)GameScript.PerVITMinute;
+                //if (GameScript.VIT > 999)
+                //{
+                //    GameScript.VIT = 999;
+                //}
+                GameScript.VITCounter = DateTime.Now.Date.AddMinutes(GameScript.PerVITMinute);
             }
         }
     }
@@ -584,6 +594,7 @@ public class GameInitScript : MonoBehaviour
         RoleLoad();
         BagLoad();
         LevelOutputLoad();
+        VITLoad();
 
         GameScript.QualityNormal = GameScript.GetSprite("UI/Normal.png");
         GameScript.QualityExcellent = GameScript.GetSprite("UI/Excellent.png");

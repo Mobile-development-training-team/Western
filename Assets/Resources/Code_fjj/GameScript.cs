@@ -28,6 +28,10 @@ public class GameScript
     public static DateTime DisableTime;
     public static bool IfInit = false;
 
+    public static int VIT;
+    public static double PerVITMinute;
+    public static DateTime VITCounter;
+
     public static Sprite GetSprite(string path)
     {
         string texturePath;
@@ -118,6 +122,21 @@ public class GameScript
         return Quality.Normal;
     }
 
-
+    public static bool ReduceVIT(int vit)
+    {
+        if (VIT == 999)
+        {
+            VITScript.ReStart = true;
+        }
+        if (VIT >= vit)
+        {
+            VIT -= vit;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     
 }

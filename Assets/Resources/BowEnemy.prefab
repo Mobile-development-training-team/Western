@@ -45,7 +45,7 @@ MonoBehaviour:
   mTeam: 2
   mHp: 100
   MAXHP: 100
-  mDef: 0
+  mDef: 60
   hasHp: 1
 --- !u!114 &2785939989767829502
 MonoBehaviour:
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 7
-  atk: 20
+  atk: 70
   mhit: {fileID: 5642229094556118159, guid: b1831b20846b2ff41acdbb5e7eb3b0e9, type: 3}
 --- !u!1001 &8994656404878564600
 PrefabInstance:

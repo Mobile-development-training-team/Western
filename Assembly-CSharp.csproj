@@ -119,6 +119,7 @@
     <Compile Include="Assets\Resources\Code_fjj\UICode\SkillUIListScript.cs" />
     <Compile Include="Assets\Resources\Code_fjj\UICode\SlayTextScript.cs" />
     <Compile Include="Assets\Resources\Code_fjj\UICode\TogglePlus.cs" />
+    <Compile Include="Assets\Resources\Code_fjj\UICode\VITScript.cs" />
     <Compile Include="Assets\RPG Character Animation Pack\Code\CameraController.cs" />
     <Compile Include="Assets\RPG Character Animation Pack\Code\GUIControls.cs" />
     <Compile Include="Assets\RPG Character Animation Pack\Code\IKHands.cs" />
