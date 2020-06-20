@@ -186,7 +186,7 @@ public class GameUIController : MonoBehaviour
             rhythmText.GetComponent<Text>().text = "SS";
             ShowRhythmText();
         }
-        else if (level > 135 && level <= 175)
+        else if (level > 135 && level <= 200)
         {
             rhythmText.GetComponent<Text>().text = "SSS";
             ShowRhythmText();
@@ -194,6 +194,10 @@ public class GameUIController : MonoBehaviour
         else
         {
             rhythmText.GetComponent<Text>().text = "Devil May Cry!!!";
+            if (rhythmCount > 210)
+            {
+                rhythmCount = 210;
+            }
             ShowRhythmText();
         }
     }
@@ -211,14 +215,14 @@ public class GameUIController : MonoBehaviour
     }
     public void ShowDeathEnd()
     {
-        Time.timeScale = 0;
+        Time.timeScale = 0.2f;
         ShowEndGameFront();
         ShowReviveButton();
         DisappearNextLevelButton();
     }
     public void ShowWinEnd()
     {
-        Time.timeScale = 0;
+        Time.timeScale = 0.2f;
         ShowEndGameFront();
         ShowNextLevelButton();
         DisappearReviveButton();

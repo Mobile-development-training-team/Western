@@ -142,6 +142,7 @@ public class SkillManager : MonoBehaviour
             skill_00_timer = skill_00_coolTime;
             skill_00_num--;
             GameUIController.AddRythmCount(5f);
+            /*
             if (LightningLight != null)
             {
                 var hitInstance3 = Instantiate(LightningLight, new Vector3(transform.position[0], transform.position[1] , transform.position[2]), transform.rotation);
@@ -150,6 +151,12 @@ public class SkillManager : MonoBehaviour
                 {
                     Destroy(hitInstance3, 1.2f);
                 }
+            }
+            */
+            if (LightningLight != null)
+            {
+                var Instance = Instantiate(LightningLight, transform.position, Quaternion.identity);
+                Destroy(Instance, 1f);
             }
             //
             GameObject[] lightningPonts = GameObject.FindGameObjectsWithTag("LightningPoint");
