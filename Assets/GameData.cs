@@ -207,6 +207,16 @@ public class GameData : MonoBehaviour
         }
     }
 
+    public void ExitTimeSave()
+    {
+        using (CsvFileWriter writer = new CsvFileWriter(GetPersistentFilePath("Data/ExitTime.csv")))
+        {
+            CsvRow ExitTimeRow = new CsvRow();
+            ExitTimeRow.Add(GameScript.DisableTime.ToString());
+            writer.WriteRow(ExitTimeRow);
+        }
+    } 
+
     public void GameSave()
     {
         SkillDataSave();
@@ -214,6 +224,7 @@ public class GameData : MonoBehaviour
         BagSave();
         LottertySave();
         LevelOutputSave();
+        ExitTimeSave();
     }
 
     private void OnEnable()
@@ -274,12 +285,42 @@ public class GameData : MonoBehaviour
 
     private void OnDisable()
     {
-        GameSave();
         GameScript.DisableTime = DateTime.Now;
+        GameSave();
     }
 
     private void OnApplicationPause(bool pause)
     {
-        GameSave();
+        if (pause)
+        {
+            GameScript.DisableTime = DateTime.Now;
+            GameSave();
+        }
+        else
+        {
+            if (GameScript.IfInit)
+            {
+                if ((DateTime.Now - GameScript.DisableTime) > GameScript.NormalPool.TimeOfDay)
+                {
+                    GameScript.NormalPool = GameScript.NormalPool.Date;
+                }
+                else
+                {
+                    GameScript.NormalPool = GameScript.NormalPool.AddHours(-(DateTime.Now - GameScript.DisableTime).Hours);
+                    GameScript.NormalPool = GameScript.NormalPool.AddMinutes(-(DateTime.Now - GameScript.DisableTime).Minutes);
+                    GameScript.NormalPool = GameScript.NormalPool.AddSeconds(-(DateTime.Now - GameScript.DisableTime).Seconds);
+                }
+                if ((DateTime.Now - GameScript.DisableTime) > GameScript.GoodPool.TimeOfDay)
+                {
+                    GameScript.GoodPool = GameScript.GoodPool.Date;
+                }
+                else
+                {
+                    GameScript.GoodPool = GameScript.GoodPool.AddHours(-(DateTime.Now - GameScript.DisableTime).Hours);
+                    GameScript.GoodPool = GameScript.GoodPool.AddMinutes(-(DateTime.Now - GameScript.DisableTime).Minutes);
+                    GameScript.GoodPool = GameScript.GoodPool.AddSeconds(-(DateTime.Now - GameScript.DisableTime).Seconds);
+                }
+            }
+        }
     }
 }

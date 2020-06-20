@@ -536,6 +536,42 @@ public class GameInitScript : MonoBehaviour
         }
     }
 
+    public void ExitTimeLoad()
+    {
+        using (CsvFileReader reader = new CsvFileReader(GetPersistentFilePath("Data/ExitTime.csv")))
+        {
+            CsvRow row = new CsvRow();
+            while (reader.ReadRow(row))
+            {
+                if (row[0] == "")
+                {
+                    break;
+                }
+                GameScript.DisableTime = DateTime.Parse(row[0]);
+                if ((DateTime.Now - GameScript.DisableTime) > GameScript.NormalPool.TimeOfDay)
+                {
+                    GameScript.NormalPool = GameScript.NormalPool.Date;
+                }
+                else
+                {
+                    GameScript.NormalPool = GameScript.NormalPool.AddHours(-(DateTime.Now - GameScript.DisableTime).Hours);
+                    GameScript.NormalPool = GameScript.NormalPool.AddMinutes(-(DateTime.Now - GameScript.DisableTime).Minutes);
+                    GameScript.NormalPool = GameScript.NormalPool.AddSeconds(-(DateTime.Now - GameScript.DisableTime).Seconds);
+                }
+                if ((DateTime.Now - GameScript.DisableTime) > GameScript.GoodPool.TimeOfDay)
+                {
+                    GameScript.GoodPool = GameScript.GoodPool.Date;
+                }
+                else
+                {
+                    GameScript.GoodPool = GameScript.GoodPool.AddHours(-(DateTime.Now - GameScript.DisableTime).Hours);
+                    GameScript.GoodPool = GameScript.GoodPool.AddMinutes(-(DateTime.Now - GameScript.DisableTime).Minutes);
+                    GameScript.GoodPool = GameScript.GoodPool.AddSeconds(-(DateTime.Now - GameScript.DisableTime).Seconds);
+                }
+            }
+        }
+    }
+
     public void GameLoad()
     {
         GameItemIndexLoad();
@@ -543,11 +579,11 @@ public class GameInitScript : MonoBehaviour
         SkillLevelIndexLoad();
         SkillLevelUpIndexLoad();
         LottertyLoad();
+        ExitTimeLoad();
         SkillDataLoad();
         RoleLoad();
         BagLoad();
         LevelOutputLoad();
-        //GameModelLoad();
 
         GameScript.QualityNormal = GameScript.GetSprite("UI/Normal.png");
         GameScript.QualityExcellent = GameScript.GetSprite("UI/Excellent.png");
