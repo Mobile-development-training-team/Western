@@ -63,7 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\GameData.cs" />
     <Compile Include="Assets\Hovl Studio\AAA Projectiles Vol 2\Demo scene\DemoShooting.cs" />
     <Compile Include="Assets\Hovl Studio\AAA Projectiles Vol 2\Scripts\AutoDestroyPS.cs" />
     <Compile Include="Assets\Hovl Studio\AAA Projectiles Vol 2\Scripts\ProjectileMover.cs" />
@@ -78,6 +77,7 @@
     <Compile Include="Assets\Power Up's VFX\scripts\demo.cs" />
     <Compile Include="Assets\Resources\Code_fjj\Chip.cs" />
     <Compile Include="Assets\Resources\Code_fjj\Data.cs" />
+    <Compile Include="Assets\Resources\Code_fjj\GameData.cs" />
     <Compile Include="Assets\Resources\Code_fjj\GameInitScript.cs" />
     <Compile Include="Assets\Resources\Code_fjj\GameScript.cs" />
     <Compile Include="Assets\Resources\Code_fjj\Item.cs" />

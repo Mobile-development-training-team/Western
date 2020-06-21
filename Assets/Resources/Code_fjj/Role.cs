@@ -475,6 +475,17 @@ public class Skill
             return ReserveAttributeList[Level - 1];
         }
     }
+    public double GetNextDuration()
+    {
+        if (Level < LevelLimit)
+        {
+            return DurationList[Level];
+        }
+        else
+        {
+            return DurationList[Level - 1];
+        }
+    }
     public string GetImagePath()
     {
         return ImagePath;

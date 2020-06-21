@@ -17,7 +17,7 @@ public class NormalLottertyScript : MonoBehaviour
 
     private void Update()
     {
-        if (LotteryMessageButtonScript.HadLotteryMessage)
+        if (LotteryMessageButtonScript.HadLotteryMessage && !LottertyMessageScript.NormalOrGood)
         {
             Rebuild();
             LotteryMessageButtonScript.HadLotteryMessage = false;
@@ -26,6 +26,7 @@ public class NormalLottertyScript : MonoBehaviour
 
     private void Rebuild()
     {
+        GameScript.NormalPool = Check.Date;
         GameScript.NormalPool = GameScript.NormalPool.AddMinutes(30);
         InvokeRepeating("TimeGo", 0, 1);
     }

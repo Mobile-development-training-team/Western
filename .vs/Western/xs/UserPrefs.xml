@@ -8,28 +8,18 @@
               <Node name="Resources" expanded="True">
                 <Node name="Code_fjj" expanded="True">
                   <Node name="UICode" expanded="True" />
+                  <Node name="Role.cs" selected="True" />
                 </Node>
               </Node>
-              <Node name="Script" expanded="True">
-                <Node name="Brave" expanded="True">
-                  <Node name="Buffer" expanded="True" />
-                </Node>
-              </Node>
-              <Node name="VITScript.cs" selected="True" />
             </Node>
           </Node>
-        </State>
-      </Pad>
-      <Pad Id="MonoDevelop.UnitTesting.TestPad">
-        <State name="__root__">
-          <Node name="Western" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="f1aa8516-a466-4ecf-a3a1-0801733f7404" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="f28f2652-315d-42a5-b10b-efbf7cc2f662" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

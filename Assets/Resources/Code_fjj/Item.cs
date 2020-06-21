@@ -13,33 +13,163 @@ public struct ReserveAttribute
     public int AddDEF;
     public double PlusDEF;
 
-    public string ReserveAttributeToString()
+    public string SkillReseveAttributeToString(Skill skill)
+    {
+        string Buf = "";
+        if (skill.GetLevel() == 0)
+        {
+            ReserveAttribute nBuf = skill.GetNextAttribute();
+            if (nBuf.AddATK > 0)
+            {
+                Buf += "升级:(攻击+" + nBuf.AddATK.ToString() + ')';
+            }
+            if (nBuf.PlusATK > 0.000001)
+            {
+                Buf += "升级:(攻击+" + (nBuf.PlusATK * 100).ToString() + "%)";
+            }
+            if (nBuf.AddHP > 0)
+            {
+                Buf += "升级:(生命+" + nBuf.AddHP.ToString() + ')';
+            }
+            if (nBuf.PlusHP > 0.000001)
+            {
+                Buf += "升级:(生命+" + (nBuf.PlusHP * 100).ToString() + "%)";
+            }
+            if (nBuf.AddDEF > 0)
+            {
+                Buf += "升级:(防御+" + nBuf.AddDEF.ToString() + ')';
+            }
+            if (nBuf.PlusDEF > 0.000001)
+            {
+                Buf += "升级:(防御+" + (nBuf.PlusDEF * 100).ToString() + "%)";
+            }
+            if (skill.GetNextDuration() > 0.000001)
+            {
+                Buf += "升级:(持续时间:" + skill.GetNextDuration().ToString() + "秒)";
+            }
+        }
+        if (skill.GetLevel() < skill.GetLevelLimit())
+        {
+            if (AddATK > 0)
+            {
+                Buf += "攻击：+" + AddATK.ToString() + " 升级:(+" + skill.GetNextAttribute().AddATK.ToString() + ')';
+            }
+            if (PlusATK > 0.000001)
+            {
+                Buf += "攻击：+" + (PlusATK * 100).ToString() + "% 升级:(+" + (skill.GetNextAttribute().PlusATK * 100).ToString() + "%)";
+            }
+            if (AddHP > 0)
+            {
+                Buf += "生命：+" + AddHP.ToString() + " 升级:(+" + skill.GetNextAttribute().AddHP.ToString() + ')';
+            }
+            if (PlusHP > 0.000001)
+            {
+                Buf += "生命：+" + (PlusHP * 100).ToString() + "% 升级:(+" + (skill.GetNextAttribute().PlusHP * 100).ToString() + "%)";
+            }
+            if (AddDEF > 0)
+            {
+                Buf += "防御：+" + AddDEF.ToString() + " 升级:(+" + skill.GetNextAttribute().AddDEF.ToString() + ')';
+            }
+            if (PlusDEF > 0.000001)
+            {
+                Buf += "防御：+" + (PlusDEF * 100).ToString() + "% 升级:(+" + (skill.GetNextAttribute().PlusDEF * 100).ToString() + "%)";
+            }
+            if (skill.GetDuration() > 0.000001)
+            {
+                Buf += "持续时间:" + skill.GetDuration().ToString() + "秒 升级:(" + skill.GetNextDuration().ToString() + "秒)";
+            }
+        }
+        else
+        {
+            if (AddATK > 0)
+            {
+                Buf += "攻击：+" + AddATK.ToString();
+            }
+            if (PlusATK > 0.000001)
+            {
+                Buf += "攻击：+" + (PlusATK * 100).ToString() + '%';
+            }
+            if (AddHP > 0)
+            {
+                Buf += "生命：+" + AddHP.ToString();
+            }
+            if (PlusHP > 0.000001)
+            {
+                Buf += "生命：+" + (PlusHP * 100).ToString() + '%';
+            }
+            if (AddDEF > 0)
+            {
+                Buf += "防御：+" + AddDEF.ToString();
+            }
+            if (PlusDEF > 0.000001)
+            {
+                Buf += "防御：+" + (PlusDEF * 100).ToString() + '%';
+            }
+            if (skill.GetDuration() > 0.000001)
+            {
+                Buf += "持续时间:" + skill.GetDuration().ToString() + "秒";
+            }
+        }
+        return Buf;
+    }
+
+    public string ReserveAttributeToString(bool MAXorNot)
     {
         string Buf = "";
         Buf += "属性：\n";
-        if (AddATK > 0)
+        if (MAXorNot)
         {
-            Buf += "攻击：+" + AddATK.ToString() + '\n';
+            if (AddATK > 0)
+            {
+                Buf += "攻击：+" + AddATK.ToString() + '\n';
+            }
+            if (PlusATK > 0.000001)
+            {
+                Buf += "攻击：+" + (PlusATK * 100).ToString() + "%\n";
+            }
+            if (AddHP > 0)
+            {
+                Buf += "生命：+" + AddHP.ToString() + '\n';
+            }
+            if (PlusHP > 0.000001)
+            {
+                Buf += "生命：+" + (PlusHP * 100).ToString() + "%\n";
+            }
+            if (AddDEF > 0)
+            {
+                Buf += "防御：+" + AddDEF.ToString() + '\n';
+            }
+            if (PlusDEF > 0.000001)
+            {
+                Buf += "防御：+" + (PlusDEF * 100).ToString() + "%\n";
+            }
         }
-        if (PlusATK > 0.000001)
+        else
         {
-            Buf += "攻击：+" + (PlusATK * 100).ToString() + "%\n";
-        }
-        if (AddHP > 0)
-        {
-            Buf += "生命：+" + AddHP.ToString() + '\n';
-        }
-        if (PlusHP > 0.000001)
-        {
-            Buf += "生命：+" + (PlusHP * 100).ToString() + "%\n";
-        }
-        if (AddDEF > 0)
-        {
-            Buf += "防御：+" + AddDEF.ToString() + '\n';
-        }
-        if (PlusDEF > 0.000001)
-        {
-            Buf += "防御：+" + (PlusDEF * 100).ToString() + "%\n";
+            if (AddATK > 0)
+            {
+                Buf += "攻击：+" + AddATK.ToString() + "\n升级:(+" + ((int)(AddATK * 0.1)).ToString() + ')'+ '\n';
+            }
+            if (PlusATK > 0.000001)
+            {
+                Buf += "攻击：+" + (PlusATK * 100).ToString() + "%\n升级:(+" + (PlusATK * 100 * 0.1).ToString() + "%)\n";
+            }
+            if (AddHP > 0)
+            {
+                Buf += "生命：+" + AddHP.ToString() + "\n升级:(+" + ((int)(AddHP * 0.1)).ToString() + ')' + '\n';
+            }
+            if (PlusHP > 0.000001)
+            {
+                Buf += "生命：+" + (PlusHP * 100).ToString() + "%\n升级:(+" + (PlusATK * 100 * 0.1).ToString() + "%)\n";
+            }
+            if (AddDEF > 0)
+            {
+                Buf += "防御：+" + AddDEF.ToString() + "\n升级:(+" + ((int)(AddDEF * 0.1)).ToString() + ')' + '\n';
+            }
+            if (PlusDEF > 0.000001)
+            {
+                Buf += "防御：+" + (PlusDEF * 100).ToString() + "%\n升级:(+" + (PlusDEF * 100 * 0.1).ToString() + "%)\n";
+            }
         }
         return Buf;
     }

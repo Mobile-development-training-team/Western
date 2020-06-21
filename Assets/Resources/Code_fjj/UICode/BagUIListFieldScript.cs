@@ -74,7 +74,7 @@ public class BagUIListFieldScript : MonoBehaviour
 
             mBuf.transform.Find("Equipment").Find("Field").Find("Quality").GetComponent<Image>().sprite = GameScript.GetQualitySprite(Buf.item.GetQuality());
             mBuf.transform.Find("Equipment").Find("Field").Find("Quality").Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(Buf.item.GetImagePath());
-            mBuf.transform.Find("Equipment").Find("Text").GetComponent<Text>().text = Buf.item.GetName() + '\n' + '\n' + Buf.GetEquipmentReserveAttribute().ReserveAttributeToString();
+            mBuf.transform.Find("Equipment").Find("Text").GetComponent<Text>().text = Buf.item.GetName() + '\n' + '\n' + Buf.GetEquipmentReserveAttribute().ReserveAttributeToString(Buf.level == 20);
 
             mBuf.transform.Find("Material").Find("List").Find("Debris").gameObject.SetActive(true);
             mBuf.transform.Find("Material").Find("List").Find("RareEarth").gameObject.SetActive(true);
@@ -95,7 +95,7 @@ public class BagUIListFieldScript : MonoBehaviour
             Item iBuf = new Item(DataManager.GameItemIndex, Buf.item.GetID() - 1);
             mBuf.transform.Find("Equipment").Find("Field").Find("Quality").GetComponent<Image>().sprite = GameScript.GetQualitySprite(iBuf.GetQuality());
             mBuf.transform.Find("Equipment").Find("Field").Find("Quality").Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(iBuf.GetImagePath());
-            mBuf.transform.Find("Equipment").Find("Text").GetComponent<Text>().text = iBuf.GetName() + '\n' + '\n' + iBuf.GetReserveAttribute().ReserveAttributeToString();
+            mBuf.transform.Find("Equipment").Find("Text").GetComponent<Text>().text = iBuf.GetName() + '\n' + '\n' + iBuf.GetReserveAttribute().ReserveAttributeToString(true);
 
             mBuf.transform.Find("Material").Find("List").Find("Debris").gameObject.SetActive(true);
 

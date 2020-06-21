@@ -232,9 +232,9 @@ public class BagRoleEquipmentScript : MonoBehaviour
         mBuf.transform.Find("Resolve").gameObject.SetActive(true);
         mBuf.transform.Find("Intensify").gameObject.SetActive(true);
 
-        mBuf.transform.Find("Equipment").Find("Field").Find("Quality").GetComponent<Image>().sprite = GameScript.GetQualitySprite(Buf.item.GetQuality());
+        mBuf.transform.Find("Equipment").Find("Field").Find("Quality").GetComponent<Image>().sprite = GameScript.GetQualitySprite(Buf.item.GetQuality()); 
         mBuf.transform.Find("Equipment").Find("Field").Find("Quality").Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(Buf.item.GetImagePath());
-        mBuf.transform.Find("Equipment").Find("Text").GetComponent<Text>().text = Buf.item.GetName() + '\n' + '\n' + Buf.GetEquipmentReserveAttribute().ReserveAttributeToString();
+        mBuf.transform.Find("Equipment").Find("Text").GetComponent<Text>().text = Buf.item.GetName() + '\n' + '\n' + Buf.GetEquipmentReserveAttribute().ReserveAttributeToString(Buf.level == 20) ;
 
         mBuf.transform.Find("Material").Find("List").Find("Debris").gameObject.SetActive(true);
         mBuf.transform.Find("Material").Find("List").Find("RareEarth").gameObject.SetActive(true);

@@ -14,6 +14,7 @@ public class SkillUILearnMessageButtonScript : MonoBehaviour
             DataManager.roleEquipment.SetSkillDebris(DataManager.roleEquipment.GetSkillDebris() - DataManager.skillLevelUpIndex[pastIndex].Count);
             DataManager.SkillData[pastIndex + 12].LevelUP();
             transform.parent.parent.Find("List").GetChild(pastIndex).Find("Message").Find("Lv").GetComponent<Text>().text = DataManager.SkillData[pastIndex + 12].GetLevel().ToString() + '/' + DataManager.SkillData[pastIndex + 12].GetLevelLimit().ToString();
+            transform.parent.parent.Find("List").GetChild(pastIndex).Find("Message").Find("Text").GetComponent<Text>().text = DataManager.SkillData[pastIndex + 12].GetMessage() + '\n' + DataManager.SkillData[pastIndex + 12].GetAttibute().SkillReseveAttributeToString(DataManager.SkillData[pastIndex + 12]);
             transform.parent.GetComponent<Canvas>().enabled = false;
         }
     }

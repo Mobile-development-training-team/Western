@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class SkillUIListLearnScript : MonoBehaviour
 {
+    private void Start()
+    {
+        transform.Find("Text").GetComponent<Text>().text = "学习\n技能碎片:" + DataManager.skillLevelUpIndex[transform.parent.GetSiblingIndex()].Count.ToString();
+    }
+
     public void Click()
     {
         Skill Buf = DataManager.SkillData[transform.parent.GetSiblingIndex() + 12];
