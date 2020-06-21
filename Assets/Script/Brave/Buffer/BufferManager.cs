@@ -11,11 +11,13 @@ public class BufferManager : MonoBehaviour
     private float buffer_03_coolTime = 30f;
     private float buffer_03_timer = 30f;
     private bool buffer_04 = false;
+    int bufferIndex;
 
     void Start()
     {
         brave = transform.GetComponent<BraveController>();
         tempLife = brave.getLife();
+        bufferIndex = Random.Range(0, 6);
     }
 
     void Update()
@@ -38,7 +40,6 @@ public class BufferManager : MonoBehaviour
         }
     }
 
-    int bufferIndex = Random.Range(0, 6);
     public void getBuffer()
     {
         //int bufferIndex = Random.Range(0, 6);
@@ -81,7 +82,7 @@ public class BufferManager : MonoBehaviour
         else if (bufferIndex == 3)
         {
             //圣洁之力
-            tempLife.mShield += tempLife.MAXHP * 0.2f;
+            tempLife.mShield += tempLife.MAXHP * 2f;
             GameUIController.AddRythmCount(1f);
             //特效
         }

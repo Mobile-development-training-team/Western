@@ -151,6 +151,7 @@
      <Compile Include="Assets\Script\Brave\Ammunition\MagicBulletController.cs" />
      <Compile Include="Assets\Script\Brave\BraveController.cs" />
      <Compile Include="Assets\Script\Brave\Buffer\BufferManager.cs" />
+     <Compile Include="Assets\Script\Brave\Skill\EarthCleaveController.cs" />
      <Compile Include="Assets\Script\Brave\Skill\GroundFireController.cs" />
      <Compile Include="Assets\Script\Brave\Skill\SkillManager.cs" />
      <Compile Include="Assets\Script\Brave\Skill\SkyLightningController.cs" />

@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class SkyLightningController : MonoBehaviour
 {
-    private Attack attack1;
-    private Attack attack2;
-    private Attack attack3;
-    private Attack attack4;
+    //private Attack attack1;
+    //private Attack attack2;
+    //private Attack attack3;
+    //private Attack attack4;
+
+    private Attack attack;
+    public float atk;
     public float speed = 30f;
     public float flyTime = 3f;
     public GameObject mhit1;
@@ -18,18 +21,9 @@ public class SkyLightningController : MonoBehaviour
 
     void OnEnable()
     {
-        attack1 = new Attack();
-        attack1.mTeam = 1;
-        attack1.mAtk = 5f;
-        attack2 = new Attack();
-        attack2.mTeam = 1;
-        attack2.mAtk = 10f;
-        attack3 = new Attack();
-        attack3.mTeam = 1;
-        attack3.mAtk = 15f;
-        attack4 = new Attack();
-        attack4.mTeam = 1;
-        attack4.mAtk = 99999f;
+        attack = new Attack();
+        attack.mTeam = 1;
+        attack.mAtk = atk;
         Invoke("SaveLightning", flyTime);       //flyTime秒后回收天雷
     }
     //超出射程回收天雷
@@ -66,7 +60,8 @@ public class SkyLightningController : MonoBehaviour
     {
         if (otherLife != null)
         {
-            attack1.attack(otherLife);
+            attack.mAtk = atk * 0.3f;
+            attack.attack(otherLife);
             GameUIController.AddRythmCount(3f);
         }
         if (mhit1 != null&&mhit1_1!=null)
@@ -86,7 +81,8 @@ public class SkyLightningController : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         if (otherLife != null)
         {
-            attack2.attack(otherLife);
+            attack.mAtk = atk * 0.6f;
+            attack.attack(otherLife);
             GameUIController.AddRythmCount(3f);
         }
         if (mhit2 != null)
@@ -104,7 +100,8 @@ public class SkyLightningController : MonoBehaviour
         yield return new WaitForSeconds(0.8f);
         if (otherLife != null)
         {
-            attack3.attack(otherLife);
+            attack.mAtk = atk * 0.9f;
+            attack.attack(otherLife);
             GameUIController.AddRythmCount(3f);
         }
         if (mhit3 != null)
@@ -122,7 +119,8 @@ public class SkyLightningController : MonoBehaviour
         yield return new WaitForSeconds(1.2f);
         if (otherLife != null)
         {
-            attack4.attack(otherLife);
+            attack.mAtk = atk * 1.2f;
+            attack.attack(otherLife);
             GameUIController.AddRythmCount(3f);
         }
         if (mhit3 != null)
