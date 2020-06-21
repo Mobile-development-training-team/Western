@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-F:/UnityTestCode/Western/apkForGameProgram/game20.3.apk
+F:/UnityTestCode/Western/apkForGameProgram/game21.6.apk
 SceneListBegin?
 Assets/Scenes/MainScene_fjj.unity
 Assets/Scenes/Level01.unity
@@ -142,7 +142,7 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 c066b6aa1564ad70c37ead364348a818 Assembly-CSharp.dll:.MagicBulletController
 09b31d50a8885ff0947d3bfb1e20c078 Assembly-CSharp.dll:MagicArsenal.MagicEffectCycler
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.DebrisTextScript
-c822ada007d637656603e4c2f7a7f4f6 Assembly-CSharp.dll:.SkillManager
+2adfafb6f69f15a78a107c731f4b5179 Assembly-CSharp.dll:.SkillManager
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BagSelectedScript
 2890c468cf196dca883ea02bde96343e Assembly-CSharp.dll:MagicArsenal.MagicLightFade
 2046a769735b5a7196e56bb0bb66cba9 Assembly-CSharp.dll:.EnemyController
@@ -159,7 +159,7 @@ b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp-firstpass.dll:LeoLuz.PlugAndPlayJoystick.ButtonBase
 b32441fc1d28848e915ee71888fd61ba Assembly-CSharp.dll:RPGCharacterAnims.GUIControls
 79566861074b80c5467fa81dddcf4f5a Assembly-CSharp.dll:MagicArsenal.MagicRotation
-97b6d6c0e787fb72b9eabe1b452f9d63 Assembly-CSharp.dll:.GameUIController
+2e92f1dae75ea67ccbc9b61a0d00bf3e Assembly-CSharp.dll:.GameUIController
 56c90168bc19fe9aee4ba7e6b19350e3 Assembly-CSharp.dll:MagicArsenal.MagicBeamScript
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.LottertyMessageBackScript
 3e109c6c26138fe0fc3e8dde3d0ea67d Assembly-CSharp.dll:.SlashWaveBlueController
@@ -174,7 +174,7 @@ bd851356430480ff49df57371b719737 Assembly-CSharp.dll:RPGCharacterAnims.RPGCharac
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BagUIMessageMakeScript
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.SuperStateMachine
-cb81c1993cac1962d77b32055ebdd812 Assembly-CSharp.dll:.SkyLightningController
+78eab6f6d9c89ae4c09e544108179cb2 Assembly-CSharp.dll:.SkyLightningController
 5f594bb5861b922f9191f0bc2e093577 Assembly-CSharp.dll:.CameraController
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.AutoDestroyPS
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
@@ -237,10 +237,10 @@ dd54d4657875aaa22690ebe9af08240e Assembly-CSharp.dll:.SkillUIListScript
 3e109c6c26138fe0fc3e8dde3d0ea67d Assembly-CSharp.dll:.BulletController
 4f7795902bd682d4d1c7dbf0c4ab4f0b Assembly-CSharp.dll:RPGCharacterAnims.RPGCharacterInputController
 7d4f2220645154481dbfa15b5766e50b Assembly-CSharp-firstpass.dll:LeoLuz.PlugAndPlayJoystick.Swipe
-0cf3d2e40d105bf3ff14914981615899 Assembly-CSharp.dll:.Life
+246c636d12b0a188c75b005e9f2221dd Assembly-CSharp.dll:.Life
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BagUIMessageUpScript
 46280057aba92e5945195d40246a7bdf Assembly-CSharp.dll:MagicArsenal.MagicLoadSceneOnClick
-eda8cd2ebbce0102d9334838e231d261 Assembly-CSharp.dll:.BraveController
+a57d2fac9f8a84032a1cb51e88bff892 Assembly-CSharp.dll:.BraveController
 38b08a887a876e9c826dee55fc7daca8 Assembly-CSharp.dll:.Gravity
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.EnemiesManager01

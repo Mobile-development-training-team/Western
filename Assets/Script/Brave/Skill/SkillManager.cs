@@ -14,9 +14,9 @@ public class SkillManager : MonoBehaviour
 
     //引天雷（大招）
     ///////////////////////////////////////<skill00>
-    public int skill_00_num = 30;
-    private float skill_00_coolTime = 3f;
-    private float skill_00_timer = 3f;
+    //public int skill_00_num = 30;
+    //private float skill_00_coolTime = 3f;
+    //private float skill_00_timer = 3f;
     ///////////////////////////////////////<skill00/>
 
     //嗜血封魔
@@ -73,6 +73,7 @@ public class SkillManager : MonoBehaviour
 
     void Update()
     {
+        /*
         if (skill_00_num > 0)
         {
             if (skill_00_timer > 0)
@@ -80,7 +81,7 @@ public class SkillManager : MonoBehaviour
                 skill_00_timer -= Time.deltaTime;
             }
         }
-
+        */
         if (select_skill_04)
         {
             if (use_skill_04)
@@ -137,22 +138,14 @@ public class SkillManager : MonoBehaviour
 
     public void Use_Skill_00()
     {
-        if (skill_00_timer <= 0)
+        //if (skill_00_timer <= 0)
+        //{
+        //    skill_00_timer = skill_00_coolTime;
+            //skill_00_num--;
+        if (mLife.mAp >= 50f)
         {
-            skill_00_timer = skill_00_coolTime;
-            skill_00_num--;
+            mLife.mAp -= 50f;
             GameUIController.AddRythmCount(5f);
-            /*
-            if (LightningLight != null)
-            {
-                var hitInstance3 = Instantiate(LightningLight, new Vector3(transform.position[0], transform.position[1] , transform.position[2]), transform.rotation);
-                var hitPs = hitInstance3.GetComponent<ParticleSystem>();
-                if (hitPs != null)
-                {
-                    Destroy(hitInstance3, 1.2f);
-                }
-            }
-            */
             if (LightningLight != null)
             {
                 var Instance = Instantiate(LightningLight, transform.position, Quaternion.identity);
@@ -160,12 +153,12 @@ public class SkillManager : MonoBehaviour
             }
             //
             GameObject[] lightningPonts = GameObject.FindGameObjectsWithTag("LightningPoint");
-            //Debug.Log("lightningponts num is " + lightningPonts.Length);
-            for (int i = 0; i < lightningPonts.Length;i++ )
+            for (int i = 0; i < lightningPonts.Length; i++)
             {
-                ObjectPool.GetInstant().GetObj("LightningBeamStart", lightningPonts[i].transform.position, lightningPonts[i].transform.rotation);
+                ObjectPool.GetInstant().GetObj("LightningBeamStart", lightningPonts[i].transform.position, lightningPonts[i].transform.rotation).GetComponent<SkyLightningController>().atk = brave.getCurrAtk();
             }
         }
+        //}
     }
 
     public void Use_Skill_01()

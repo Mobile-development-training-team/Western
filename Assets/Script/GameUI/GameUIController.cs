@@ -14,8 +14,14 @@ public class GameUIController : MonoBehaviour
     public GameObject endGameFront;
     public GameObject enemiesMessageFront;
     public GameObject rhythmText;
+    public GameObject braveHPText;
+    public GameObject braveAPText;
 
     private static float rhythmCount;
+    private static float braveMaxHP;
+    private static float braveHP;
+    private static float braveAP;
+    private static float enemiesNum;
     private float maxRhythmCount;
     private bool freeze = false;
     private bool endGame = false;
@@ -32,6 +38,10 @@ public class GameUIController : MonoBehaviour
         DisappearPauseFront();
         DisappearEndGameFront();
         rhythmCount = 0;
+        braveMaxHP = 100;
+        braveHP = 100;
+        braveAP = 100;
+        enemiesNum = 0;
         maxRhythmCount = 0;
         DisappearRythmText();
     }
@@ -46,6 +56,8 @@ public class GameUIController : MonoBehaviour
         }
         //SetCenterText(rhythmCount.ToString());
         SetRhythmText(rhythmCount);
+        SetBraveHPText();
+        SetBraveAPText();
 
         //显示在场敌人数
     }
@@ -212,6 +224,26 @@ public class GameUIController : MonoBehaviour
     static public void SubtractRythmCount(float count)
     {
         rhythmCount -= count;
+    }
+    public void SetBraveAPText()
+    {
+        braveAPText.GetComponent<Text>().text = "AP：" + ((int)(braveAP+0.5)).ToString()+"/100";
+    }
+    static public void SetBraveAP(float ap)
+    {
+        braveAP = ap;
+    }
+    public void SetBraveHPText()
+    {
+        braveHPText.GetComponent<Text>().text = "HP：" + ((int)(braveHP + 0.5)).ToString() + "/" + ((int)(braveMaxHP + 0.5)).ToString();
+    }
+    static public void SetBraveHP(float hp)
+    {
+        braveHP = hp;
+    }
+    static public void SetBraveMaxHP(float maxHp)
+    {
+        braveMaxHP = maxHp;
     }
     public void ShowDeathEnd()
     {

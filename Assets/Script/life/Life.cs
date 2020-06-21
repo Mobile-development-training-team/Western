@@ -9,6 +9,8 @@ public class Life : MonoBehaviour
     public int mTeam = 1;
     public float mHp = 100f;
     public float MAXHP = 100f;
+    public float mAp = 100f;
+    public float MAXAP = 100f;
     public float mDef = 0f;
     public float mShield = 0f;
     public float mBlock = 0f;
@@ -28,6 +30,7 @@ public class Life : MonoBehaviour
         if (transform.gameObject.tag.Equals("brave"))
         {
             brave = transform.gameObject.GetComponent<BraveController>();
+            mAp = MAXAP;
         }
         if (hasHp)
         {
@@ -95,6 +98,7 @@ public class Life : MonoBehaviour
                 {
                     ShowBlock();
                 }
+                mAp -= Time.deltaTime * 10f;
             }
             else
             {
@@ -102,13 +106,23 @@ public class Life : MonoBehaviour
                 {
                     DisappearBlock();
                     mBlock = 0f;
-                    brave.mBlock = 0;
+                    //brave.mBlock = 0;
                 }
                 usingBlock = false;
-                brave.Blocking = false;
+                //brave.Blocking = false;
+                //brave.BlockBroken = true;
             }
         }
-
+        if (transform.gameObject.tag.Equals("brave"))
+        {
+            GameUIController.SetBraveAP(mAp);
+            GameUIController.SetBraveHP(mHp);
+            GameUIController.SetBraveMaxHP(MAXHP);
+            if (mAp < MAXAP)
+            {
+                mAp += Time.deltaTime * 10f;
+            }
+        }
     }
     
     public float beAttacked(Attack attack)
@@ -184,18 +198,20 @@ public class Life : MonoBehaviour
     public void ShowBlock()
     {
         usingBlock = true;
+        mAp -= 10f;
         Block = ObjectPool.GetInstant().loadResource<GameObject>("EarthShield");
         Block = Instantiate(Block);
-        Block.transform.position = new Vector3(transform.position[0], transform.position[1], transform.position[2]);
+        Block.transform.position = new Vector3(transform.position[0], transform.position[1] + 0.7f, transform.position[2]);
         Block.SetActive(true);
         Block.transform.parent = transform;
     }
     public void DisappearBlock()
     {
-        usingBlock = false;
+        usingBlock = false;     
         mBlock = 0f;
-        brave.mBlock = 0f;
-        brave.Blocking = false;
+        brave.BlockBroken = true;
+        //brave.mBlock = 0f;
+        //brave.Blocking = false;
         brave.beDoingSomethings = false;
         brave.transform.GetComponent<Animator>().SetBool("beDoingSomethings", false);
         Destroy(Block);

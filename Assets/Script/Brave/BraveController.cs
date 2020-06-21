@@ -39,8 +39,6 @@ namespace LeoLuz.PlugAndPlayJoystick
         private int Ammunition = 10;
         private float horizontal = 0;
         private float vertical = 0;
-        private bool canUse_secondAttack = false;
-        private float secondAttack_coolTime = 5f;
 
         public int mainWeaponIndex = 0;
         public int secondaryWeaponIndex = 1;
@@ -55,8 +53,9 @@ namespace LeoLuz.PlugAndPlayJoystick
         private float baseAtk;
         private float currAtk;
         public GameObject mhit;
-        public float mBlock;
+        //public float mBlock;
         public bool Blocking;
+        public bool BlockBroken;
 
         private float deathTime = 3f;
         private int deaths = 0;//主角死亡次数
@@ -119,9 +118,10 @@ namespace LeoLuz.PlugAndPlayJoystick
             baseAtk = 20f;
             currAtk = baseAtk;
             attack.mAtk = currAtk;
-            skillManager.skill_00_num = 30;
-            mBlock = mLife.MAXHP * 0.2f;
+            //skillManager.skill_00_num = 30;
+            //mBlock = mLife.MAXHP * 0.2f;
             Blocking = false;
+            BlockBroken = false;
             //从外面拿数据
             /*
             mLife.MAXHP = GameScript.GameRoleAttribute.HealthPointLimit;
@@ -203,14 +203,6 @@ namespace LeoLuz.PlugAndPlayJoystick
                 ///////////////////////////////<3秒后复活/>
                 return;
             }
-            if (secondAttack_coolTime > 0)
-            {
-                secondAttack_coolTime -= Time.deltaTime;
-                if (secondAttack_coolTime <= 0)
-                {
-                    canUse_secondAttack = true;
-                }
-            }
             //手柄输入版本
             horizontal = Input.GetAxis("Horizontal");
             vertical = Input.GetAxis("Vertical");
@@ -280,16 +272,17 @@ namespace LeoLuz.PlugAndPlayJoystick
                     if (atAir)
                     {
                         //快速下降
-                        if (transform.position[1] >= -4)
+                        if (transform.position[1] >= -4 && mLife.mAp > 20f)        //&&mLife.mAp>20f
                         {
                             this.GetComponent<Rigidbody>().AddForce(new Vector3(0, -1000, 0), ForceMode.Impulse);
+                            mLife.mAp -= 20f;       //mLife.mAp-=20f
                             dashFall = true;
                         }
                     }
                     else
                     {
                         //防御
-                        if (mBlock >= mLife.MAXHP * 0.2f)
+                        if (mLife.mAp >= 10f && !BlockBroken)       //mBlock >= mLife.MAXHP * 0.2f
                         {
                             if (!Blocking)
                             {
@@ -313,21 +306,13 @@ namespace LeoLuz.PlugAndPlayJoystick
             else
             {
                 Blocking = false;
+                mLife.mBlock = 0;
             }
-
+            
             if (!Blocking)
             {
-                mLife.mBlock = 0;
-                if (mBlock < mLife.MAXHP * 0.2f)
-                {
-                    mBlock += Time.deltaTime * mLife.MAXHP * 0.04f;     //5秒冷却
-                }
-                else
-                {
-                    mBlock = mLife.MAXHP * 0.2f;
-                }
+                BlockBroken = false;
             }
-
             //键盘输入版本（废弃）
 
             /*
@@ -498,9 +483,10 @@ namespace LeoLuz.PlugAndPlayJoystick
             running = true;
             mAnimator.SetBool("Walking", walking);
             mAnimator.SetBool("Running", running);
-            if (dashCoolTime <= 0)
+            if (dashCoolTime <= 0 && mLife.mAp > 0f)      //mLife.mAp>0f
             {
                 transform.Translate(Vector3.forward * 2 * Time.deltaTime);
+                mLife.mAp -= Time.deltaTime * 15f;//mLife.mAp-=Time.dealtime*7f
             }
         }
         public void idle()
@@ -577,17 +563,11 @@ namespace LeoLuz.PlugAndPlayJoystick
                 mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
             }
             */
-            if (!canUse_secondAttack)
+            if (!beDoingSomethings && !death && !reviving && !atAir && mLife.mAp > 20f)      //&&mLife.mAp>20f
             {
-                return;
-            }
-
-            if (!beDoingSomethings && !death && !reviving&&!atAir)
-            {
-                secondAttack_coolTime = 5f;
-                canUse_secondAttack = false;
                 beDoingSomethings = true;
-                mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
+                mAnimator.SetBool("beDoingSomethings", beDoingSomethings);      //mLife.mAp-=20f
+                mLife.mAp -= 20f;
                 if (WeaponIndex == 0)
                 {
                     TwoHandSwordSkill();
@@ -615,7 +595,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             ChangeWeapon();
             */
 
-            if (!beDoingSomethings&&!death&&!reviving&&!atAir)
+            if (!beDoingSomethings&&!death&&!reviving&&!atAir)      
             {
                 beDoingSomethings = true;
                 mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
@@ -632,7 +612,7 @@ namespace LeoLuz.PlugAndPlayJoystick
                 Jump();
             }
             */
-            if (!death)
+            if (!death)     //&& mLife.mAp >= 50f
             {
                 skillManager.Use_Skill_00();
             }
