@@ -25,6 +25,68 @@ public class GameScript
     public static Item[] RareDebrisPool;
     public static Item[] EpicDebrisPool;
 
+    public static void LevelPass(int level)
+    {
+        if (level >= LevelOutput.Count)
+        {
+            return;
+        }
+        System.Random rA = new System.Random();
+        int cnBuf = LevelOutput[level].GetChipNum();
+        if (cnBuf > 0)
+        {
+            switch (LevelOutput[level].GetChipQuality())
+            {
+                case Quality.Normal:
+                    DataManager.bag.AddItem(NormalDebrisPool[rA.Next() % 4], cnBuf);
+                    break;
+                case Quality.Excellent:
+                    DataManager.bag.AddItem(ExcellentDebrisPool[rA.Next() % 4], cnBuf);
+                    break;
+                case Quality.Rare:
+                    DataManager.bag.AddItem(RareDebrisPool[rA.Next() % 4], cnBuf);
+                    break;
+                case Quality.Epic:
+                    DataManager.bag.AddItem(EpicDebrisPool[rA.Next() % 4], cnBuf);
+                    break;
+            }
+        }
+        DataManager.roleEquipment.SetRareEarthCount(DataManager.roleEquipment.GetRareEarthCount() + LevelOutput[level].GetRareEarthNum());
+        DataManager.roleAttribute.ExpUP(LevelOutput[level].GetExp());
+        DataManager.roleEquipment.SetSkillDebris(DataManager.roleEquipment.GetSkillDebris() + LevelOutput[level].GetSkillDebrisNum());
+        LevelOutput[level].SetFirstOrNot(false);
+    }
+    public static void LevelNotPass(int level, double course)
+    {
+        if (level >= LevelOutput.Count)
+        {
+            return;
+        }
+        System.Random rA = new System.Random();
+        int cnBuf = (int)(LevelOutput[level].GetNotPassChipNum() * course);
+        if (cnBuf > 0)
+        {
+            switch (LevelOutput[level].GetNotPassChipQuality())
+            {
+                case Quality.Normal:
+                    DataManager.bag.AddItem(NormalDebrisPool[rA.Next() % 4], cnBuf);
+                    break;
+                case Quality.Excellent:
+                    DataManager.bag.AddItem(ExcellentDebrisPool[rA.Next() % 4], cnBuf);
+                    break;
+                case Quality.Rare:
+                    DataManager.bag.AddItem(RareDebrisPool[rA.Next() % 4], cnBuf);
+                    break;
+                case Quality.Epic:
+                    DataManager.bag.AddItem(EpicDebrisPool[rA.Next() % 4], cnBuf);
+                    break;
+            }
+        }
+        DataManager.roleEquipment.SetRareEarthCount(DataManager.roleEquipment.GetRareEarthCount() + (int)(LevelOutput[level].GetNotPassRareEarthNum() * course));
+        DataManager.roleAttribute.ExpUP((int)(LevelOutput[level].GetExp() * course));
+        DataManager.roleEquipment.SetSkillDebris(DataManager.roleEquipment.GetSkillDebris() + (int)(LevelOutput[level].GetNotPassSkillDebrisNum()*course));
+    }
+
     public static DateTime DisableTime;
     public static bool IfInit = false;
 

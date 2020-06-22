@@ -26,7 +26,7 @@ public class GoodLottertyScript : MonoBehaviour
     private void Rebuild()
     {
         GameScript.GoodPool = Check.Date;
-        GameScript.GoodPool = GameScript.GoodPool.AddHours(1);
+        GameScript.GoodPool = GameScript.GoodPool.AddHours(6);
         InvokeRepeating("TimeGo", 0, 1);
     }
 
@@ -48,6 +48,8 @@ public class GoodLottertyScript : MonoBehaviour
         if (GameScript.GoodPool == Check)
         {
             LottertyMessageScript.NormalOrGood = true;
+            transform.parent.parent.Find("LottertyMessage").Find("Main").Find("NormalIcon").GetComponent<Canvas>().enabled = false;
+            transform.parent.parent.Find("LottertyMessage").Find("Main").Find("GoodIcon").GetComponent<Canvas>().enabled = true;
             transform.parent.parent.Find("LottertyMessage").GetComponent<Canvas>().enabled = true;
         }
     }

@@ -55,42 +55,184 @@ public class LotteryMessageButtonScript : MonoBehaviour
         transform.parent.parent.Find("Done").GetComponent<Canvas>().enabled = true;
     }
 
-    private void RunNormalLotterty(int equipmentDebris = 20, int rareEarth = 50, int skillDebris = 10)
+    private void RunNormalLotterty()
     {
         System.Random ra = new System.Random();
-        int indexNum = ra.Next() % 4;
-        DataManager.bag.AddItem(ExcellentDebrisPool[indexNum], equipmentDebris);
-        DataManager.roleEquipment.SetRareEarthCount(DataManager.roleEquipment.GetRareEarthCount() + rareEarth);
-        DataManager.roleEquipment.SetSkillDebris(DataManager.roleEquipment.GetSkillDebris() + skillDebris);
-        transform.parent.parent.Find("Done").Find("Material").Find("Equipment").GetComponent<Image>().sprite = GameScript.QualityExcellent;
-        transform.parent.parent.Find("Done").Find("Material").Find("Equipment").Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(ExcellentDebrisPool[indexNum].GetImagePath());
-        transform.parent.parent.Find("Done").Find("Material").Find("Equipment").Find("Text").GetComponent<Text>().text = 'x' + equipmentDebris.ToString();
+        int raNum = ra.Next() % 100;
+        if (raNum < 5)
+        {
+            int equipmentDebris = 5;
+            int rareEarth = 80;
+            int skillDebris = 25;
+            int indexNum = ra.Next() % 4;
+            DataManager.bag.AddItem(EpicDebrisPool[indexNum], equipmentDebris);
+            DataManager.roleEquipment.SetRareEarthCount(DataManager.roleEquipment.GetRareEarthCount() + rareEarth);
+            DataManager.roleEquipment.SetSkillDebris(DataManager.roleEquipment.GetSkillDebris() + skillDebris);
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").GetComponent<Image>().sprite = GameScript.QualityEpic;
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(EpicDebrisPool[indexNum].GetImagePath());
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").Find("Text").GetComponent<Text>().text = 'x' + equipmentDebris.ToString();
 
-        transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").GetComponent<Image>().sprite = GameScript.QualityExcellent;
-        transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").Find("Icon").GetComponent<Image>().sprite = GameScript.RareEarthSprite;
-        transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").Find("Text").GetComponent<Text>().text = 'x' + rareEarth.ToString();
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").GetComponent<Image>().sprite = GameScript.QualityExcellent;
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").Find("Icon").GetComponent<Image>().sprite = GameScript.RareEarthSprite;
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").Find("Text").GetComponent<Text>().text = 'x' + rareEarth.ToString();
 
-        transform.parent.parent.Find("Done").Find("Material").Find("Skill").GetComponent<Image>().sprite = GameScript.QualityExcellent;
-        transform.parent.parent.Find("Done").Find("Material").Find("Skill").Find("Icon").GetComponent<Image>().sprite = GameScript.SkillDebrisSprite;
-        transform.parent.parent.Find("Done").Find("Material").Find("Skill").Find("Text").GetComponent<Text>().text = 'x' + skillDebris.ToString();
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").GetComponent<Image>().sprite = GameScript.QualityExcellent;
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").Find("Icon").GetComponent<Image>().sprite = GameScript.SkillDebrisSprite;
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").Find("Text").GetComponent<Text>().text = 'x' + skillDebris.ToString();
+        }
+        else if (raNum < 20)
+        {
+            int equipmentDebris = 5;
+            int rareEarth = 70;
+            int skillDebris = 20;
+            int indexNum = ra.Next() % 4;
+            DataManager.bag.AddItem(RareDebrisPool[indexNum], equipmentDebris);
+            DataManager.roleEquipment.SetRareEarthCount(DataManager.roleEquipment.GetRareEarthCount() + rareEarth);
+            DataManager.roleEquipment.SetSkillDebris(DataManager.roleEquipment.GetSkillDebris() + skillDebris);
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").GetComponent<Image>().sprite = GameScript.QualityRare;
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(RareDebrisPool[indexNum].GetImagePath());
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").Find("Text").GetComponent<Text>().text = 'x' + equipmentDebris.ToString();
+
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").GetComponent<Image>().sprite = GameScript.QualityExcellent;
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").Find("Icon").GetComponent<Image>().sprite = GameScript.RareEarthSprite;
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").Find("Text").GetComponent<Text>().text = 'x' + rareEarth.ToString();
+
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").GetComponent<Image>().sprite = GameScript.QualityExcellent;
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").Find("Icon").GetComponent<Image>().sprite = GameScript.SkillDebrisSprite;
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").Find("Text").GetComponent<Text>().text = 'x' + skillDebris.ToString();
+        }
+        else if (raNum < 50)
+        {
+            int equipmentDebris = 10;
+            int rareEarth = 60;
+            int skillDebris = 15;
+            int indexNum = ra.Next() % 4;
+            DataManager.bag.AddItem(ExcellentDebrisPool[indexNum], equipmentDebris);
+            DataManager.roleEquipment.SetRareEarthCount(DataManager.roleEquipment.GetRareEarthCount() + rareEarth);
+            DataManager.roleEquipment.SetSkillDebris(DataManager.roleEquipment.GetSkillDebris() + skillDebris);
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").GetComponent<Image>().sprite = GameScript.QualityExcellent;
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(ExcellentDebrisPool[indexNum].GetImagePath());
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").Find("Text").GetComponent<Text>().text = 'x' + equipmentDebris.ToString();
+
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").GetComponent<Image>().sprite = GameScript.QualityExcellent;
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").Find("Icon").GetComponent<Image>().sprite = GameScript.RareEarthSprite;
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").Find("Text").GetComponent<Text>().text = 'x' + rareEarth.ToString();
+
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").GetComponent<Image>().sprite = GameScript.QualityExcellent;
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").Find("Icon").GetComponent<Image>().sprite = GameScript.SkillDebrisSprite;
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").Find("Text").GetComponent<Text>().text = 'x' + skillDebris.ToString();
+        }
+        else
+        {
+            int equipmentDebris = 15;
+            int rareEarth = 40;
+            int skillDebris = 10;
+            int indexNum = ra.Next() % 4;
+            DataManager.bag.AddItem(NormalDebrisPool[indexNum], equipmentDebris);
+            DataManager.roleEquipment.SetRareEarthCount(DataManager.roleEquipment.GetRareEarthCount() + rareEarth);
+            DataManager.roleEquipment.SetSkillDebris(DataManager.roleEquipment.GetSkillDebris() + skillDebris);
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").GetComponent<Image>().sprite = GameScript.QualityNormal;
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(NormalDebrisPool[indexNum].GetImagePath());
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").Find("Text").GetComponent<Text>().text = 'x' + equipmentDebris.ToString();
+
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").GetComponent<Image>().sprite = GameScript.QualityExcellent;
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").Find("Icon").GetComponent<Image>().sprite = GameScript.RareEarthSprite;
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").Find("Text").GetComponent<Text>().text = 'x' + rareEarth.ToString();
+
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").GetComponent<Image>().sprite = GameScript.QualityExcellent;
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").Find("Icon").GetComponent<Image>().sprite = GameScript.SkillDebrisSprite;
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").Find("Text").GetComponent<Text>().text = 'x' + skillDebris.ToString();
+        }
+        
     }
-    private void RunGoodLotterty(int equipmentDebris = 10, int rareEarth = 200, int slayCount = 3)
+    private void RunGoodLotterty()
     {
         System.Random ra = new System.Random();
-        int indexNum = ra.Next() % 4;
-        DataManager.bag.AddItem(RareDebrisPool[indexNum], equipmentDebris);
-        DataManager.roleEquipment.SetRareEarthCount(DataManager.roleEquipment.GetRareEarthCount() + rareEarth);
-        DataManager.roleEquipment.SetSlayCount(DataManager.roleEquipment.GetSlayCount() + slayCount);
-        transform.parent.parent.Find("Done").Find("Material").Find("Equipment").GetComponent<Image>().sprite = GameScript.QualityRare;
-        transform.parent.parent.Find("Done").Find("Material").Find("Equipment").Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(RareDebrisPool[indexNum].GetImagePath());
-        transform.parent.parent.Find("Done").Find("Material").Find("Equipment").Find("Text").GetComponent<Text>().text = 'x' + equipmentDebris.ToString();
+        int raNum = ra.Next() % 100;
+        if (raNum < 5)
+        {
+            int equipmentDebris = 5;
+            int rareEarth = 100;
+            int slayCount = 4;
+            int indexNum = ra.Next() % 4;
+            DataManager.bag.AddItem(EpicDebrisPool[indexNum], equipmentDebris);
+            DataManager.roleEquipment.SetRareEarthCount(DataManager.roleEquipment.GetRareEarthCount() + rareEarth);
+            DataManager.roleEquipment.SetSlayCount(DataManager.roleEquipment.GetSlayCount() + slayCount);
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").GetComponent<Image>().sprite = GameScript.QualityEpic;
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(EpicDebrisPool[indexNum].GetImagePath());
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").Find("Text").GetComponent<Text>().text = 'x' + equipmentDebris.ToString();
 
-        transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").GetComponent<Image>().sprite = GameScript.QualityExcellent;
-        transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").Find("Icon").GetComponent<Image>().sprite = GameScript.RareEarthSprite;
-        transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").Find("Text").GetComponent<Text>().text = 'x' + rareEarth.ToString();
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").GetComponent<Image>().sprite = GameScript.QualityExcellent;
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").Find("Icon").GetComponent<Image>().sprite = GameScript.RareEarthSprite;
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").Find("Text").GetComponent<Text>().text = 'x' + rareEarth.ToString();
 
-        transform.parent.parent.Find("Done").Find("Material").Find("Skill").GetComponent<Image>().sprite = GameScript.QualityRare;
-        transform.parent.parent.Find("Done").Find("Material").Find("Skill").Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(DataManager.SkillData[0].GetImagePath());
-        transform.parent.parent.Find("Done").Find("Material").Find("Skill").Find("Text").GetComponent<Text>().text = 'x' + slayCount.ToString();
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").GetComponent<Image>().sprite = GameScript.QualityRare;
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(DataManager.SkillData[0].GetImagePath());
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").Find("Text").GetComponent<Text>().text = 'x' + slayCount.ToString();
+        }
+        else if (raNum < 20)
+        {
+            int equipmentDebris = 5;
+            int rareEarth = 90;
+            int slayCount = 3;
+            int indexNum = ra.Next() % 4;
+            DataManager.bag.AddItem(RareDebrisPool[indexNum], equipmentDebris);
+            DataManager.roleEquipment.SetRareEarthCount(DataManager.roleEquipment.GetRareEarthCount() + rareEarth);
+            DataManager.roleEquipment.SetSlayCount(DataManager.roleEquipment.GetSlayCount() + slayCount);
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").GetComponent<Image>().sprite = GameScript.QualityRare;
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(RareDebrisPool[indexNum].GetImagePath());
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").Find("Text").GetComponent<Text>().text = 'x' + equipmentDebris.ToString();
+
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").GetComponent<Image>().sprite = GameScript.QualityExcellent;
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").Find("Icon").GetComponent<Image>().sprite = GameScript.RareEarthSprite;
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").Find("Text").GetComponent<Text>().text = 'x' + rareEarth.ToString();
+
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").GetComponent<Image>().sprite = GameScript.QualityRare;
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(DataManager.SkillData[0].GetImagePath());
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").Find("Text").GetComponent<Text>().text = 'x' + slayCount.ToString();
+        }
+        else if (raNum < 50)
+        {
+            int equipmentDebris = 12;
+            int rareEarth = 70;
+            int slayCount = 2;
+            int indexNum = ra.Next() % 4;
+            DataManager.bag.AddItem(ExcellentDebrisPool[indexNum], equipmentDebris);
+            DataManager.roleEquipment.SetRareEarthCount(DataManager.roleEquipment.GetRareEarthCount() + rareEarth);
+            DataManager.roleEquipment.SetSlayCount(DataManager.roleEquipment.GetSlayCount() + slayCount);
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").GetComponent<Image>().sprite = GameScript.QualityExcellent;
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(ExcellentDebrisPool[indexNum].GetImagePath());
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").Find("Text").GetComponent<Text>().text = 'x' + equipmentDebris.ToString();
+
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").GetComponent<Image>().sprite = GameScript.QualityExcellent;
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").Find("Icon").GetComponent<Image>().sprite = GameScript.RareEarthSprite;
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").Find("Text").GetComponent<Text>().text = 'x' + rareEarth.ToString();
+
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").GetComponent<Image>().sprite = GameScript.QualityRare;
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(DataManager.SkillData[0].GetImagePath());
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").Find("Text").GetComponent<Text>().text = 'x' + slayCount.ToString();
+        }
+        else
+        {
+            int equipmentDebris = 10;
+            int rareEarth = 50;
+            int slayCount = 1;
+            int indexNum = ra.Next() % 4;
+            DataManager.bag.AddItem(ExcellentDebrisPool[indexNum], equipmentDebris);
+            DataManager.roleEquipment.SetRareEarthCount(DataManager.roleEquipment.GetRareEarthCount() + rareEarth);
+            DataManager.roleEquipment.SetSlayCount(DataManager.roleEquipment.GetSlayCount() + slayCount);
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").GetComponent<Image>().sprite = GameScript.QualityExcellent;
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(ExcellentDebrisPool[indexNum].GetImagePath());
+            transform.parent.parent.Find("Done").Find("Material").Find("Equipment").Find("Text").GetComponent<Text>().text = 'x' + equipmentDebris.ToString();
+
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").GetComponent<Image>().sprite = GameScript.QualityExcellent;
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").Find("Icon").GetComponent<Image>().sprite = GameScript.RareEarthSprite;
+            transform.parent.parent.Find("Done").Find("Material").Find("Rare-earth").Find("Text").GetComponent<Text>().text = 'x' + rareEarth.ToString();
+
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").GetComponent<Image>().sprite = GameScript.QualityRare;
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(DataManager.SkillData[0].GetImagePath());
+            transform.parent.parent.Find("Done").Find("Material").Find("Skill").Find("Text").GetComponent<Text>().text = 'x' + slayCount.ToString();
+        }
     }
+        
 }

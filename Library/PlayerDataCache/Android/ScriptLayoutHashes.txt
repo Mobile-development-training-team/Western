@@ -104,6 +104,7 @@ abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.Tou
 ebe4619662441f55c3364269bb5622e9 Assembly-CSharp.dll:.SuperCollisionType
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BruteForceMesh
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.GoodLottertyScript
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BagRoleEquipmentTipScript
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 06f0fef534ca4c1d6064fd77a26bf722 UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
 780e8f682b3221346c034a6712a0fd25 UnityEngine.Timeline.dll:UnityEngine.Timeline.AnimationPlayableAsset
@@ -250,5 +251,6 @@ a0b90ca9b57ca50a01d311479eda61c2 Assembly-CSharp-firstpass.dll:LeoLuz.PlugAndPla
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.LotteryMessageButtonScript
 59e13e042c3d0abe89ab483417fdcc34 Assembly-CSharp.dll:.ShakeCamera
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BagUIListFieldScript
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BagUIListFieldTipScript
 36c8f18bc5d3fe1484699fc45c89e2b9 Assembly-CSharp.dll:.CamController
 13ec1fbb0991ade13261f246055b927b Assembly-CSharp.dll:.AlwaysFace

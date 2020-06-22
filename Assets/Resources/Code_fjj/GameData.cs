@@ -189,6 +189,8 @@ public class GameData : MonoBehaviour
             levelOutputRow.Add("首通碎片");
             levelOutputRow.Add("首通碎片数量");
             levelOutputRow.Add("首通稀土数量");
+            levelOutputRow.Add("技能碎片数量");
+            levelOutputRow.Add("首通技能碎片数量");
             writer.WriteRow(levelOutputRow);
             for (int i = 0; i < GameScript.LevelOutput.Count; i++)
             {
@@ -202,6 +204,8 @@ public class GameData : MonoBehaviour
                 row.Add(GameScript.LevelOutput[i].GetSaveChipTypeF());
                 row.Add(GameScript.LevelOutput[i].GetSaveChipNumF());
                 row.Add(GameScript.LevelOutput[i].GetSaveRareNumF());
+                row.Add(GameScript.LevelOutput[i].GetSaveSDNum());
+                row.Add(GameScript.LevelOutput[i].GetSaveSDNumF());
                 writer.WriteRow(row);
             }
         }
@@ -310,9 +314,9 @@ public class GameData : MonoBehaviour
 
     private void Update()
     {
-        Skill[] BuffSkillList = new Skill[1];
-        BuffSkillList[0] = DataManager.SkillData[13];
-        if (!ReserveAttribute.ReserveAttributeCompare(reserveAttribute_Buf, DataManager.roleEquipment.GetEquipmentListReserveAttribute() + Skill.GetSkillListAttributer(BuffSkillList)))
+        //Skill[] BuffSkillList = new Skill[1];
+        //BuffSkillList[0] = DataManager.SkillData[13];
+        if (!ReserveAttribute.ReserveAttributeCompare(reserveAttribute_Buf, DataManager.roleEquipment.GetEquipmentListReserveAttribute() + ReserveAttribute.StandardReserveAttribute()))//Skill.GetSkillListAttributer(BuffSkillList)))
         {
             SelfUpdate();
             return;
@@ -327,9 +331,9 @@ public class GameData : MonoBehaviour
     public void SelfUpdate()
     {
         reserveAttribute_Buf = DataManager.roleEquipment.GetEquipmentListReserveAttribute();
-        Skill[] BuffSkillList = new Skill[1];
-        BuffSkillList[0] = DataManager.SkillData[13];
-        reserveAttribute_Buf = reserveAttribute_Buf + Skill.GetSkillListAttributer(BuffSkillList);
+        //Skill[] BuffSkillList = new Skill[1];
+        //BuffSkillList[0] = DataManager.SkillData[13];
+        reserveAttribute_Buf = reserveAttribute_Buf + ReserveAttribute.StandardReserveAttribute();//Skill.GetSkillListAttributer(BuffSkillList);
         attribute_Buf = DataManager.roleAttribute.GetAttribute();
         GameScript.GameRoleAttribute = ReserveAttribute.ReserverToService(reserveAttribute_Buf, attribute_Buf);
     }

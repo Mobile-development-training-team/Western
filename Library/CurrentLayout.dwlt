@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 204, y: 448}
   m_MaxSize: {x: 4004, y: 8048}
   vertical: 1
-  controlID: 14
+  controlID: 106
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 498}
   m_MaxSize: {x: 18008, y: 14048}
   vertical: 0
-  controlID: 49
+  controlID: 73
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 498}
   m_MaxSize: {x: 10002, y: 14048}
   vertical: 1
-  controlID: 50
+  controlID: 74
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -471,23 +471,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 826b0100
-      m_LastClickedID: 93058
-      m_ExpandedIDs: 8250ffff2852ffff4852ffffcc53ffff8c57ffff4c5bffff185fffff225fffff8e61ffff3463ffff5463ffffd864ffff9868ffff586cffff2470ffff2e70ffff5c71ffff0273ffff2273ffffa674ffff6678ffff267cfffff27ffffffc7fffff1c81ffffc282ffffe282ffff6684ffff2688ffffe68bffffb28fffffbc8fffffd690ffff7c92ffff9c92ffff2094ffffe097ffffa09bffff6c9fffff769fffffd2a0ffff78a2ffff98a2ffff1ca4ffffdca7ffff9cabffff68afffff72afffff56b3fffffcb4ffff1cb5ffffa0b6ffff60baffff20beffffecc1fffff6c1ffffe6c4ffff8cc6ffffacc6ffff30c8fffff0cbffffb0cfffff7cd3ffff86d3ffff9cf5ffffc6fbffff883d0000c63d0000d63e00005a8000001e84000004860000
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: c2e8ffff68eaffff88eaffff0eecffffceefffff8ef3ffff5af7ffff64f7ffffb6fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: GameData
-        m_OriginalName: GameData
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 15260
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 10}
       m_SearchString: 
@@ -535,7 +535,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Code_fjj/UICode
+    - Assets/Resources
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
@@ -547,7 +547,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 9}
     m_SelectedIDs: 4a340000
     m_LastClickedID: 13386
-    m_ExpandedIDs: 000000009a280000f0280000e82c0000842d00008e2d0000a42d0000b62d0000be2d00009c2e0000c22e0000262f000080310000ca310000043200000e320000263200004a32000072320000763200009e320000f03200000c330000ae330000c63300003c3400009634000024350000d6360000b8440000ba440000bc440000be440000c0440000
+    m_ExpandedIDs: 00000000b42800000e290000102d0000ac2d0000b62d0000de2d0000c62e0000ec2e0000502f0000b0310000fa310000343200003e320000563200007a320000a6320000ce320000223300003e330000e4330000fc3300006234000072340000cc3400005a3500002a3600000e3700003e45000040450000424500004445000046450000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -572,24 +572,24 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 276.00342}
+    scrollPos: {x: 0, y: 813.9969}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff000000009a280000f0280000e82c0000842d00008e2d0000b62d00009c2e0000c22e0000262f000080310000ca310000043200000e320000263200004a320000763200009e320000f03200000c330000ae330000c63300002c3400003c3400009634000024350000d6360000b8440000ba440000bc440000be440000c0440000
+    m_ExpandedIDs: ffffffff00000000b42800000e290000102d0000ac2d0000b62d0000de2d0000c62e0000ec2e0000502f0000b0310000fa310000343200003e320000563200007a320000a6320000ce320000223300003e330000e4330000fc3300006234000072340000cc3400005a3500002a3600000e3700003e45000040450000424500004445000046450000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: SkillUILearnMessageButtonScript
-      m_OriginalName: SkillUILearnMessageButtonScript
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 9316
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 11}
     m_SearchString: 

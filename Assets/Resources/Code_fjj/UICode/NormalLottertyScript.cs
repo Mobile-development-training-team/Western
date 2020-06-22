@@ -27,7 +27,7 @@ public class NormalLottertyScript : MonoBehaviour
     private void Rebuild()
     {
         GameScript.NormalPool = Check.Date;
-        GameScript.NormalPool = GameScript.NormalPool.AddMinutes(30);
+        GameScript.NormalPool = GameScript.NormalPool.AddHours(4);
         InvokeRepeating("TimeGo", 0, 1);
     }
 
@@ -48,6 +48,8 @@ public class NormalLottertyScript : MonoBehaviour
         if (GameScript.NormalPool == Check)
         {
             LottertyMessageScript.NormalOrGood = false;
+            transform.parent.parent.Find("LottertyMessage").Find("Main").Find("NormalIcon").GetComponent<Canvas>().enabled = true;
+            transform.parent.parent.Find("LottertyMessage").Find("Main").Find("GoodIcon").GetComponent<Canvas>().enabled = false;
             transform.parent.parent.Find("LottertyMessage").GetComponent<Canvas>().enabled = true;
         }
     }

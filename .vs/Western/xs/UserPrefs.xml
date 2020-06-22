@@ -7,19 +7,23 @@
             <Node name="Assets" expanded="True">
               <Node name="Resources" expanded="True">
                 <Node name="Code_fjj" expanded="True">
-                  <Node name="UICode" expanded="True" />
-                  <Node name="Role.cs" selected="True" />
+                  <Node name="UICode" expanded="True">
+                    <Node name="SkillUICellScript.cs" selected="True" />
+                  </Node>
                 </Node>
               </Node>
             </Node>
           </Node>
         </State>
       </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="f28f2652-315d-42a5-b10b-efbf7cc2f662" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="383589d3-efc0-4f27-a8e1-b6c7a96ac9e0" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

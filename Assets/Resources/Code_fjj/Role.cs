@@ -359,7 +359,8 @@ public struct SkillDataPlus
 public struct SkillLevelUpIndex
 {
     public string Name;
-    public int Count;
+    public int LearnCount;
+    public int UpCount;
 }
 /// <summary>
 /// In Role.cs

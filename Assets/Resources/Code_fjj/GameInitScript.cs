@@ -252,7 +252,7 @@ public class GameInitScript : MonoBehaviour
                 {
                     break;
                 }
-                SkillLevelUpIndex a = new SkillLevelUpIndex { Name = row[0], Count = int.Parse(row[1]) };
+                SkillLevelUpIndex a = new SkillLevelUpIndex { Name = row[0], LearnCount = int.Parse(row[1]), UpCount = int.Parse(row[2]) };
                 buf.Add(a);
             }
             DataManager.skillLevelUpIndex = new SkillLevelUpIndex[buf.Count];
@@ -434,22 +434,22 @@ public class GameInitScript : MonoBehaviour
                 {
                     if (row[2] == "")
                     {
-                        GameScript.LevelOutput.Add(new Chip(int.Parse(row[0]), true, Quality.Normal, 0, int.Parse(row[4]), int.Parse(row[5]), GameScript.GetEquipmentQuality(row[6]), int.Parse(row[7]), int.Parse(row[8])));
+                        GameScript.LevelOutput.Add(new Chip(int.Parse(row[0]), true, Quality.Normal, 0, int.Parse(row[4]), int.Parse(row[5]), GameScript.GetEquipmentQuality(row[6]), int.Parse(row[7]), int.Parse(row[8]), int.Parse(row[9]), int.Parse(row[10])));
                     }
                     else
                     {
-                        GameScript.LevelOutput.Add(new Chip(int.Parse(row[0]), true, GameScript.GetEquipmentQuality(row[2]), int.Parse(row[3]), int.Parse(row[4]), int.Parse(row[5]), GameScript.GetEquipmentQuality(row[6]), int.Parse(row[7]), int.Parse(row[8])));
+                        GameScript.LevelOutput.Add(new Chip(int.Parse(row[0]), true, GameScript.GetEquipmentQuality(row[2]), int.Parse(row[3]), int.Parse(row[4]), int.Parse(row[5]), GameScript.GetEquipmentQuality(row[6]), int.Parse(row[7]), int.Parse(row[8]), int.Parse(row[9]), int.Parse(row[10])));
                     }
                 }
                 else
                 {
                     if (row[2] == "")
                     {
-                        GameScript.LevelOutput.Add(new Chip(int.Parse(row[0]), false, Quality.Normal, 0, int.Parse(row[4]), int.Parse(row[5]), GameScript.GetEquipmentQuality(row[6]), int.Parse(row[7]), int.Parse(row[8])));
+                        GameScript.LevelOutput.Add(new Chip(int.Parse(row[0]), false, Quality.Normal, 0, int.Parse(row[4]), int.Parse(row[5]), GameScript.GetEquipmentQuality(row[6]), int.Parse(row[7]), int.Parse(row[8]), int.Parse(row[9]), int.Parse(row[10])));
                     }
                     else
                     {
-                        GameScript.LevelOutput.Add(new Chip(int.Parse(row[0]), false, GameScript.GetEquipmentQuality(row[2]), int.Parse(row[3]), int.Parse(row[4]), int.Parse(row[5]), GameScript.GetEquipmentQuality(row[6]), int.Parse(row[7]), int.Parse(row[8])));
+                        GameScript.LevelOutput.Add(new Chip(int.Parse(row[0]), false, GameScript.GetEquipmentQuality(row[2]), int.Parse(row[3]), int.Parse(row[4]), int.Parse(row[5]), GameScript.GetEquipmentQuality(row[6]), int.Parse(row[7]), int.Parse(row[8]), int.Parse(row[9]), int.Parse(row[10])));
                     }
                 }
 

@@ -11,8 +11,10 @@ public class Chip
     private int rareEarthNum;
     private int rareEarthNum_first;
     private int exp;
+    private int skillDebrisNum;
+    private int skillDebrisNum_first;
 
-    public Chip(int l, bool fON, Quality cT, int cN, int rEN, int e, Quality cTF, int cNF, int rEF)
+    public Chip(int l, bool fON, Quality cT, int cN, int rEN, int e, Quality cTF, int cNF, int rEF, int sDN, int sDF)
     {
         level = l;
         firstOrNot = fON;
@@ -23,6 +25,8 @@ public class Chip
         chipType_first = cTF;
         chipNum_first = cNF;
         rareEarthNum_first = rEF;
+        skillDebrisNum = sDN;
+        skillDebrisNum_first = sDF;
     }
 
     public void SetFirstOrNot(bool b)
@@ -41,7 +45,11 @@ public class Chip
             return chipType;
         }  
     }
- 
+    public Quality GetNotPassChipQuality()
+    {
+        return chipType;
+    }
+
     public int GetChipNum()
     {
         Random random = new Random();
@@ -55,6 +63,13 @@ public class Chip
         {
             return (int)(chipNum * factor);
         }
+    }
+    public int GetNotPassChipNum()
+    {
+        Random random = new Random();
+        int min = 95, max = 105;
+        float factor = random.Next(min, max) / (float)100;
+        return (int)(chipNum * factor);
     }
 
     public int GetRareEarthNum()
@@ -70,6 +85,35 @@ public class Chip
         {
             return (int)(rareEarthNum * factor);
         }
+    }
+    public int GetNotPassRareEarthNum()
+    {
+        Random random = new Random();
+        int min = 95, max = 105;
+        float factor = random.Next(min, max) / (float)100;
+        return (int)(rareEarthNum * factor);
+    }
+
+    public int GetSkillDebrisNum()
+    {
+        Random random = new Random();
+        int min = 95, max = 105;
+        float factor = random.Next(min, max) / (float)100;
+        if (firstOrNot)
+        {
+            return (int)(skillDebrisNum_first * factor);
+        }
+        else
+        {
+            return (int)(skillDebrisNum * factor);
+        }
+    }
+    public int GetNotPassSkillDebrisNum()
+    {
+        Random random = new Random();
+        int min = 95, max = 105;
+        float factor = random.Next(min, max) / (float)100;
+        return (int)(skillDebrisNum * factor);
     }
 
     public int GetExp()
@@ -149,5 +193,13 @@ public class Chip
     public string GetSaveRareNumF()
     {
         return rareEarthNum_first.ToString();
+    }
+    public string GetSaveSDNum()
+    {
+        return skillDebrisNum.ToString();
+    }
+    public string GetSaveSDNumF()
+    {
+        return skillDebrisNum_first.ToString();
     }
 }
