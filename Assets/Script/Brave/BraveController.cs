@@ -10,6 +10,9 @@ namespace LeoLuz.PlugAndPlayJoystick
 */
     public class BraveController : MonoBehaviour
     {
+        public GameManager gameManager;
+        GameUIController gameUIController;
+
         private Animator mAnimator;
         private SkillManager skillManager;
         private BufferManager bufferManager;
@@ -83,18 +86,25 @@ namespace LeoLuz.PlugAndPlayJoystick
             {
                 //if(!brave.death&&!brave.reviving&&!brave.atAir)
                 brave.GetHit();
-                GameUIController.SubtractRythmCount(20f);
+                //GameUIController.SubtractRythmCount(20f);
             }
             public void onDead()
             {
                 //if (!brave.death && !brave.reviving && !brave.atAir)
                 brave.Death();
-                GameUIController.SubtractRythmCount(999f);
+                //GameUIController.SubtractRythmCount(999f);
             }
         }
         
         void Awake()
         {
+            if (GameManager.INSTANCE == null)
+            {
+                return;
+            }
+            gameManager = GameManager.INSTANCE;
+            gameManager.setBrave(this);
+
             mAnimator = GetComponent<Animator>();
             mAnimator.SetInteger("AttackIndex", 0);
             mAnimator.SetInteger("WeaponIndex", 0);
@@ -114,15 +124,20 @@ namespace LeoLuz.PlugAndPlayJoystick
             attack = new Attack();
             mLife.hasHp = true;
             attack.mTeam = mLife.mTeam;
+
+            deaths = 0;
+            Blocking = false;
+            BlockBroken = false;
+
             //自定义测试数据
             mLife.mHp = mLife.MAXHP;
             baseAtk = 20f;
             currAtk = baseAtk;
             attack.mAtk = currAtk;
-            //skillManager.skill_00_num = 30;
+            skillManager.skill_00_num = 3;
+            
             //mBlock = mLife.MAXHP * 0.2f;
-            Blocking = false;
-            BlockBroken = false;
+
             //从外面拿数据
             /*
             mLife.MAXHP = GameScript.GameRoleAttribute.HealthPointLimit;
@@ -132,6 +147,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             currAtk = baseAtk;
             attack.mAtk = currAtk;
             */
+
             RightHand = GameObject.FindGameObjectWithTag("RightHand");
             //THandSword = RightHand.transform.Find("2Hand-Sword Variant").gameObject;
             //Gun = RightHand.transform.Find("2Hand-Rifle").gameObject;
@@ -192,15 +208,18 @@ namespace LeoLuz.PlugAndPlayJoystick
             mAnimator.SetInteger("WeaponIndex", WeaponIndex);
             //mainWeapon.SetActive(true);
         }
-
-        // Update is called once per frame
+        void Start()
+        {
+            gameUIController = gameManager.getUIController();
+            gameUIController.SetSkillNumText(skillManager.skill_00_num);
+        }
         ////////////////////////////////////////////////////////////////////<监听UI>
         void Update()
         {
             if (death)
             {
                 ///////////////////////////////<3秒后复活>
-                if (deaths < 10)       //10条命
+                if (deaths < 3)       //3条命
                 {
                     deathTime -= Time.deltaTime;
                     if (deathTime <= 0)
@@ -296,7 +315,7 @@ namespace LeoLuz.PlugAndPlayJoystick
                     else
                     {
                         //防御
-                        if (mLife.mAp >= 10f && !BlockBroken)       //mBlock >= mLife.MAXHP * 0.2f
+                        if (mLife.mAp >= 20f && !BlockBroken)       //mBlock >= mLife.MAXHP * 0.2f
                         {
                             if (!Blocking)
                             {
@@ -496,7 +515,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             if (dashCoolTime <= 0 && mLife.mAp > 0f)      //mLife.mAp>0f
             {
                 transform.Translate(Vector3.forward * 2 * Time.deltaTime);
-                mLife.mAp -= Time.deltaTime * 15f;//mLife.mAp-=Time.dealtime*7f
+                mLife.mAp -= Time.deltaTime * 10f;//mLife.mAp-=Time.dealtime*7f
             }
         }
         public void idle()
@@ -572,11 +591,11 @@ namespace LeoLuz.PlugAndPlayJoystick
                 mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
             }
             */
-            if (!beDoingSomethings && !death && !reviving && !atAir && mLife.mAp > 20f && !Blocking)       //&&mLife.mAp>20f
+            if (!beDoingSomethings && !death && !reviving && !atAir && mLife.mAp > 30f && !Blocking)      
             {
                 beDoingSomethings = true;
-                mAnimator.SetBool("beDoingSomethings", beDoingSomethings);      //mLife.mAp-=20f
-                mLife.mAp -= 20f;
+                mAnimator.SetBool("beDoingSomethings", beDoingSomethings);      
+                mLife.mAp -= 30f;
                 if (WeaponIndex == 0)
                 {
                     TwoHandSwordSkill();
@@ -620,7 +639,7 @@ namespace LeoLuz.PlugAndPlayJoystick
                 Jump();
             }
             */
-            if (!death)     //&& mLife.mAp >= 50f
+            if (!death)      //&& mLife.mAp >= 50f
             {
                 skillManager.Use_Skill_00();
             }
@@ -682,10 +701,10 @@ namespace LeoLuz.PlugAndPlayJoystick
                 mAnimator.SetBool("Death", death);
                 Hit(transform.GetComponent<CapsuleCollider>());
                 deaths++;
-                //暂定主角有10条命。如果死了10次就游戏结束
-                if (deaths >= 10)
+                //暂定主角有3条命。如果死了3次就游戏结束
+                if (deaths >= 3)
                 {
-                    GameManager.INSTANCE.GameOver(false);
+                    gameManager.GameOver(false);
                 }
             }
         }
@@ -991,12 +1010,12 @@ namespace LeoLuz.PlugAndPlayJoystick
                     Destroy(hitInstance, hitPsParts.main.duration);
                 }
             }
-            GameUIController.AddRythmCount(3f);
+            //GameUIController.AddRythmCount(3f);
         }
         ////////////////////////////////////////////////////////////////////<攻击特效/>
 
 
-        ////////////////////////////////////////////////////////////////////<技能和buff相关>
+        ////////////////////////////////////////////////////////////////////<获取与设定勇者数据>
         public void setAtk(float setatk)
         {
             currAtk = setatk;
@@ -1014,12 +1033,24 @@ namespace LeoLuz.PlugAndPlayJoystick
         {
             return mLife;
         }
-        ////////////////////////////////////////////////////////////////////<技能和buff相关/>
-
+        public int getSkillNum()
+        {
+            return skillManager.skill_00_num;
+        }
+        public SkillManager getSkillManager()
+        {
+            return skillManager;
+        }
+        public BufferManager getBufferManager()
+        {
+            return bufferManager;
+        }
         public bool isDead()
         {
             return death || reviving;
         }
+        ////////////////////////////////////////////////////////////////////<获取与设定勇者数据/>
+
     }
 
 //}

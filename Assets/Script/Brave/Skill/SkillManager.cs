@@ -14,15 +14,15 @@ public class SkillManager : MonoBehaviour
 
     //引天雷（大招）
     ///////////////////////////////////////<skill00>
-    //public int skill_00_num = 30;
-    //private float skill_00_coolTime = 3f;
-    //private float skill_00_timer = 3f;
+    public int skill_00_num = 3;
+    private float skill_00_coolTime = 20f;
+    private float skill_00_timer = 20f;
     ///////////////////////////////////////<skill00/>
 
     //嗜血封魔
     ///////////////////////////////////////<skill01>
     public bool select_skill_01 = true;
-    private float skill_01_num = 0.08f;
+    private float skill_01_num = 0.11f;
     //概率型技能实现
     private float skill_01_percent = 10f;
     ///////////////////////////////////////<skill01/>
@@ -30,26 +30,26 @@ public class SkillManager : MonoBehaviour
     //剑气
     ///////////////////////////////////////<skill02>
     public bool select_skill_02 = true ;
-    private float skill_02_atk = 10f;
-    private float skill_02_num = 0.5f;
+    //private float skill_02_atk = 10f;
+    private float skill_02_num = 0.55f;
     //概率型技能实现
-    private float skill_02_percent = 80f;
+    private float skill_02_percent = 40f;
     ///////////////////////////////////////<skill02/>
 
     //地火
     ///////////////////////////////////////<skill03>
     public bool select_skill_03 = true;
-    private float skill_03_atk = 10f;
-    private float skill_03_num = 2f;
+    //private float skill_03_atk = 10f;
+    private float skill_03_num = 1f;
     //概率型技能实现
-    private float skill_03_percent = 10f;
+    private float skill_03_percent = 15f;
     ///////////////////////////////////////<skill03/>
 
     //血战天虹
     ///////////////////////////////////////<skill04>
     public bool select_skill_04 = true;
     private float skill_04_num = 0.2f;
-    private float skill_04_percent = 10f;
+    //private float skill_04_percent = 10f;
     private bool use_skill_04 = false;
     private GameObject skill_04_buff;
     ///////////////////////////////////////<skill04/>
@@ -61,7 +61,7 @@ public class SkillManager : MonoBehaviour
     //冷却+持续型技能实现
     private bool skill_05 = false;
     private float skill_05_coolTime = 30f;
-    private float skill_05_stayedTime = 5f;
+    private float skill_05_stayedTime = 1.5f;
     private float skill_05_timer = 30f;
     ///////////////////////////////////////<skill05/>
 
@@ -73,7 +73,6 @@ public class SkillManager : MonoBehaviour
 
     void Update()
     {
-        /*
         if (skill_00_num > 0)
         {
             if (skill_00_timer > 0)
@@ -81,14 +80,13 @@ public class SkillManager : MonoBehaviour
                 skill_00_timer -= Time.deltaTime;
             }
         }
-        */
         if (select_skill_04)
         {
             if (use_skill_04)
             {
                 if (mLife.mHp >= mLife.MAXHP * 0.5f)
                 {
-                    brave.setAtk(brave.getCurrAtk() + brave.getBaseAtk() * skill_04_num);
+                    brave.setAtk(brave.getCurrAtk() - brave.getBaseAtk() * skill_04_num);
                     DisappearBuff04();
                     use_skill_04 = false;
                 }
@@ -97,10 +95,10 @@ public class SkillManager : MonoBehaviour
             {
                 if (mLife.mHp < mLife.MAXHP * 0.5f)
                 {
-                    brave.setAtk(brave.getCurrAtk() - brave.getBaseAtk() * skill_04_num);
+                    brave.setAtk(brave.getCurrAtk() + brave.getBaseAtk() * skill_04_num);
                     ShowBuff04();
                     use_skill_04 = true;
-                    GameUIController.AddRythmCount(2f);
+                    //GameUIController.AddRythmCount(2f);
                 }
             }
         }
@@ -122,7 +120,7 @@ public class SkillManager : MonoBehaviour
                     skill_05_timer = skill_05_stayedTime;
                     mLife.mDef += 99999;
                     loadBuffer("armor-increase-buff", skill_05_stayedTime);
-                    GameUIController.AddRythmCount(2f);
+                    //GameUIController.AddRythmCount(2f);
                     /*
                     GameObject buffer = ObjectPool.GetInstant().loadResource<GameObject>("armor-increase-buff");
                     buffer = Instantiate(buffer);
@@ -138,27 +136,28 @@ public class SkillManager : MonoBehaviour
 
     public void Use_Skill_00()
     {
-        //if (skill_00_timer <= 0)
-        //{
-        //    skill_00_timer = skill_00_coolTime;
-            //skill_00_num--;
-        if (mLife.mAp >= 50f)
+        if (skill_00_timer <= 0)
         {
-            mLife.mAp -= 50f;
-            GameUIController.AddRythmCount(5f);
-            if (LightningLight != null)
-            {
-                var Instance = Instantiate(LightningLight, transform.position, Quaternion.identity);
-                Destroy(Instance, 1f);
-            }
-            //
-            GameObject[] lightningPonts = GameObject.FindGameObjectsWithTag("LightningPoint");
-            for (int i = 0; i < lightningPonts.Length; i++)
-            {
-                ObjectPool.GetInstant().GetObj("LightningBeamStart", lightningPonts[i].transform.position, lightningPonts[i].transform.rotation).GetComponent<SkyLightningController>().atk = brave.getCurrAtk();
-            }
+            skill_00_timer = skill_00_coolTime;
+            skill_00_num--;
+            brave.gameManager.getUIController().SetSkillNumText(skill_00_num);
+            //if (mLife.mAp >= 50f)
+            //{
+                //mLife.mAp -= 50f;
+                //GameUIController.AddRythmCount(5f);
+                if (LightningLight != null)
+                {
+                    var Instance = Instantiate(LightningLight, transform.position, Quaternion.identity);
+                    Destroy(Instance, 1f);
+                }
+                //
+                GameObject[] lightningPonts = GameObject.FindGameObjectsWithTag("LightningPoint");
+                for (int i = 0; i < lightningPonts.Length; i++)
+                {
+                    ObjectPool.GetInstant().GetObj("LightningBeamStart", lightningPonts[i].transform.position, lightningPonts[i].transform.rotation).GetComponent<SkyLightningController>().atk = brave.getCurrAtk();
+                }
+            //}
         }
-        //}
     }
 
     public void Use_Skill_01()
@@ -169,7 +168,7 @@ public class SkillManager : MonoBehaviour
             if (judgePercent(skill_01_percent))
             {
                 mLife.mHp += mLife.MAXHP * skill_01_num;
-                GameUIController.AddRythmCount(2f);
+                //GameUIController.AddRythmCount(2f);
                 if (mLife.mHp > mLife.MAXHP)
                 {
                     mLife.mHp = mLife.MAXHP;
@@ -187,7 +186,7 @@ public class SkillManager : MonoBehaviour
         {
             if (judgePercent(skill_02_percent))
             {
-                GameUIController.AddRythmCount(1f);
+                //GameUIController.AddRythmCount(1f);
                 ObjectPool.GetInstant().GetObj("SlashWaveBlue", magicCircle.transform.position, transform.localRotation).GetComponent<SlashWaveBlueController>().atk = brave.getCurrAtk() * skill_02_num;
                 if (needBack)
                     ObjectPool.GetInstant().GetObj("SlashWaveBlue", magicCircleBack.transform.position, magicCircleBack.transform.rotation).GetComponent<SlashWaveBlueController>().atk = brave.getCurrAtk() * skill_02_num;
@@ -201,7 +200,7 @@ public class SkillManager : MonoBehaviour
         {
             if (judgePercent(skill_03_percent))
             {
-                GameUIController.AddRythmCount(1f);
+                //GameUIController.AddRythmCount(1f);
                 ObjectPool.GetInstant().GetObj("GroundFire", new Vector3(magicCircle.transform.position[0], magicCircle.transform.position[1] - 0.777f, magicCircle.transform.position[2]), transform.localRotation).GetComponent<GroundFireController>().atk = brave.getCurrAtk() * skill_03_num;
                 if (needBack)
                 {

@@ -7,10 +7,14 @@ using UnityEditor;
 //using  LeoLuz.PlugAndPlayJoystick;
 public class GameManager:MonoBehaviour
 {
-    public  static GameManager INSTANCE;
-    public int currentSceneIndex;
+    public static GameManager INSTANCE;
+    private LevelManager levelManager;
     private GameUIController gameUIController;
-    private EnemiesManager01 enemiesManager;
+    private EnemiesManager enemiesManager;
+    private BraveController brave;
+
+    private int currentSceneIndex;
+    private int levelId;
 
     private GameManager() { }
 
@@ -20,6 +24,7 @@ public class GameManager:MonoBehaviour
         {
             INSTANCE = this;
             currentSceneIndex = getCurrentSceneIndex();
+            levelId = PlayerPrefs.GetInt(PlayerPrefs.GetString("level"), 1);
         }
         else if (INSTANCE != this)
         {
@@ -33,6 +38,14 @@ public class GameManager:MonoBehaviour
     {
         return SceneManager.GetActiveScene().buildIndex; ;
     }
+    public int getLevelID()
+    {
+        return levelId;
+    }
+    public void ResetLevel()
+    {
+        PlayerPrefs.DeleteKey("level");
+    }
     public void LoadTargetScene(int targetSceneIndex)
     {
         currentSceneIndex = targetSceneIndex;
@@ -40,18 +53,19 @@ public class GameManager:MonoBehaviour
     }
     public void LoadGameSelectScene()
     {
-        LoadTargetScene(4);
+        LoadTargetScene(9);
     }
     public void LoadNextScene()
     {
-        if (currentSceneIndex == 4)
+        if (currentSceneIndex == 9)
         {
             return;
         }
         currentSceneIndex += 1;
-        if (currentSceneIndex > PlayerPrefs.GetInt("level"))
+        if (currentSceneIndex > levelId)
         {
-            PlayerPrefs.SetInt(PlayerPrefs.GetString("level"), currentSceneIndex );
+            levelId = currentSceneIndex;
+            PlayerPrefs.SetInt(PlayerPrefs.GetString("level"), levelId);
         }
         SceneManager.LoadScene(currentSceneIndex);
     }
@@ -60,9 +74,10 @@ public class GameManager:MonoBehaviour
         int curSceneIndex = getCurrentSceneIndex();
         SceneManager.LoadScene(curSceneIndex);
     }
-     public void LoadMainScene() {
+    public void LoadMainScene() 
+    {
          SceneManager.LoadScene("MainScene_fjj");
-         Destroy(gameObject);
+         //Destroy(gameObject);
     }
     ///////////////////////////////////////////////////////////////<页面跳转相关/>
 
@@ -84,6 +99,17 @@ public class GameManager:MonoBehaviour
         {
             //关卡获胜
             gameUIController.ShowWinEnd();
+            if (currentSceneIndex == levelId)
+            {
+                levelId++;
+                PlayerPrefs.SetInt(PlayerPrefs.GetString("level"), levelId);
+            }
+            else if (currentSceneIndex > levelId)
+            {
+                levelId = currentSceneIndex;
+                PlayerPrefs.SetInt(PlayerPrefs.GetString("level"), levelId);
+            }
+
             /*
             currentSceneIndex = getCurrentSceneIndex();
             if (currentSceneIndex == 3)
@@ -110,9 +136,33 @@ public class GameManager:MonoBehaviour
     {
         gameUIController = uic;
     }
-    public void setEnemiesManager(EnemiesManager01 em)
+    public GameUIController getUIController()
+    {
+        return gameUIController;
+    }
+    public void setEnemiesManager(EnemiesManager em)
     {
         enemiesManager = em;
+    }
+    public EnemiesManager getEnemiesManager()
+    {
+        return enemiesManager;
+    }
+    public void setLevelManager(LevelManager lm)
+    {
+        levelManager = lm;
+    }
+    public LevelManager getLevelManager()
+    {
+        return levelManager;
+    }
+    public void setBrave(BraveController br)
+    {
+        brave = br;
+    }
+    public BraveController getBrave()
+    {
+        return brave;
     }
     ///////////////////////////////////////////////////////////////<关卡控制相关/>
 }

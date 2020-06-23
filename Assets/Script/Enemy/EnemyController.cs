@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    GameManager gameManager;
+    EnemiesManager enemiesManager;
+
     public float range = 0f;    //敌人攻击范围
     public float atk = 20f;
 
@@ -24,6 +27,7 @@ public class EnemyController : MonoBehaviour
     private bool meetBrave = false;
     private float deathTime = 5f;
     private float time1 = 3f;
+    private bool atAir = false;
 
     public GameObject mhit;
 
@@ -57,7 +61,6 @@ public class EnemyController : MonoBehaviour
         mAnimator = GetComponent<Animator>();
         mcollider = GetComponent<CapsuleCollider>();
         mrigidbody = GetComponent<Rigidbody>();
-        brave = GameObject.FindGameObjectWithTag("brave");
         foreach (Transform child in gameObject.GetComponentsInChildren<Transform>())
         {
             if (child.name.Equals("EnemyWeapon"))
@@ -73,6 +76,10 @@ public class EnemyController : MonoBehaviour
 
     void OnEnable()
     {
+        gameManager = GameManager.INSTANCE;
+        enemiesManager = gameManager.getEnemiesManager();
+        brave = gameManager.getBrave().gameObject;
+
         EnemyWeapon.GetComponent<BoxCollider>().enabled = false;
         mcollider.enabled = true;
         mrigidbody.isKinematic = false;
@@ -91,20 +98,27 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        ///////////////////////////////<3秒后死亡>
+
         /*
-        time1 -= Time.deltaTime;
-        if (time1 <= 0)
+        if (atAir)
         {
-            death = true;
+            idle();
+            return;
         }
-         * */
-        ///////////////////////////////<3秒后死亡/>
+        */
+        ///////////////////////////////<身位高于勇者即在天空>
+        if (transform.position[1] > brave.transform.position[1])
+        {
+            idle();
+            return;
+        }
+        ///////////////////////////////<身位高于勇者即在天空/>
 
         ///////////////////////////////<掉出场景外回收敌人(保险)>
         if (transform.position[1] < -100)
         {
-            Death();
+            //Death();
+            transform.position = new Vector3(brave.transform.position[0] + 20f, brave.transform.position[1] + 2, brave.transform.position[2]);
         }
         ///////////////////////////////<掉出场景外回收敌人(保险)/>
 
@@ -191,7 +205,7 @@ public class EnemyController : MonoBehaviour
         if (!death)
         {
             death = true;
-            EnemiesManager01.Instance.EnemiesDestory();
+            enemiesManager.EnemiesDestory();
             GameObject.Find("Main Camera").GetComponent<ShakeCamera>().isShake = true;
         }
     }
@@ -234,6 +248,7 @@ public class EnemyController : MonoBehaviour
         //碰到地面
         if (collision.gameObject.name.Equals("Plane"))
         {
+            atAir = false;
             return;
         }
     }

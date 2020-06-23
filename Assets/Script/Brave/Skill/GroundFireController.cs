@@ -45,7 +45,7 @@ public class GroundFireController : MonoBehaviour
                     Hit(other);
                 }
                 attack.attack(otherLife);
-                GameUIController.AddRythmCount(3f);
+                //GameUIController.AddRythmCount(3f);
             }
         }
     }

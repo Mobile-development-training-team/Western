@@ -98,7 +98,7 @@ public class Life : MonoBehaviour
                 {
                     ShowBlock();
                 }
-                mAp -= Time.deltaTime * 10f;
+                mAp -= Time.deltaTime * 5f;
             }
             else
             {
@@ -115,12 +115,12 @@ public class Life : MonoBehaviour
         }
         if (transform.gameObject.tag.Equals("brave"))
         {
-            GameUIController.SetBraveAP(mAp);
-            GameUIController.SetBraveHP(mHp);
-            GameUIController.SetBraveMaxHP(MAXHP);
+            //GameUIController.SetBraveAP(mAp);
+            //GameUIController.SetBraveHP(mHp);
+            //GameUIController.SetBraveMaxHP(MAXHP);
             if (mAp < MAXAP)
             {
-                mAp += Time.deltaTime * 10f;
+                mAp += Time.deltaTime * 5f;
             }
         }
     }
@@ -198,7 +198,7 @@ public class Life : MonoBehaviour
     public void ShowBlock()
     {
         usingBlock = true;
-        mAp -= 10f;
+        mAp -= 20f;
         Block = ObjectPool.GetInstant().loadResource<GameObject>("EarthShield");
         Block = Instantiate(Block);
         Block.transform.position = new Vector3(transform.position[0], transform.position[1] + 0.7f, transform.position[2]);
@@ -216,5 +216,43 @@ public class Life : MonoBehaviour
         //brave.transform.GetComponent<Animator>().SetBool("beDoingSomethings", false);
         Destroy(Block);
     }
+
+    ///////////////////////////////////////////////////////////////////////<获得勇者数据>
+    public float getBraveCurrentHP()
+    {
+        if (transform.gameObject.tag.Equals("brave"))
+            return mHp;
+        else
+            return -1;
+    }
+    public float getBraveMaxHP()
+    {
+        if (transform.gameObject.tag.Equals("brave"))
+            return MAXHP;
+        else
+            return -1;
+    }
+    public float getBraveDef()
+    {
+        if (transform.gameObject.tag.Equals("brave"))
+            return mDef;
+        else
+            return -1;
+    }
+    public float getBraveAtk()
+    {
+        if (transform.gameObject.tag.Equals("brave"))
+            return brave.getCurrAtk();
+        else
+            return -1;
+    }
+    public float getBraveAP()
+    {
+        if (transform.gameObject.tag.Equals("brave"))
+            return mAp;
+        else
+            return -1;
+    }
+    ///////////////////////////////////////////////////////////////////////<获得勇者数据/>
     
 }
