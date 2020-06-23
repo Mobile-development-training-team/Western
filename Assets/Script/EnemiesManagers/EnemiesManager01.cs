@@ -99,8 +99,8 @@ public class EnemiesManager01 : MonoBehaviour
     {
         generatorEnemy(0, -7);
         generatorEnemy(0, 7);
-        generatorEnemy(0, -10);
-        generatorEnemy(1, 12);
+        generatorEnemy(2, -10);
+        generatorEnemy(2, 12);
         generatorEnemy(1, -14);
         waveNum++;
     }
@@ -109,7 +109,7 @@ public class EnemiesManager01 : MonoBehaviour
     {
         generatorEnemy(0, -7);
         generatorEnemy(0, 7);
-        generatorEnemy(0, -10);
+        generatorEnemy(2, -10);
         generatorEnemy(1, 12);
         generatorEnemy(1, -14);
         waveNum++;
@@ -119,8 +119,8 @@ public class EnemiesManager01 : MonoBehaviour
     {
         generatorEnemy(0, -7);
         generatorEnemy(0, 7);
-        generatorEnemy(0, -10);
-        generatorEnemy(1, 12);
+        generatorEnemy(2, -10);
+        generatorEnemy(2, 12);
         generatorEnemy(1, -14);
         waveNum++;
     }
@@ -128,9 +128,9 @@ public class EnemiesManager01 : MonoBehaviour
     {
         generatorEnemy(0, -7);
         generatorEnemy(0, 7);
-        generatorEnemy(0, -10);
-        generatorEnemy(1, 12);
-        generatorEnemy(1, -14);
+        generatorEnemy(1, -10);
+        generatorEnemy(2, 12);
+        generatorEnemy(2, -14);
         waveNum++;
     }
     private void wave5()
@@ -197,6 +197,10 @@ public class EnemiesManager01 : MonoBehaviour
         if (enemyIndex == 1)
         {
             ObjectPool.GetInstant().GetObj("BowEnemy", new Vector3(brave.transform.position[0] + distance, brave.transform.position[1] + 2, brave.transform.position[2]), new Quaternion());
+        }
+        if (enemyIndex == 2)
+        {
+            ObjectPool.GetInstant().GetObj("MagicWandEnemy", new Vector3(brave.transform.position[0] + distance, brave.transform.position[1] + 2, brave.transform.position[2]), new Quaternion());
         }
         curDisplayedEnemies++;
     }

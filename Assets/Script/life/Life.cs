@@ -212,8 +212,8 @@ public class Life : MonoBehaviour
         brave.BlockBroken = true;
         //brave.mBlock = 0f;
         //brave.Blocking = false;
-        brave.beDoingSomethings = false;
-        brave.transform.GetComponent<Animator>().SetBool("beDoingSomethings", false);
+        //brave.beDoingSomethings = false;
+        //brave.transform.GetComponent<Animator>().SetBool("beDoingSomethings", false);
         Destroy(Block);
     }
     

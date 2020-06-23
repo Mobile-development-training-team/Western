@@ -3579,7 +3579,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1246368046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4472,7 +4471,7 @@ PrefabInstance:
     - target: {fileID: 8813945959708444684, guid: 1e5e7595f3645c74495491e04a771f5d,
         type: 3}
       propertyPath: secondaryWeaponIndex
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e5e7595f3645c74495491e04a771f5d, type: 3}

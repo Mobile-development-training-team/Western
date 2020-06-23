@@ -3902,12 +3902,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301765989556726}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.045002215, y: -0.3645273, z: 0.0065227235}
+  m_LocalRotation: {x: -0.70839787, y: -0.00031848613, z: -0.0022091607, w: 0.7058099}
+  m_LocalPosition: {x: 0.12133191, y: -0.0210419, z: 0.35198054}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4310399721249226}
-  m_RootOrder: 9
+  m_Father: {fileID: 4207274724012542}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33344698454716972
 MeshFilter:
@@ -4910,7 +4910,6 @@ Transform:
   - {fileID: 4044345333058392}
   - {fileID: 4001762194343200}
   - {fileID: 4664622697430506}
-  - {fileID: 4315470688168046}
   m_Father: {fileID: 4996750445533672}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9907,7 +9906,7 @@ GameObject:
   - component: {fileID: 4915247174103650}
   - component: {fileID: 95013393895463432}
   m_Layer: 0
-  m_Name: TwoHandsSword02
+  m_Name: TwoHandsSword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11281,6 +11280,7 @@ Transform:
   - {fileID: 4493300130962862}
   - {fileID: 4576032502687662}
   - {fileID: 4603595036979996}
+  - {fileID: 4315470688168046}
   m_Father: {fileID: 4149950458430506}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

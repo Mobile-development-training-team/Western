@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public float range = 3f;    //敌人攻击范围
+    public float range = 0f;    //敌人攻击范围
     public float atk = 20f;
 
     private Life mLife;
@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour
     private Collider mcollider;
     private Rigidbody mrigidbody;
     private GameObject EnemyWeapon;
+    private GameObject ShootingPoint;
     private GameObject brave;
 
     private bool walking = false;
@@ -49,6 +50,7 @@ public class EnemyController : MonoBehaviour
         mLife = GetComponent<Life>();
         callback = new LifeCallback(this);
         mLife.registerCallback(callback);
+        mLife.mHp = mLife.MAXHP;
         attack.mTeam = mLife.mTeam;
         attack.mAtk = atk;
 
@@ -61,6 +63,10 @@ public class EnemyController : MonoBehaviour
             if (child.name.Equals("EnemyWeapon"))
             {
                 EnemyWeapon = child.gameObject;
+            }
+            if (child.name.Equals("ShootingPoint"))
+            {
+                ShootingPoint = child.gameObject;
             }
         }
     }
@@ -122,6 +128,16 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
+        if (brave.GetComponent<BraveController>().isDead())
+        {
+            idle();
+            return;
+        }
+        else
+        {
+            walk(new Vector3(brave.transform.position.x - transform.position.x, 0, 0));
+        }
+
         ///////////////////////////////<勇者是否在攻击范围内>
         if ((brave.transform.position.x - transform.position.x) > -range && (brave.transform.position.x - transform.position.x) < range)
         {
@@ -139,7 +155,6 @@ public class EnemyController : MonoBehaviour
             Attack();
         }
 
-        walk(new Vector3(brave.transform.position.x - transform.position.x, 0, 0));
     }
 
     ////////////////////////////////////////////////////////////////////<控制运动状态>
@@ -194,12 +209,19 @@ public class EnemyController : MonoBehaviour
     }
     public void startBowShooting()
     {
-        ObjectPool.GetInstant().GetObj("EnemyArrow", EnemyWeapon.transform.position, transform.localRotation);
+        ObjectPool.GetInstant().GetObj("EnemyArrow", EnemyWeapon.transform.position, transform.localRotation).gameObject.GetComponent<EnemyArrowController>().atk = attack.mAtk;
         EnemyWeapon.SetActive(false);
     }
     public void endBowShooting()
     {
         EnemyWeapon.SetActive(true);
+    }
+    public void startBigMagic()
+    {
+        ObjectPool.GetInstant().GetObj("EnemyMagic01", ShootingPoint.transform.position, transform.localRotation).gameObject.GetComponent<EnemyMagicBulletController>().atk = attack.mAtk;
+    }
+    public void endBigMagic()
+    {
     }
     ////////////////////////////////////////////////////////////////////<动画的回调函数/>
 
@@ -259,5 +281,13 @@ public class EnemyController : MonoBehaviour
         }
     }
     ////////////////////////////////////////////////////////////////////<攻击特效/>
+
+    public void setAttribte(float HP, float Def, float ATK)
+    {
+        mLife.MAXHP = HP;
+        mLife.mHp = mLife.MAXHP;
+        mLife.mDef = Def;
+        attack.mAtk = ATK;
+    }
 
 }
