@@ -1,11 +1,16 @@
 Android
 PlayerPath?
-F:/UnityTestCode/Western/apkForGameProgram/game22.6.apk
+F:/UnityTestCode/Western/apkForGameProgram/game23.5.apk
 SceneListBegin?
 Assets/Scenes/MainScene_fjj.unity
 Assets/Scenes/Level01.unity
 Assets/Scenes/Level02.unity
 Assets/Scenes/Level03.unity
+Assets/Scenes/Level04.unity
+Assets/Scenes/Level05.unity
+Assets/Scenes/Level06.unity
+Assets/Scenes/Level07.unity
+Assets/Scenes/Level08.unity
 Assets/Scenes/LevelSelectScene.unity
 SceneListEnd?
 4887afe81cd3591d5a292bf81b23453a Assembly-CSharp.dll:.Parallax
@@ -142,14 +147,14 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 c066b6aa1564ad70c37ead364348a818 Assembly-CSharp.dll:.MagicBulletController
 09b31d50a8885ff0947d3bfb1e20c078 Assembly-CSharp.dll:MagicArsenal.MagicEffectCycler
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.DebrisTextScript
-2adfafb6f69f15a78a107c731f4b5179 Assembly-CSharp.dll:.SkillManager
+c822ada007d637656603e4c2f7a7f4f6 Assembly-CSharp.dll:.SkillManager
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BagSelectedScript
 2890c468cf196dca883ea02bde96343e Assembly-CSharp.dll:MagicArsenal.MagicLightFade
 2046a769735b5a7196e56bb0bb66cba9 Assembly-CSharp.dll:.EnemyController
 b8a5e8091ab0b8861d2add371082c5e0 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.SkillUILearnMessageBackScript
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.SkillUILearnMessageButtonScript
-7258fea61ff06aa7e7a261d5ae511c8e Assembly-CSharp.dll:.GameManager
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.GameManager
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.LottertyMessageScript
 135f200ed215b4ab62976f28b14fd0ce Assembly-CSharp.dll:.SimpleStateMachine
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp-firstpass.dll:.Projectile
@@ -159,7 +164,8 @@ b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp-firstpass.dll:LeoLuz.PlugAndPlayJoystick.ButtonBase
 b32441fc1d28848e915ee71888fd61ba Assembly-CSharp.dll:RPGCharacterAnims.GUIControls
 79566861074b80c5467fa81dddcf4f5a Assembly-CSharp.dll:MagicArsenal.MagicRotation
-2e92f1dae75ea67ccbc9b61a0d00bf3e Assembly-CSharp.dll:.GameUIController
+a8421d6793c8cfe3c540028526b44f8d Assembly-CSharp.dll:.GameUIController
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.EnemiesManager04
 56c90168bc19fe9aee4ba7e6b19350e3 Assembly-CSharp.dll:MagicArsenal.MagicBeamScript
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.LottertyMessageBackScript
 3e109c6c26138fe0fc3e8dde3d0ea67d Assembly-CSharp.dll:.SlashWaveBlueController
@@ -176,6 +182,7 @@ bd851356430480ff49df57371b719737 Assembly-CSharp.dll:RPGCharacterAnims.RPGCharac
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.SuperStateMachine
 78eab6f6d9c89ae4c09e544108179cb2 Assembly-CSharp.dll:.SkyLightningController
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.EnemiesManager02
 5f594bb5861b922f9191f0bc2e093577 Assembly-CSharp.dll:.CameraController
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.AutoDestroyPS
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
@@ -202,6 +209,7 @@ ad9173d3a69d99153f38ed4b62226129 UnityEngine.Networking.dll:UnityEngine.Networki
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BagUIMessageIntensifyScript
 35a9693c388776aaf487636491a20f11 Unity.TextMeshPro.dll:TMPro.TMP_FontAsset
 e1300922cc039f41ab46a47f4cb05898 Unity.TextMeshPro.dll:TMPro.TMP_Settings
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.EnemiesManager06
 fa40d272f673893cc73649954b2bc585 Assembly-CSharp-firstpass.dll:LeoLuz.PlugAndPlayJoystick.UIButtonToAxis
 88cc9df3c6fc697bfbeacd24c0d6f2d7 UnityEngine.TestRunner.dll:UnityEngine.TestTools.BeforeAfterTestCommandState
 88cc9df3c6fc697bfbeacd24c0d6f2d7 UnityEngine.TestRunner.dll:UnityEngine.TestTools.EnumerableSetUpTearDownCommandState
@@ -216,6 +224,7 @@ fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BagUIMessageScript
 f090e0c4b2c5c9f0cde019ad4e20032d Assembly-CSharp.dll:.BSPTree
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.EnemiesManager03
 931f489e44eadf809e9310429c99dde5 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioListenerExtension
 fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
@@ -226,9 +235,11 @@ f92bed0118fad5c277e62fd4703487e3 Assembly-CSharp.dll:.DemoShooting
 a80fac49832270c158ed18c23335c5a7 Assembly-CSharp.dll:.PerfectLookAt
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.GameInitScript
 97d77b3ac6198dc2bf0c1559c50e56c7 Assembly-CSharp.dll:.ResetTimer
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.EnemiesManager08
 3b760e6526e13f7504f59e210145899a Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 507174d46dacbc5fe45e28485db5dd1e Unity.Analytics.DataPrivacy.dll:UnityEngine.Analytics.DataPrivacyButton
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BagUIMessageResolveScript
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.EnemiesManager07
 c66ceb5e91aed8c07f89649c4ead7223 Assembly-CSharp.dll:RPGCharacterAnims.RPGCharacterMovementController
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 820b12286cae52be5fb63439e5a14f6e Assembly-CSharp.dll:.ProjectileMover
@@ -241,7 +252,7 @@ dd54d4657875aaa22690ebe9af08240e Assembly-CSharp.dll:.SkillUIListScript
 246c636d12b0a188c75b005e9f2221dd Assembly-CSharp.dll:.Life
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BagUIMessageUpScript
 46280057aba92e5945195d40246a7bdf Assembly-CSharp.dll:MagicArsenal.MagicLoadSceneOnClick
-b19eae3cce477937743b866ae5f09f11 Assembly-CSharp.dll:.BraveController
+8a51528e55633ab4d60b8ca5c4801b12 Assembly-CSharp.dll:.BraveController
 38b08a887a876e9c826dee55fc7daca8 Assembly-CSharp.dll:.Gravity
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.EnemiesManager01
@@ -262,6 +273,7 @@ a0b90ca9b57ca50a01d311479eda61c2 Assembly-CSharp-firstpass.dll:LeoLuz.PlugAndPla
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.LevelUIGoScript
 761c71fe565631b7b05616cf39a1a258 Assembly-CSharp.dll:.SuperCharacterController
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.LotteryMessageButtonScript
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.EnemiesManager05
 8ec0e792978bd03f071b8a441f3cbb19 Assembly-CSharp.dll:MagicArsenal.MagicLoopScript
 59e13e042c3d0abe89ab483417fdcc34 Assembly-CSharp.dll:.ShakeCamera
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BagUIListFieldScript

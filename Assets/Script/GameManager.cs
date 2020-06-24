@@ -23,8 +23,10 @@ public class GameManager:MonoBehaviour
         if (INSTANCE == null)
         {
             INSTANCE = this;
+            ResetLevel();
             currentSceneIndex = getCurrentSceneIndex();
-            levelId = PlayerPrefs.GetInt(PlayerPrefs.GetString("level"), 1);
+            //levelId = PlayerPrefs.GetInt(PlayerPrefs.GetString("level"), 1);
+            levelId = PlayerPrefs.GetInt("level", 1);
         }
         else if (INSTANCE != this)
         {
@@ -65,7 +67,8 @@ public class GameManager:MonoBehaviour
         if (currentSceneIndex > levelId)
         {
             levelId = currentSceneIndex;
-            PlayerPrefs.SetInt(PlayerPrefs.GetString("level"), levelId);
+            //PlayerPrefs.SetInt(PlayerPrefs.GetString("level"), levelId);
+            PlayerPrefs.SetInt("level", levelId);
         }
         SceneManager.LoadScene(currentSceneIndex);
     }
@@ -98,18 +101,19 @@ public class GameManager:MonoBehaviour
         else
         {
             //关卡获胜
-            gameUIController.ShowWinEnd();
             if (currentSceneIndex == levelId)
             {
                 levelId++;
-                PlayerPrefs.SetInt(PlayerPrefs.GetString("level"), levelId);
+                //PlayerPrefs.SetInt(PlayerPrefs.GetString("level"), levelId);
+                PlayerPrefs.SetInt("level", levelId);
             }
             else if (currentSceneIndex > levelId)
             {
                 levelId = currentSceneIndex;
-                PlayerPrefs.SetInt(PlayerPrefs.GetString("level"), levelId);
+                //PlayerPrefs.SetInt(PlayerPrefs.GetString("level"), levelId);
+                PlayerPrefs.SetInt("level", levelId);
             }
-
+            gameUIController.ShowWinEnd();
             /*
             currentSceneIndex = getCurrentSceneIndex();
             if (currentSceneIndex == 3)
