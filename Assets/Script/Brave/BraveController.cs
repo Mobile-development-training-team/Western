@@ -28,6 +28,7 @@ namespace LeoLuz.PlugAndPlayJoystick
         public GameObject Axe;
         public GameObject Bow;
         public GameObject BowArrow;
+        public GameObject Spear;
 
         public GameObject EarthSlam;
         public GameObject EarthSphereBlast;
@@ -39,7 +40,7 @@ namespace LeoLuz.PlugAndPlayJoystick
         private bool death = false;
         private bool reviving = false;
         private bool dashFall = false;
-        private float dashCoolTime = 1.5f;
+        //private float dashCoolTime = 1.5f;
         private int AttackIndex = 0;
         private int WeaponIndex = 0;
         private int Ammunition = 10;
@@ -165,6 +166,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             Wand.SetActive(false);
             CrossBow.SetActive(false);
             Axe.SetActive(false);
+            Spear.SetActive(false);
             Bow.SetActive(false);
             BowArrow.SetActive(false);
             THandSword.GetComponent<BoxCollider>().enabled = false;
@@ -173,6 +175,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             magicCircle.SetActive(true);
             magicCircleBack.SetActive(true);
             Axe.GetComponent<BoxCollider>().enabled = false;
+            Spear.GetComponent<BoxCollider>().enabled = false;
             BowArrow.GetComponent<BoxCollider>().enabled = false;
 
             ArmdeMyselfe();
@@ -188,6 +191,10 @@ namespace LeoLuz.PlugAndPlayJoystick
             else if (mainWeaponIndex == 3)
             {
                 mainWeapon = Axe;
+            }
+            else if (mainWeaponIndex == 4)
+            {
+                mainWeapon = Spear;
             }
             else
             {
@@ -257,6 +264,7 @@ namespace LeoLuz.PlugAndPlayJoystick
                 {
                     run(new Vector3(horizontal, 0, 0));
                 }
+                /*
                 if (walking && running && !beDoingSomethings)
                 {
                     dashCoolTime -= Time.deltaTime;
@@ -265,6 +273,7 @@ namespace LeoLuz.PlugAndPlayJoystick
                 {
                     dashCoolTime = 1.5f;
                 }
+                */
                 if (!atAir)
                 {
                     /*
@@ -580,6 +589,10 @@ namespace LeoLuz.PlugAndPlayJoystick
                 {
                     AxeAttack();
                 }
+                else if (WeaponIndex == 4)
+                {
+                    SpearAttack();
+                }
                 else if (WeaponIndex == 5)
                 {
                     BowShoot();
@@ -609,7 +622,9 @@ namespace LeoLuz.PlugAndPlayJoystick
             if (!beDoingSomethings && !death && !reviving && !atAir && mLife.mAp > 30f && !Blocking)      
             {
                 beDoingSomethings = true;
-                mAnimator.SetBool("beDoingSomethings", beDoingSomethings);      
+                mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
+                AttackIndex = 0;
+                mAnimator.SetInteger("AttackIndex", AttackIndex);   
                 mLife.mAp -= 30f;
                 if (WeaponIndex == 0)
                 {
@@ -626,6 +641,10 @@ namespace LeoLuz.PlugAndPlayJoystick
                 else if (WeaponIndex == 3)
                 {
                     AxeSkill();
+                }
+                else if (WeaponIndex == 4)
+                {
+                    SpearSkill();
                 }
                 else if (WeaponIndex == 5)
                 {
@@ -684,6 +703,16 @@ namespace LeoLuz.PlugAndPlayJoystick
             AttackIndex = (AttackIndex + 1) % 4;
         }
         public void AxeSkill()
+        {
+            mAnimator.SetTrigger("Skill01");
+        }
+        public void SpearAttack()
+        {
+            mAnimator.SetInteger("AttackIndex", AttackIndex);
+            mAnimator.SetTrigger("Attacking");
+            AttackIndex = (AttackIndex + 1) % 4;
+        }
+        public void SpearSkill()
         {
             mAnimator.SetTrigger("Skill01");
         }

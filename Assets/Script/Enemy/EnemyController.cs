@@ -54,9 +54,6 @@ public class EnemyController : MonoBehaviour
         mLife = GetComponent<Life>();
         callback = new LifeCallback(this);
         mLife.registerCallback(callback);
-        mLife.mHp = mLife.MAXHP;
-        attack.mTeam = mLife.mTeam;
-        attack.mAtk = atk;
 
         mAnimator = GetComponent<Animator>();
         mcollider = GetComponent<CapsuleCollider>();
@@ -93,6 +90,8 @@ public class EnemyController : MonoBehaviour
         time1 = 3f;
 
         mLife.mHp = mLife.MAXHP;
+        attack.mTeam = mLife.mTeam;
+        attack.mAtk = atk;
         mLife.hasHp = true;
     }
 

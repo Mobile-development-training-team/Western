@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: c7a3176fae6822b4fab5c5555f2a41ed
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     100002: B_Prop1
@@ -241,10 +241,12 @@ ModelImporter:
     13700000: Soldier_Mesh
     13700002: RPG-Character-Mesh
     2186277476908879412: ImportLogs
+  externalObjects: {}
   materials:
     importMaterials: 0
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -257,25 +259,18 @@ ModelImporter:
     animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
       might lower retargeting quality:\n\t'B_Spine2' is inbetween humanoid transforms
       and has rotation animation that will be discarded.\n"
-    animationRetargetingWarnings: "\nRetargeting quality report for clip 'Take 001':\n\tLeftLowerLeg
-      average position error 0.2 mm and maximum position error 1.6 mm at time 1: 4
-      (94.4%) Frame 34\n\tLeftUpperArm average position error 16.0 mm and maximum
-      position error 37.2 mm at time 1: 4 (94.4%) Frame 34\n\tLeftLowerArm average
-      position error 10.8 mm and maximum position error 25.9 mm at time 1: 4 (94.4%)
-      Frame 34\n\tLeftHand average position error 8.7 mm and maximum position error
-      23.1 mm at time 1: 4 (94.4%) Frame 34\n\tRightUpperArm average position error
-      11.7 mm and maximum position error 24.3 mm at time 1: 4 (94.4%) Frame 34\n\tRightLowerArm
-      average position error 7.9 mm and maximum position error 17.0 mm at time 1:
-      4 (94.4%) Frame 34\n\tRightHand average position error 5.6 mm and maximum position
-      error 13.8 mm at time 1: 4 (94.4%) Frame 34\n\tHead average position error 33.7
-      mm and maximum position error 85.7 mm at time 1: 4 (94.4%) Frame 34\n"
+    animationRetargetingWarnings: "\nRetargeting quality report for clip 'Take 001':\n\tRetargeting
+      quality is good. No significant differences with original animation were found.\n"
     animationDoRetargetingWarnings: 1
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 0
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
       name: 2Hand-Spear-Attack10
@@ -301,8 +296,15 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.48166382
-        functionName: Hit
+      - time: 0.36096257
+        functionName: startHit
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.49933153
+        functionName: endHit
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -318,22 +320,34 @@ ModelImporter:
     globalScale: 0.01
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 0
     importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 0
     keepQuads: 0
     weldVertices: 0
+    preserveHierarchy: 0
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 0
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 2
     tangentImportMode: 2
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 2
+    normalSmoothingSource: 0
   importAnimation: 1
   copyAvatar: 1
   humanDescription:
@@ -1031,7 +1045,6 @@ ModelImporter:
     legStretch: 0
     feetSpacing: 0
     rootMotionBoneName: PositionLocator
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 1
     hasExtraRoot: 0
     skeletonHasParents: 0
