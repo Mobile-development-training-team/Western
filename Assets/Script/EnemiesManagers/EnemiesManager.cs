@@ -136,6 +136,14 @@ abstract public class EnemiesManager : MonoBehaviour
         {
             ObjectPool.GetInstant().GetObj("MagicWandEnemy", new Vector3(brave.transform.position[0] + distance, brave.transform.position[1] + 2, brave.transform.position[2]), new Quaternion());
         }
+        if (enemyIndex == 3)
+        {
+            ObjectPool.GetInstant().GetObj("AxeEnemy", new Vector3(brave.transform.position[0] + distance, brave.transform.position[1] + 2, brave.transform.position[2]), new Quaternion());
+        }
+        if (enemyIndex == 4)
+        {
+            ObjectPool.GetInstant().GetObj("HammerEnemy", new Vector3(brave.transform.position[0] + distance, brave.transform.position[1] + 2, brave.transform.position[2]), new Quaternion());
+        }
         curDisplayedEnemies++;
         gameUIController.SetCurrentEnemyNumText(curDisplayedEnemies);
     }

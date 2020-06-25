@@ -40,19 +40,19 @@ public class EnemiesManager01 : EnemiesManager
     }
     protected override void wave1()
     {
-        StartCoroutine(generatorEnemy(0, -8, 1f));
-        StartCoroutine(generatorEnemy(0, -8, 2f));
-        StartCoroutine(generatorEnemy(0, -8, 3f));
-        StartCoroutine(generatorEnemy(0, -8, 4f));
+        StartCoroutine(generatorEnemy(4, -8, 1f));
+        StartCoroutine(generatorEnemy(4, -8, 2f));
+        StartCoroutine(generatorEnemy(4, -8, 3f));
+        StartCoroutine(generatorEnemy(4, -8, 4f));
         curWaveStillHaveEnemies = 4;
     }
 
     protected override void wave2()
     {
-        StartCoroutine(generatorEnemy(0, 8, 1f));
-        StartCoroutine(generatorEnemy(0, 8, 2f));
-        StartCoroutine(generatorEnemy(0, 8, 3f));
-        StartCoroutine(generatorEnemy(0, 8, 4f));
+        StartCoroutine(generatorEnemy(3, 8, 1f));
+        StartCoroutine(generatorEnemy(3, 8, 2f));
+        StartCoroutine(generatorEnemy(3, 8, 3f));
+        StartCoroutine(generatorEnemy(3, 8, 4f));
         curWaveStillHaveEnemies = 4;
     }
 

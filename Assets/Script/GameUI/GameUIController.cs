@@ -104,7 +104,9 @@ public class GameUIController : MonoBehaviour
     public void ShowDeathEnd()
     {
         Time.timeScale = 0.2f;
+        endGame = true;
         ShowEndGameFront();
+        DisappearPauseButton();
         SetEndGameMessageText("很遗憾！闯关失败！");
         //ShowReviveButton();
         //DisappearNextLevelButton();
@@ -112,7 +114,9 @@ public class GameUIController : MonoBehaviour
     public void ShowWinEnd()
     {
         Time.timeScale = 0.2f;
+        endGame = true;
         ShowEndGameFront();
+        DisappearPauseButton();
         SetEndGameMessageText("恭喜你！闯关成功！");
         //ShowNextLevelButton();
         //DisappearReviveButton();
@@ -122,6 +126,7 @@ public class GameUIController : MonoBehaviour
         SetBuffListBuff(buffListIndex, BuffIndex);
         SetTheBuff(BuffIndex);
         ShowGetBuffFront();
+        Invoke("ResumeButton", 1f);
     }
     /////////////////////////////////////////////////////////////<外部使用/>
 
@@ -130,7 +135,8 @@ public class GameUIController : MonoBehaviour
     {
         if (endGame)
         {
-            ShowPauseButton();
+            //ShowPauseButton();
+            DisappearPauseButton();
             return;
         }
         if (freeze)
@@ -138,6 +144,7 @@ public class GameUIController : MonoBehaviour
             Time.timeScale = 1f;
             freeze = false;
             DisappearPauseFront();
+            DisappearGetBuffFront();
         }
         else
         {
@@ -223,7 +230,7 @@ public class GameUIController : MonoBehaviour
     }
     public void ShowGetBuffFront()
     {
-        Time.timeScale = 0f;
+        Time.timeScale = 0.2f;
         freeze = true;
         theGetBuffFront.transform.gameObject.SetActive(true);
     }
