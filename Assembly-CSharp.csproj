@@ -170,6 +170,7 @@
      <Compile Include="Assets\Script\Enemy\EnemyController.cs" />
      <Compile Include="Assets\Script\GameManager.cs" />
      <Compile Include="Assets\Script\GameUI\GameUIController.cs" />
+     <Compile Include="Assets\Script\GameUI\SkillEffect.cs" />
      <Compile Include="Assets\Script\LevelManager.cs" />
      <Compile Include="Assets\Script\life\Attack.cs" />
      <Compile Include="Assets\Script\life\DamageCalculation.cs" />
