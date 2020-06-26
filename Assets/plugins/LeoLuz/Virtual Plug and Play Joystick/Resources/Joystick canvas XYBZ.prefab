@@ -250,6 +250,7 @@ GameObject:
   - component: {fileID: 114273956927677208}
   - component: {fileID: 225848140777074192}
   - component: {fileID: 114941934960198974}
+  - component: {fileID: 6955667173906177137}
   m_Layer: 5
   m_Name: A
   m_TagString: Untagged
@@ -353,7 +354,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114486291527611952}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6955667173906177137}
+        m_MethodName: SkillTimeStarts
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!225 &225848140777074192
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -380,6 +392,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonName: Jump
   pressed: 0
+--- !u!114 &6955667173906177137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219510982681582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7098391d0a31f874ab33e7780fc3a1de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CD_Time: 20
+  Mask: {fileID: 3647934704604236410}
 --- !u!1 &1499427384119404
 GameObject:
   m_ObjectHideFlags: 0
@@ -1227,7 +1253,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.31
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

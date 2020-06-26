@@ -23,6 +23,15 @@ public class SkillEffect : MonoBehaviour
     void Start()
     {
         Mask.gameObject.SetActive(false);
+        /*Times += Time.deltaTime;
+            Mask.fillAmount = 1-Times/CD_Time;
+            if (Times >= CD_Time)
+                {
+                    ButtonSwitch = false;
+                    Mask.fillAmount = 0;
+                    Times = 0f;
+                    ThisButton.interactable = true;
+                }*/
         //Times = CD_Time;
     }
 

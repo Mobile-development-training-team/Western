@@ -16,7 +16,7 @@ public class SkillManager : MonoBehaviour
     ///////////////////////////////////////<skill00>
     public int skill_00_num = 3;
     private float skill_00_coolTime = 20f;
-    private float skill_00_timer = 20f;
+    private float skill_00_timer = 20f;//20f
     ///////////////////////////////////////<skill00/>
 
     //嗜血封魔
@@ -75,9 +75,9 @@ public class SkillManager : MonoBehaviour
     {
         if (skill_00_num > 0)
         {
-            if (skill_00_timer > 0)
+            if (skill_00_timer < skill_00_coolTime)
             {
-                skill_00_timer -= Time.deltaTime;
+                skill_00_timer += Time.deltaTime;
             }
         }
         if (select_skill_04)
@@ -136,9 +136,9 @@ public class SkillManager : MonoBehaviour
 
     public void Use_Skill_00()
     {
-        if (skill_00_timer <= 0)
+        if (skill_00_timer >= skill_00_coolTime)
         {
-            skill_00_timer = skill_00_coolTime;
+            skill_00_timer = 0;
             skill_00_num--;
             brave.gameManager.getUIController().SetSkillNumText(skill_00_num);
             //if (mLife.mAp >= 50f)
