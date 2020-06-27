@@ -1,54 +1,54 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// In Item.cs
-/// </summary>
+//属性加成结构体
 public struct ReserveAttribute
 {
-    public int AddATK;
-    public double PlusATK;
-    public int AddHP;
-    public double PlusHP;
-    public int AddDEF;
-    public double PlusDEF;
+    public int AddATK;  //攻击加算参数
+    public double PlusATK;  //攻击乘算参数
+    public int AddHP;  //生命加算参数
+    public double PlusHP;  //生命乘算参数
+    public int AddDEF;  //防御加算参数
+    public double PlusDEF;  //防御乘算参数
 
+    //将技能属性加成转化为特定string，用于辅助技能属性显示
     public string SkillReseveAttributeToString(Skill skill)
     {
         string Buf = "";
-        if (skill.GetLevel() == 0)
+        //以下判断区分不同等级下技能的不同显示
+        if (skill.GetLevel() == 0)  //当技能等级为0
         {
             ReserveAttribute nBuf = skill.GetNextAttribute();
-            if (nBuf.AddATK > 0)
+            if (nBuf.AddATK > 0)  //当存在技能加算
             {
                 Buf += "升级:(攻击+" + nBuf.AddATK.ToString() + ')';
             }
-            if (nBuf.PlusATK > 0.000001)
+            if (nBuf.PlusATK > 0.000001)  //当存在技能乘算
             {
                 Buf += "升级:(攻击+" + (nBuf.PlusATK * 100).ToString() + "%)";
             }
-            if (nBuf.AddHP > 0)
+            if (nBuf.AddHP > 0)  //当存在生命加算
             {
                 Buf += "升级:(生命+" + nBuf.AddHP.ToString() + ')';
             }
-            if (nBuf.PlusHP > 0.000001)
+            if (nBuf.PlusHP > 0.000001)  //当存在生命乘算
             {
                 Buf += "升级:(生命+" + (nBuf.PlusHP * 100).ToString() + "%)";
             }
-            if (nBuf.AddDEF > 0)
+            if (nBuf.AddDEF > 0)  //当存在防御加算
             {
                 Buf += "升级:(防御+" + nBuf.AddDEF.ToString() + ')';
             }
-            if (nBuf.PlusDEF > 0.000001)
+            if (nBuf.PlusDEF > 0.000001)  //当存在防御乘算
             {
                 Buf += "升级:(防御+" + (nBuf.PlusDEF * 100).ToString() + "%)";
             }
-            if (skill.GetNextDuration() > 0.000001)
+            if (skill.GetNextDuration() > 0.000001)  //当存在持续时间
             {
                 Buf += "升级:(持续时间:" + skill.GetNextDuration().ToString() + "秒)";
             }
         }
-        if (skill.GetLevel() < skill.GetLevelLimit())
+        if (skill.GetLevel() < skill.GetLevelLimit()) //当技能未满级[技能等级为0时此判断不输出]
         {
             if (AddATK > 0)
             {
@@ -79,7 +79,7 @@ public struct ReserveAttribute
                 Buf += "持续时间:" + skill.GetDuration().ToString() + "秒 升级:(" + skill.GetNextDuration().ToString() + "秒)";
             }
         }
-        else
+        else  //当技能满级
         {
             if (AddATK > 0)
             {
@@ -113,11 +113,12 @@ public struct ReserveAttribute
         return Buf;
     }
 
+    //将属性加成转化为特定string，用于辅助装备属性显示
     public string ReserveAttributeToString(bool MAXorNot)
     {
         string Buf = "";
         Buf += "属性：\n";
-        if (MAXorNot)
+        if (MAXorNot)  //判断装备满级与否，如满级
         {
             if (AddATK > 0)
             {
@@ -144,7 +145,7 @@ public struct ReserveAttribute
                 Buf += "防御：+" + (PlusDEF * 100).ToString() + "%\n";
             }
         }
-        else
+        else  //如不满级
         {
             if (AddATK > 0)
             {
@@ -174,6 +175,66 @@ public struct ReserveAttribute
         return Buf;
     }
 
+    //将攻击、生命、防御转化为string，用于辅助新UI属性显示
+    public string AtkToString()
+    {
+        string Buf = "";
+        if (AddATK > 0)
+        {
+            Buf += '+' + AddATK.ToString();
+            if (PlusATK > 0.000001)
+            {
+                Buf = Buf + " +" + (PlusATK * 100).ToString() + '%';
+                return Buf;
+            }
+            return Buf;
+        }
+        if (PlusATK > 0.000001)
+        {
+            Buf = Buf + '+' + (PlusATK * 100).ToString() + '%';
+        }
+        return Buf;
+    }
+    public string HpToString()
+    {
+        string Buf = "";
+        if (AddHP > 0)
+        {
+            Buf += '+' + AddHP.ToString();
+            if (PlusHP > 0.000001)
+            {
+                Buf = Buf + " +" + (PlusHP * 100).ToString() + '%';
+                return Buf;
+            }
+            return Buf;
+        }
+        if (PlusHP > 0.000001)
+        {
+            Buf = Buf + '+' + (PlusHP * 100).ToString() + '%';
+        }
+        return Buf;
+    }
+    public string DefToString()
+    {
+        string Buf = "";
+        if (AddDEF > 0)
+        {
+            Buf += '+' + AddDEF.ToString();
+            if (PlusDEF > 0.000001)
+            {
+                Buf = Buf + " +" + (PlusDEF * 100).ToString() + '%';
+                return Buf;
+            }
+            return Buf;
+        }
+        if (PlusDEF > 0.000001)
+        {
+            Buf = Buf + '+' + (PlusDEF * 100).ToString() + '%';
+        }
+        return Buf;
+    }
+
+    //获取ReserveAttribute[]的总和，是辅助函数
     public static ReserveAttribute GrossReserveAttribute(ReserveAttribute[] reserveAttributeList)
     {
         ReserveAttribute buf = ReserveAttribute.StandardReserveAttribute();
@@ -184,20 +245,34 @@ public struct ReserveAttribute
         return buf;
     }
 
+    //基于属性Attribute b,计算叠加属性加成ReserveAttribute a后的属性
     public static Attribute ReserverToService(ReserveAttribute a, Attribute b)
     {
         Attribute c = new Attribute();
+        //计算公式为：属性 = (原属性 + 属性加算) * (1 + 属性乘算)
         c.Attack = (int)((a.AddATK + b.Attack) * (1 + a.PlusATK));
         c.HealthPointLimit = (int)((a.AddHP + b.HealthPointLimit) * (1 + a.PlusHP));
         c.Defence = (int)((a.AddDEF + b.Defence) * (1 + a.PlusHP));
         return c;
     }
+    //基于属性Attribute b,计算属性加成ReserveAttribute a换算后的属性，用于计算技能输出
+    public static Attribute SkillReserveToServiece(ReserveAttribute a, Attribute b)
+    {
+        Attribute c = new Attribute();
+        //计算公式为：属性 = (原属性 + 属性加算) * 属性乘算
+        c.Attack = (int)((a.AddATK + b.Attack) * a.PlusATK);
+        c.HealthPointLimit = (int)((a.AddHP + b.HealthPointLimit) * a.PlusHP);
+        c.Defence = (int)((a.AddDEF + b.Defence) * a.PlusHP);
+        return c;
+    }
 
+    //返回零值的标准ReserveAttribute
     public static ReserveAttribute StandardReserveAttribute()
     {
         ReserveAttribute NewOne = new ReserveAttribute { AddATK = 0, PlusATK = 0, AddHP = 0, PlusHP = 0, AddDEF = 0, PlusDEF = 0 };
         return NewOne;
     }
+    //用于比较ReserveAttribute a/b是否相等
     public static bool ReserveAttributeCompare(ReserveAttribute a, ReserveAttribute b)
     {
         if (a.AddATK != b.AddATK) { return false; }
@@ -209,7 +284,7 @@ public struct ReserveAttribute
         return true;
     }
 
-
+    //以下为对ReserveAttribute的运算符重载
     public static ReserveAttribute operator +(ReserveAttribute a, ReserveAttribute b)
     {
         ReserveAttribute c = new ReserveAttribute();
@@ -254,15 +329,15 @@ public struct ReserveAttribute
         return b * a;
     }
 }
-/// <summary>
-/// In Item.cs
-/// </summary>
+
+//属性结构体
 public struct Attribute
 {
-    public int Attack;
-    public int HealthPointLimit;
-    public int Defence;
+    public int Attack;  //攻击
+    public int HealthPointLimit;  //生命
+    public int Defence;  //防御
 
+    //用于比较Attribute a/b是否相等
     public static bool AttributeCompare(Attribute a, Attribute b)
     {
         if (a.Attack != b.Attack) { return false; }
@@ -271,6 +346,7 @@ public struct Attribute
         return true;
     }
 
+    //以下为对Attribute的运算符重载
     public static Attribute operator +(Attribute a, Attribute b)
     {
         Attribute c = new Attribute();
@@ -313,36 +389,31 @@ public struct Attribute
     }
 }
 
-/// <summary>
-/// In Item.cs
-/// </summary>
+//装备类型枚举
 public enum EquipmentType
 {
-    MainWeapon,
-    AlternateWeapon,
-    Cuirass,
-    Helm
+    MainWeapon,  //主武器
+    AlternateWeapon,  //副武器
+    Cuirass,  //护甲
+    Helm  //头盔
 }
 
-/// <summary>
-/// In Item.cs
-/// </summary>
+//物品品质枚举
 public enum Quality
 {
-    Normal,
-    Excellent,
-    Rare,
-    Epic
+    Normal,  //普通
+    Excellent,  //精良
+    Rare,  //稀有
+    Epic  //史诗
 }
 
-/// <summary>
-/// In Item.cs
-/// </summary>
+//物品类
 public class Item
 {
     public Item()
     {
     }
+    //获取物品ID、名称、简介、装备与否、属性加成、装备种类、物品品质、物品图标路径，进行初始化
     public Item(int id, string name, string message, bool equipmentOrNot, ReserveAttribute rA, EquipmentType eT, Quality q, string imagePath)
     {
         ID = id;
@@ -354,6 +425,7 @@ public class Item
         quality = q;
         ImagePath = imagePath;
     }
+    //从另一个Item拷贝
     public Item(Item copy)
     {
         ID = copy.ID;
@@ -365,11 +437,13 @@ public class Item
         quality = copy.quality;
         ImagePath = copy.ImagePath;
     }
+    //根据Item列表及序号进行初始化
     public Item(Item[] itemList, int id)
     {
         FindItem(itemList, id);
     }
 
+    //将自己初始化为Item列表中的特定Item
     public void FindItem(Item[] itemList, int id)
     {
         for (int i = 0; i < itemList.Length; i++)
@@ -389,45 +463,45 @@ public class Item
         }
     }
 
-    public int GetID()
+    public int GetID()  //获取物品ID
     {
         return ID;
     }
-    public string GetName()
+    public string GetName()  //获取物品名称
     {
         return Name;
     }
-    public string GetMessage()
+    public string GetMessage()  //获取物品简介
     {
         return Message;
     }
-    public bool GetEquipmentOrNot()
+    public bool GetEquipmentOrNot()  //获取是否装备
     {
         return EquipmentOrNot;
     }
-    public ReserveAttribute GetReserveAttribute()
+    public ReserveAttribute GetReserveAttribute()  //获取属性加成
     {
         return reserveAttribute;
     }
-    public EquipmentType GetEquipmentType()
+    public EquipmentType GetEquipmentType()  //获取装备种类
     {
         return equipmentType;
     }
-    public Quality GetQuality()
+    public Quality GetQuality()  //获取物品品质
     {
         return quality;
     }
-    public string GetImagePath()
+    public string GetImagePath()  //获取物品图标路径，用于读取Sprite
     {
         return ImagePath;
     }
 
-    private int ID;
-    private string Name;
-    private string Message;
-    private bool EquipmentOrNot;
-    private EquipmentType equipmentType;
-    private ReserveAttribute reserveAttribute;
-    private Quality quality;
-    private string ImagePath;
+    private int ID;  //物品ID
+    private string Name;  //物品名称
+    private string Message;  //物品简介
+    private bool EquipmentOrNot;  //是否是装备
+    private EquipmentType equipmentType;  //装备种类
+    private ReserveAttribute reserveAttribute;  //属性加成
+    private Quality quality;  //物品品质
+    private string ImagePath;  //物品图标路径
 }

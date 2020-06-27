@@ -25,11 +25,15 @@ public class BagUIMessageIntensifyScript : MonoBehaviour
                 }
                 else
                 {
+                    transform.parent.parent.Find("Tip").GetComponent<Canvas>().enabled = true;
+                    Invoke("TipDisable", 1);
                     return;
                 }
             }
             else
             {
+                transform.parent.parent.Find("Tip").GetComponent<Canvas>().enabled = true;
+                Invoke("TipDisable", 1);
                 return;
             }
         }
@@ -84,23 +88,26 @@ public class BagUIMessageIntensifyScript : MonoBehaviour
                 }
                 else
                 {
+                    transform.parent.parent.Find("Tip").GetComponent<Canvas>().enabled = true;
+                    Invoke("TipDisable", 1);
                     return;
                 }
             }
             else
             {
+                transform.parent.parent.Find("Tip").GetComponent<Canvas>().enabled = true;
+                Invoke("TipDisable", 1);
                 return;
             }
 
         }
+        transform.parent.parent.Find("Cost").Find("RareEarth").gameObject.SetActive(false);
 
-        transform.parent.Find("Material").Find("List").Find("Debris").gameObject.SetActive(false);
-        transform.parent.Find("Material").Find("List").Find("RareEarth").gameObject.SetActive(false);
-        transform.parent.Find("Make").gameObject.SetActive(false);
-        transform.parent.Find("Up").gameObject.SetActive(false);
-        transform.parent.Find("Down").gameObject.SetActive(false);
-        transform.parent.Find("Resolve").gameObject.SetActive(false);
-        transform.parent.Find("Intensify").gameObject.SetActive(false);
-        transform.parent.GetComponent<Canvas>().enabled = false;
+        transform.parent.parent.GetComponent<Canvas>().enabled = false;
+    }
+
+    public void TipDisable()
+    {
+        transform.parent.parent.Find("Tip").GetComponent<Canvas>().enabled = false;
     }
 }

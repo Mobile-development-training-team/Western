@@ -26,7 +26,7 @@ public class VITScript : MonoBehaviour
 
     private void VITTimeGo()
     {
-        if (GameScript.VIT < 999)
+        if (GameScript.VIT < 24)
         {
             GameScript.VITCounter = GameScript.VITCounter.AddSeconds(-1);
             if (GameScript.VITCounter < check)
@@ -34,20 +34,20 @@ public class VITScript : MonoBehaviour
                 GameScript.VIT++;
                 GameScript.VITCounter = check.Date;
                 GameScript.VITCounter = GameScript.VITCounter.AddMinutes(GameScript.PerVITMinute);
-                if (GameScript.VIT == 999)
+                if (GameScript.VIT == 24)
                 {
-                    transform.Find("Text").GetComponent<Text>().text = "体力:" + GameScript.VIT.ToString() + "/999\n\n距离恢复:\n" + GameScript.VITCounter.TimeOfDay.ToString().Substring(0, 8);
+                    GetComponent<Text>().text = GameScript.VITCounter.TimeOfDay.ToString().Substring(0, 8);
                     CancelInvoke();
                     return;
                 }
             }
-            transform.Find("Text").GetComponent<Text>().text = "体力:" + GameScript.VIT.ToString() + "/999\n\n距离恢复:\n" + GameScript.VITCounter.TimeOfDay.ToString().Substring(0, 8);
+            GetComponent<Text>().text = GameScript.VITCounter.TimeOfDay.ToString().Substring(0, 8);
         }
         else
         {
             GameScript.VITCounter = check.Date;
             GameScript.VITCounter = GameScript.VITCounter.AddMinutes(GameScript.PerVITMinute);
-            transform.Find("Text").GetComponent<Text>().text = "体力:" + GameScript.VIT.ToString() + "/999\n\n距离恢复:\n" + GameScript.VITCounter.TimeOfDay.ToString().Substring(0, 8);
+            GetComponent<Text>().text = GameScript.VITCounter.TimeOfDay.ToString().Substring(0, 8);
             CancelInvoke();
         }
     }

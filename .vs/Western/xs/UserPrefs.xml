@@ -1,17 +1,20 @@
 ﻿<Properties StartupConfiguration="{50C7B57E-24D1-55E7-07C9-A0EB85BADE51}|">
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/LPTestScript.cs">
+    <Files>
+      <File FileName="Assets/Resources/Code_fjj/Chip.cs" Line="240" Column="1" />
+      <File FileName="Assets/Resources/Code_fjj/GameInitScript.cs" Line="6" Column="19" />
+      <File FileName="Assets/Resources/Code_fjj/GameScript.cs" Line="76" Column="16" />
+      <File FileName="Assets/LPTestScript.cs" Line="7" Column="14" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Western" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Resources" expanded="True">
-                <Node name="Code_fjj" expanded="True">
-                  <Node name="UICode" expanded="True">
-                    <Node name="SkillUICellScript.cs" selected="True" />
-                  </Node>
-                </Node>
+                <Node name="Code_fjj" expanded="True" />
               </Node>
+              <Node name="LPTestScript.cs" selected="True" />
             </Node>
           </Node>
         </State>
@@ -23,7 +26,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="383589d3-efc0-4f27-a8e1-b6c7a96ac9e0" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="f3c17d46-6474-47cd-a62f-f859f8d8f28e" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

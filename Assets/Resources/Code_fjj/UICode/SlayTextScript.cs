@@ -14,7 +14,7 @@ public class SlayTextScript : MonoBehaviour
     private void SelfUpdate()
     {
         Buf = DataManager.roleEquipment.GetSlayCount();
-        GetComponent<Text>().text = "剩余必杀次数：" + Buf.ToString();
+        GetComponent<Text>().text = Buf.ToString();
     }
 
     void Update()

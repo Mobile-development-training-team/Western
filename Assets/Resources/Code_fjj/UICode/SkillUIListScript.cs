@@ -14,7 +14,6 @@ public class SkillUIListScript : MonoBehaviour
             GameObject NewOne = Instantiate(cellPrefab);
             NewOne.transform.SetParent(transform);
             NewOne.transform.localScale = new Vector3(1, 1, 1);
-            NewOne.transform.Find("Learn").GetComponent<Toggle>().group = GetComponent<ToggleGroup>();
         }
     }
 }

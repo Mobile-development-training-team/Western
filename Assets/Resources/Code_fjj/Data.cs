@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
+//以下csv前缀的类为对csv文件的读写实现
 public class CsvRow : List<string>
 {
     public string LineText { get; set; }
@@ -135,16 +136,18 @@ public class CsvFileReader : StreamReader
     }
 }
 
+/// <summary>
+/// 用于储存角色相关的数值信息
+/// </summary>
 public class DataManager{
     //Index
-    public static Item[] GameItemIndex;
-    public static LevelIndex[] levelIndex;
-    public static SkillLevelIndex[] skillLevelIndex;
-    public static SkillLevelUpIndex[] skillLevelUpIndex;
+    public static Item[] GameItemIndex;  //游戏物品目录
+    public static LevelIndex[] levelIndex;  //角色等级属性目录
+    public static SkillLevelIndex[] skillLevelIndex;  //角色技能等级属性目录
+    public static SkillLevelUpIndex[] skillLevelUpIndex;  //角色技能升级消耗目录
     //Use in unity
-    public static RoleAttribute roleAttribute;
-    public static RoleEquipment roleEquipment;
-    public static Skill[] SkillData;
-    public static SkillLearn skillLearn;
-    public static Bag bag;
+    public static RoleAttribute roleAttribute;  //角色裸属性
+    public static RoleEquipment roleEquipment;  //角色装备
+    public static Skill[] SkillData;  //角色技能
+    public static Bag bag;  //角色背包
 }

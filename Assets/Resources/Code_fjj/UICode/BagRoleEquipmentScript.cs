@@ -93,59 +93,63 @@ public class BagRoleEquipmentScript : MonoBehaviour
             biBuf[3].count = DataManager.roleEquipment.GetHelm().count;
         }
 
-        GameObject Buf = transform.Find("Quality").gameObject;
+        GameObject hBuf = transform.Find("Had").gameObject;
         switch (transform.GetSiblingIndex())
         {
             case 0:
                 if (bBuf[0])
                 {
-                    Buf.GetComponent<Image>().sprite = GameScript.GetQualitySprite(biBuf[0].item.GetQuality());
-                    Buf.transform.Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(biBuf[0].item.GetImagePath());
-                    Buf.transform.Find("Level").GetComponent<Text>().text = '+' + biBuf[0].level.ToString();
-                    Buf.GetComponent<Canvas>().enabled = true;
+                    hBuf.transform.Find("Quality").GetComponent<Image>().sprite = GameScript.GetQualitySprite(biBuf[0].item.GetQuality());
+                    hBuf.transform.Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(biBuf[0].item.GetImagePath());
+                    hBuf.transform.Find("Lv").GetComponent<Text>().text = '+' + biBuf[0].level.ToString();
+                    hBuf.transform.Find("Count").GetComponent<Text>().text = 'x' + biBuf[0].count.ToString();
+                    hBuf.GetComponent<Canvas>().enabled = true;
                 }
                 else
                 {
-                    Buf.GetComponent<Canvas>().enabled = false;
+                    hBuf.GetComponent<Canvas>().enabled = false;
                 }
                 break;
             case 1:
                 if (bBuf[1])
                 {
-                    Buf.GetComponent<Image>().sprite = GameScript.GetQualitySprite(biBuf[1].item.GetQuality());
-                    Buf.transform.Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(biBuf[1].item.GetImagePath());
-                    Buf.transform.Find("Level").GetComponent<Text>().text = '+' + biBuf[1].level.ToString();
-                    Buf.GetComponent<Canvas>().enabled = true;
+                    hBuf.transform.Find("Quality").GetComponent<Image>().sprite = GameScript.GetQualitySprite(biBuf[1].item.GetQuality());
+                    hBuf.transform.Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(biBuf[1].item.GetImagePath());
+                    hBuf.transform.Find("Lv").GetComponent<Text>().text = '+' + biBuf[1].level.ToString();
+                    hBuf.transform.Find("Count").GetComponent<Text>().text = 'x' + biBuf[1].count.ToString();
+                    hBuf.GetComponent<Canvas>().enabled = true;
                 }
                 else
                 {
-                    Buf.GetComponent<Canvas>().enabled = false;
+                    hBuf.GetComponent<Canvas>().enabled = false;
                 }
                 break;
             case 2:
                 if (bBuf[2])
                 {
-                    Buf.GetComponent<Image>().sprite = GameScript.GetQualitySprite(biBuf[2].item.GetQuality());
-                    Buf.transform.Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(biBuf[2].item.GetImagePath());
-                    Buf.transform.Find("Level").GetComponent<Text>().text = '+' + biBuf[2].level.ToString();
-                    Buf.GetComponent<Canvas>().enabled = true;
+                    hBuf.transform.Find("Quality").GetComponent<Image>().sprite = GameScript.GetQualitySprite(biBuf[2].item.GetQuality());
+                    hBuf.transform.Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(biBuf[2].item.GetImagePath());
+                    hBuf.transform.Find("Lv").GetComponent<Text>().text = '+' + biBuf[2].level.ToString();
+                    hBuf.transform.Find("Count").GetComponent<Text>().text = 'x' + biBuf[2].count.ToString();
+                    hBuf.GetComponent<Canvas>().enabled = true;
                 }
                 else
                 {
-                    Buf.GetComponent<Canvas>().enabled = false;
+                    hBuf.GetComponent<Canvas>().enabled = false;
                 }
                 break;
             case 3:
                 if (bBuf[3])
                 {
-                    Buf.GetComponent<Image>().sprite = GameScript.GetQualitySprite(biBuf[3].item.GetQuality());
-                    Buf.transform.Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(biBuf[3].item.GetImagePath());
-                    Buf.transform.Find("Level").GetComponent<Text>().text = '+' + biBuf[3].level.ToString();
-                    Buf.GetComponent<Canvas>().enabled = true;
+                    hBuf.transform.Find("Quality").GetComponent<Image>().sprite = GameScript.GetQualitySprite(biBuf[3].item.GetQuality());
+                    hBuf.transform.Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(biBuf[3].item.GetImagePath());
+                    hBuf.transform.Find("Lv").GetComponent<Text>().text = '+' + biBuf[3].level.ToString();
+                    hBuf.transform.Find("Count").GetComponent<Text>().text = 'x' + biBuf[3].count.ToString();
+                    hBuf.GetComponent<Canvas>().enabled = true;
                 }
                 else
                 {
-                    Buf.GetComponent<Canvas>().enabled = false;
+                    hBuf.GetComponent<Canvas>().enabled = false;
                 }
                 break;
         }
@@ -218,35 +222,88 @@ public class BagRoleEquipmentScript : MonoBehaviour
                 break;
         }
 
-        GameObject mBuf = transform.parent.parent.Find("Message").gameObject;
+        GameObject ObjBuf = transform.parent.parent.parent.parent.Find("ItemMessage").gameObject;
+        GameObject aBuf = ObjBuf.transform.Find("Attribute").gameObject;
+        GameObject cBuf = ObjBuf.transform.Find("Cost").gameObject;
+        cBuf.transform.Find("RareEarth").gameObject.SetActive(false);
+        GameObject ButtonBuf = ObjBuf.transform.Find("Button").gameObject;
+        ButtonBuf.transform.Find("Make").gameObject.SetActive(false);
+        ButtonBuf.transform.Find("Up").gameObject.SetActive(false);
+        ButtonBuf.transform.Find("Down").gameObject.SetActive(false);
+        ButtonBuf.transform.Find("Resolve").gameObject.SetActive(false);
+        ButtonBuf.transform.Find("Intensify").gameObject.SetActive(false);
 
-        mBuf.transform.Find("Make").gameObject.SetActive(false);
-        mBuf.transform.Find("Up").gameObject.SetActive(false);
-        mBuf.transform.Find("Down").gameObject.SetActive(false);
-        mBuf.transform.Find("Resolve").gameObject.SetActive(false);
-        mBuf.transform.Find("Intensify").gameObject.SetActive(false);
+        ButtonBuf.transform.Find("Down").gameObject.SetActive(true);
+        ButtonBuf.transform.Find("Resolve").gameObject.SetActive(true);
+        ButtonBuf.transform.Find("Intensify").gameObject.SetActive(true);
+
+        ObjBuf.transform.Find("Field").Find("Quality").GetComponent<Image>().sprite = GameScript.GetQualitySprite(Buf.item.GetQuality());
+        ObjBuf.transform.Find("Field").Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(Buf.item.GetImagePath());
+        ObjBuf.transform.Find("Field").Find("Lv").GetComponent<Text>().text = '+' + Buf.level.ToString();
+        ObjBuf.transform.Find("Field").Find("Count").GetComponent<Text>().text = 'x' + Buf.count.ToString();
+
+        ObjBuf.transform.Find("Name").GetComponent<Text>().text = Buf.item.GetName();
+
+        if (Buf.GetEquipmentReserveAttribute().AddATK > 0 || Buf.GetEquipmentReserveAttribute().PlusATK > 0.000001)
+        {
+            aBuf.transform.Find("ATK").gameObject.SetActive(true);
+            aBuf.transform.Find("ATK").Find("Text").GetComponent<Text>().text = Buf.GetEquipmentReserveAttribute().AtkToString();
+            if (Buf.level < 20)
+            {
+                aBuf.transform.Find("ATK").Find("Intensify").GetComponent<Canvas>().enabled = true;
+                aBuf.transform.Find("ATK").Find("Intensify").Find("Next").GetComponent<Text>().text = (Buf.GetEquipmentReserveAttribute() * 1.1).AtkToString();
+            }
+        }
+        else
+        {
+            aBuf.transform.Find("ATK").Find("Intensify").GetComponent<Canvas>().enabled = false;
+            aBuf.transform.Find("ATK").gameObject.SetActive(false);
+        }
+
+        if (Buf.GetEquipmentReserveAttribute().AddHP > 0 || Buf.GetEquipmentReserveAttribute().PlusHP > 0.000001)
+        {
+            aBuf.transform.Find("HP").gameObject.SetActive(true);
+            aBuf.transform.Find("HP").Find("Text").GetComponent<Text>().text = Buf.GetEquipmentReserveAttribute().HpToString();
+            if (Buf.level < 20)
+            {
+                aBuf.transform.Find("HP").Find("Intensify").GetComponent<Canvas>().enabled = true;
+                aBuf.transform.Find("HP").Find("Intensify").Find("Next").GetComponent<Text>().text = (Buf.GetEquipmentReserveAttribute() * 1.1).HpToString();
+            }
+        }
+        else
+        {
+            aBuf.transform.Find("HP").Find("Intensify").GetComponent<Canvas>().enabled = false;
+            aBuf.transform.Find("HP").gameObject.SetActive(false);
+        }
+
+        if (Buf.GetEquipmentReserveAttribute().AddDEF > 0 || Buf.GetEquipmentReserveAttribute().PlusDEF > 0.000001)
+        {
+            aBuf.transform.Find("DEF").gameObject.SetActive(true);
+            aBuf.transform.Find("DEF").Find("Text").GetComponent<Text>().text = Buf.GetEquipmentReserveAttribute().DefToString();
+            if (Buf.level < 20)
+            {
+                aBuf.transform.Find("DEF").Find("Intensify").GetComponent<Canvas>().enabled = true;
+                aBuf.transform.Find("DEF").Find("Intensify").Find("Next").GetComponent<Text>().text = (Buf.GetEquipmentReserveAttribute() * 1.1).DefToString();
+            }
+        }
+        else
+        {
+            aBuf.transform.Find("DEF").Find("Intensify").GetComponent<Canvas>().enabled = false;
+            aBuf.transform.Find("DEF").gameObject.SetActive(false);
+        }
+
+        cBuf.transform.Find("RareEarth").gameObject.SetActive(true);
+        Item iBuf = new Item(DataManager.GameItemIndex, Buf.item.GetID() + 1);
+        cBuf.transform.Find("Debris").Find("Quality").GetComponent<Image>().sprite = GameScript.GetQualitySprite(iBuf.GetQuality());
+        cBuf.transform.Find("Debris").Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(iBuf.GetImagePath());
+        cBuf.transform.Find("Debris").Find("Count").GetComponent<Text>().text = 'x' + Buf.GetIntensifyDebris().ToString();
+        cBuf.transform.Find("RareEarth").gameObject.SetActive(true);
+        cBuf.transform.Find("RareEarth").Find("Count").GetComponent<Text>().text = 'x' + Buf.GetIntensifyRareEarth().ToString();
+
 
         BagUIMessageScript.pastIndex = transform.GetSiblingIndex() + DataManager.bag.GetItemBag().Count;
 
-        mBuf.transform.Find("Down").gameObject.SetActive(true);
-        mBuf.transform.Find("Resolve").gameObject.SetActive(true);
-        mBuf.transform.Find("Intensify").gameObject.SetActive(true);
-
-        mBuf.transform.Find("Equipment").Find("Field").Find("Quality").GetComponent<Image>().sprite = GameScript.GetQualitySprite(Buf.item.GetQuality()); 
-        mBuf.transform.Find("Equipment").Find("Field").Find("Quality").Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(Buf.item.GetImagePath());
-        mBuf.transform.Find("Equipment").Find("Text").GetComponent<Text>().text = Buf.item.GetName() + '\n' + '\n' + Buf.GetEquipmentReserveAttribute().ReserveAttributeToString(Buf.level == 20) ;
-
-        mBuf.transform.Find("Material").Find("List").Find("Debris").gameObject.SetActive(true);
-        mBuf.transform.Find("Material").Find("List").Find("RareEarth").gameObject.SetActive(true);
-        Item iBuf = new Item(DataManager.GameItemIndex, Buf.item.GetID() + 1);
-        mBuf.transform.Find("Material").Find("List").Find("Debris").GetComponent<Image>().sprite = GameScript.GetQualitySprite(iBuf.GetQuality());
-        mBuf.transform.Find("Material").Find("List").Find("Debris").Find("Icon").GetComponent<Image>().sprite = GameScript.GetSprite(iBuf.GetImagePath());
-        mBuf.transform.Find("Material").Find("List").Find("Debris").Find("Text").GetComponent<Text>().text = 'x' + Buf.GetIntensifyDebris().ToString();
-        mBuf.transform.Find("Material").Find("List").Find("RareEarth").Find("Text").GetComponent<Text>().text = 'x' + Buf.GetIntensifyRareEarth().ToString();
-
-        mBuf.GetComponent<Canvas>().enabled = true;
-
-
+        ObjBuf.GetComponent<Canvas>().enabled = true;
     }
 }
 

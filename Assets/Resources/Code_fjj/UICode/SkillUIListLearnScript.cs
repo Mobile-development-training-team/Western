@@ -9,32 +9,41 @@ public class SkillUIListLearnScript : MonoBehaviour
     {
         if (DataManager.SkillData[transform.parent.GetSiblingIndex() + 3].GetLevel() == 0)
         {
-            transform.Find("Text").GetComponent<Text>().text = "学习\n技能碎片:" + DataManager.skillLevelUpIndex[transform.parent.GetSiblingIndex()].LearnCount.ToString();
+            transform.Find("Count").GetComponent<Text>().text = 'x' + DataManager.skillLevelUpIndex[transform.parent.GetSiblingIndex()].LearnCount.ToString();
         }
         else
         {
-            transform.Find("Text").GetComponent<Text>().text = "学习\n技能碎片:" + DataManager.skillLevelUpIndex[transform.parent.GetSiblingIndex()].UpCount.ToString();
+            transform.Find("Count").GetComponent<Text>().text = 'x' + DataManager.skillLevelUpIndex[transform.parent.GetSiblingIndex()].UpCount.ToString();
         }
     }
 
     public void Click()
     {
-        Skill Buf = DataManager.SkillData[transform.parent.GetSiblingIndex() + 3];
+        int Index = transform.parent.GetSiblingIndex();
+        Skill Buf = DataManager.SkillData[Index + 3];
         if (Buf.GetLevel() < Buf.GetLevelLimit())
         {
-            SkillUILearnMessageButtonScript.pastIndex = transform.parent.GetSiblingIndex();
-            GameObject gBuf = transform.parent.parent.parent.Find("LearnMessage").gameObject;
-            gBuf.transform.Find("Name").GetComponent<Text>().text = Buf.GetName() + " Lv" + (Buf.GetLevel() + 1).ToString();
-            if (DataManager.SkillData[transform.parent.GetSiblingIndex() + 3].GetLevel() == 0)
+            if (Buf.GetLevel() == 0)
             {
-                gBuf.transform.Find("Debris").GetComponent<Text>().text = "消耗技能碎片：" + DataManager.skillLevelUpIndex[SkillUILearnMessageButtonScript.pastIndex].LearnCount.ToString();
+                if (DataManager.skillLevelUpIndex[Index].LearnCount <= DataManager.roleEquipment.GetSkillDebris())
+                {
+                    DataManager.roleEquipment.SetSkillDebris(DataManager.roleEquipment.GetSkillDebris() - DataManager.skillLevelUpIndex[Index].LearnCount);
+                    DataManager.SkillData[Index + 3].LevelUP();
+                    transform.parent.Find("Lv").GetComponent<Text>().text = "等级:" + DataManager.SkillData[Index + 3].GetLevel().ToString() + '/' + DataManager.SkillData[Index + 3].GetLevelLimit().ToString();
+                    transform.parent.Find("Message").GetComponent<Text>().text = DataManager.SkillData[Index + 3].GetMessage() + '\n' + DataManager.SkillData[Index + 3].GetAttibute().SkillReseveAttributeToString(DataManager.SkillData[Index + 3]);
+                    transform.Find("Count").GetComponent<Text>().text = 'x' + DataManager.skillLevelUpIndex[Index].UpCount.ToString();
+                }
             }
             else
             {
-                gBuf.transform.Find("Debris").GetComponent<Text>().text = "消耗技能碎片：" + DataManager.skillLevelUpIndex[SkillUILearnMessageButtonScript.pastIndex].UpCount.ToString();
+                if (DataManager.skillLevelUpIndex[Index].UpCount <= DataManager.roleEquipment.GetSkillDebris())
+                {
+                    DataManager.roleEquipment.SetSkillDebris(DataManager.roleEquipment.GetSkillDebris() - DataManager.skillLevelUpIndex[Index].UpCount);
+                    DataManager.SkillData[Index + 3].LevelUP();
+                    transform.parent.Find("Lv").GetComponent<Text>().text = "等级:" + DataManager.SkillData[Index + 3].GetLevel().ToString() + '/' + DataManager.SkillData[Index + 3].GetLevelLimit().ToString();
+                    transform.parent.Find("Message").GetComponent<Text>().text = DataManager.SkillData[Index + 3].GetMessage() + '\n' + DataManager.SkillData[Index + 3].GetAttibute().SkillReseveAttributeToString(DataManager.SkillData[Index + 3]);
+                }
             }
-            
-            transform.parent.parent.parent.Find("LearnMessage").GetComponent<Canvas>().enabled = true;
         }
     }
 }
