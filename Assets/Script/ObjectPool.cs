@@ -26,7 +26,6 @@ public class ObjectPool
     public GameObject GetObj(string objName, Vector3 pos, Quaternion qua)
     {
         GameObject currentObj = null;
-        //Debug.Log("currentObjName is " + objName);
         if (pool.ContainsKey(objName))
         {
             if(pool[objName].Count>0)
@@ -38,17 +37,33 @@ public class ObjectPool
         if (currentObj == null)
         {
             currentObj = loadResource<GameObject>(objName);
-            //GameObject.Instantiate(currentObj);
             GameObject.Instantiate(currentObj, pos, qua);
-            //currentObj = LoadObj(objName); ;
         }
         currentObj.transform.position = pos;
         currentObj.transform.rotation = qua;
-        //currentObj.transform.localRotation = qua;
-
-        //Debug.Log("currentObj.transform.localRotation=" + currentObj.transform.localRotation + "    %%%%    currentObj.transform.rotation=" + currentObj.transform.rotation + "    %%%%    qua=" + qua);
         currentObj.SetActive(true);
-        //AINum++;//产生AI的数量增加1
+        return currentObj;
+    }
+    public GameObject GetEnemy(string objName, Vector3 pos, Quaternion qua,GameManager.EnemyData enemy)
+    {
+        GameObject currentObj = null;
+        if (pool.ContainsKey(objName))
+        {
+            if (pool[objName].Count > 0)
+            {
+                currentObj = pool[objName][0];
+                pool[objName].Remove(currentObj);
+            }
+        }
+        if (currentObj == null)
+        {
+            currentObj = loadResource<GameObject>(objName);
+            GameObject.Instantiate(currentObj, pos, qua);
+        }
+        currentObj.transform.position = pos;
+        currentObj.transform.rotation = qua;
+        currentObj.SetActive(true);
+        currentObj.GetComponent<EnemyController>().setAttribte(enemy.MaxHP,enemy.Def,enemy.Atk);
         return currentObj;
     }
 

@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public float range = 3f;    //敌人攻击范围
+    GameManager gameManager;
+    EnemiesManager enemiesManager;
+
+    public float range = 0f;    //敌人攻击范围
     public float atk = 20f;
 
-    private Life mLife;
-    private Attack attack;
+    public Life mLife;
+    public Attack attack;
     private LifeCallback callback;
 
     private Animator mAnimator;
     private Collider mcollider;
     private Rigidbody mrigidbody;
     private GameObject EnemyWeapon;
+    private GameObject ShootingPoint;
     private GameObject brave;
 
     private bool walking = false;
@@ -23,6 +27,7 @@ public class EnemyController : MonoBehaviour
     private bool meetBrave = false;
     private float deathTime = 5f;
     private float time1 = 3f;
+    public bool atAir = false;
 
     public GameObject mhit;
 
@@ -45,28 +50,45 @@ public class EnemyController : MonoBehaviour
 
     void Awake()
     {
+        //Debug.Log("Enemy awake");
         attack = new Attack();
-        mLife = GetComponent<Life>();
-        callback = new LifeCallback(this);
-        mLife.registerCallback(callback);
-        attack.mTeam = mLife.mTeam;
-        attack.mAtk = atk;
-
+        /*
+        if (attack == null)
+        {
+            Debug.Log("in the awake,attack is null");
+        }
+        else
+        {
+            Debug.Log("in the awake,attack is not null");
+        }
+        */
         mAnimator = GetComponent<Animator>();
         mcollider = GetComponent<CapsuleCollider>();
         mrigidbody = GetComponent<Rigidbody>();
-        brave = GameObject.FindGameObjectWithTag("brave");
         foreach (Transform child in gameObject.GetComponentsInChildren<Transform>())
         {
             if (child.name.Equals("EnemyWeapon"))
             {
                 EnemyWeapon = child.gameObject;
             }
+            if (child.name.Equals("ShootingPoint"))
+            {
+                ShootingPoint = child.gameObject;
+            }
         }
+        //Debug.Log("Enemy awake finished");
     }
 
     void OnEnable()
     {
+        //Debug.Log("Enemy enable");
+        mLife = GetComponent<Life>();
+        callback = new LifeCallback(this);
+        mLife.registerCallback(callback);
+        gameManager = GameManager.INSTANCE;
+        enemiesManager = gameManager.getEnemiesManager();
+        brave = gameManager.getBrave().gameObject;
+
         EnemyWeapon.GetComponent<BoxCollider>().enabled = false;
         mcollider.enabled = true;
         mrigidbody.isKinematic = false;
@@ -80,28 +102,25 @@ public class EnemyController : MonoBehaviour
         time1 = 3f;
 
         mLife.mHp = mLife.MAXHP;
+        attack.mTeam = mLife.mTeam;
+        attack.mAtk = atk;
+        //Debug.Log("enable atk=" + atk);
         mLife.hasHp = true;
+        /*
+        if (attack == null)
+        {
+            Debug.Log("in the enable,attack is null");
+        }
+        else
+        {
+            Debug.Log("in the enable,attack is not null");
+        }
+        Debug.Log("Enemy enable finished");
+         * */
     }
 
     void Update()
     {
-        ///////////////////////////////<3秒后死亡>
-        /*
-        time1 -= Time.deltaTime;
-        if (time1 <= 0)
-        {
-            death = true;
-        }
-         * */
-        ///////////////////////////////<3秒后死亡/>
-
-        ///////////////////////////////<掉出场景外回收敌人(保险)>
-        if (transform.position[1] < -100)
-        {
-            Death();
-        }
-        ///////////////////////////////<掉出场景外回收敌人(保险)/>
-
         if (death)
         {
             mAnimator.SetBool("Death", death);
@@ -122,6 +141,40 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
+
+        ///////////////////////////////<身位高于勇者即在天空>
+        if (transform.position[1] > brave.transform.position[1])
+        {
+            atAir = true;
+        }
+        else
+        {
+            atAir = false;
+        }
+        if (atAir)
+        {
+            idle();
+            return;
+        }
+        ///////////////////////////////<身位高于勇者即在天空/>
+
+        ///////////////////////////////<掉出场景外回收敌人(保险)>
+        if (transform.position[1] < -100)
+        {
+            //Death();
+            transform.position = new Vector3(brave.transform.position[0] + 20f, brave.transform.position[1] + 2, brave.transform.position[2]);
+        }
+        ///////////////////////////////<掉出场景外回收敌人(保险)/>
+        if (brave.GetComponent<BraveController>().isDead())
+        {
+            idle();
+            return;
+        }
+        else
+        {
+            walk(new Vector3(brave.transform.position.x - transform.position.x, 0, 0));
+        }
+
         ///////////////////////////////<勇者是否在攻击范围内>
         if ((brave.transform.position.x - transform.position.x) > -range && (brave.transform.position.x - transform.position.x) < range)
         {
@@ -139,7 +192,6 @@ public class EnemyController : MonoBehaviour
             Attack();
         }
 
-        walk(new Vector3(brave.transform.position.x - transform.position.x, 0, 0));
     }
 
     ////////////////////////////////////////////////////////////////////<控制运动状态>
@@ -164,6 +216,7 @@ public class EnemyController : MonoBehaviour
     ////////////////////////////////////////////////////////////////////<控制动画>
     public void Attack()
     {
+        //Debug.Log("attacking atk=" + atk);
         mAnimator.SetTrigger("Attacking");
     }
     public void GetHit()
@@ -176,7 +229,7 @@ public class EnemyController : MonoBehaviour
         if (!death)
         {
             death = true;
-            EnemiesManager01.Instance.EnemiesDestory();
+            enemiesManager.EnemiesDestory();
             GameObject.Find("Main Camera").GetComponent<ShakeCamera>().isShake = true;
         }
     }
@@ -194,12 +247,19 @@ public class EnemyController : MonoBehaviour
     }
     public void startBowShooting()
     {
-        ObjectPool.GetInstant().GetObj("EnemyArrow", EnemyWeapon.transform.position, transform.localRotation);
+        ObjectPool.GetInstant().GetObj("EnemyArrow", EnemyWeapon.transform.position, transform.localRotation).gameObject.GetComponent<EnemyArrowController>().atk = attack.mAtk;
         EnemyWeapon.SetActive(false);
     }
     public void endBowShooting()
     {
         EnemyWeapon.SetActive(true);
+    }
+    public void startBigMagic()
+    {
+        ObjectPool.GetInstant().GetObj("EnemyMagic01", ShootingPoint.transform.position, transform.localRotation).gameObject.GetComponent<EnemyMagicBulletController>().atk = attack.mAtk;
+    }
+    public void endBigMagic()
+    {
     }
     ////////////////////////////////////////////////////////////////////<动画的回调函数/>
 
@@ -212,7 +272,12 @@ public class EnemyController : MonoBehaviour
         //碰到地面
         if (collision.gameObject.name.Equals("Plane"))
         {
+            atAir = false;
             return;
+        }
+        else if(atAir)
+        {
+            transform.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(5, 5, 0), ForceMode.Impulse);
         }
     }
     private void OnCollisionExit(Collision collision)
@@ -259,5 +324,26 @@ public class EnemyController : MonoBehaviour
         }
     }
     ////////////////////////////////////////////////////////////////////<攻击特效/>
+
+    public void setAttribte(float HP, float Def, float ATK)
+    {
+        //Debug.Log("try to setAttribute");
+        mLife = new Life();
+        mLife.MAXHP = HP;
+        mLife.mHp = mLife.MAXHP;
+        mLife.mDef = Def;
+        mLife.mTeam = 2;
+        attack = new Attack();
+        attack.mAtk = ATK;
+        attack.mTeam = mLife.mTeam;
+        /*
+        mLife.MAXHP = HP;
+        mLife.mHp = mLife.MAXHP;
+        mLife.mDef = Def;
+        atk = ATK;
+        attack.mAtk = ATK;
+         * */
+        //Debug.Log("setattribute atk=" + atk);
+    }
 
 }

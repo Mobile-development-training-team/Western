@@ -116,6 +116,7 @@ public class MagicBulletController : MonoBehaviour
         if (otherLife != null)
         {
             attack.attack(otherLife);
+            //GameUIController.AddRythmCount(3f);
         }
         Hit(other);
         /*

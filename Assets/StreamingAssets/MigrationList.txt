@@ -9,6 +9,7 @@ Data/SkillData.csv
 Data/LevelOutput.csv
 Data/ExitTime.csv
 Data/VIT.csv
+Data/Enemies.csv
 UI/Normal.png
 UI/Excellent.png
 UI/Rare.png

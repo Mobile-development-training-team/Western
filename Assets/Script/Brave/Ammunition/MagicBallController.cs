@@ -43,6 +43,7 @@ public class MagicBallController : MonoBehaviour
         if (otherLife != null)
         {
             attack.attack(otherLife);
+            //GameUIController.AddRythmCount(3f);
         }
         ObjectPool.GetInstant().SaveObj(transform.gameObject);
         if (IsInvoking("SaveMagicBall"))
