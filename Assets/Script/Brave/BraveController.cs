@@ -827,6 +827,7 @@ namespace LeoLuz.PlugAndPlayJoystick
                 mAnimator.SetBool("Death", death);
                 Hit(transform.GetComponent<CapsuleCollider>());
                 deaths++;
+                gameUIController.SetLifeNumText(3-deaths);
                 //暂定主角有3条命。如果死了3次就游戏结束
                 if (deaths >= 3)
                 {

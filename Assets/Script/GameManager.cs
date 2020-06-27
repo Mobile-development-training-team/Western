@@ -50,31 +50,31 @@ public class GameManager:MonoBehaviour
         }
         else if (GameScript.LevelOutput[1].GetFirstOrNot())
         {
-            levelId = 1;
+            levelId = 2;
         }
         else if (GameScript.LevelOutput[2].GetFirstOrNot())
         {
-            levelId = 2;
+            levelId = 3;
         }
         else if (GameScript.LevelOutput[3].GetFirstOrNot())
         {
-            levelId = 3;
+            levelId = 4;
         }
         else if (GameScript.LevelOutput[4].GetFirstOrNot())
         {
-            levelId = 4;
+            levelId = 5;
         }
         else if (GameScript.LevelOutput[5].GetFirstOrNot())
         {
-            levelId = 5;
+            levelId = 6;
         }
         else if (GameScript.LevelOutput[6].GetFirstOrNot())
         {
-            levelId = 6;
+            levelId = 7;
         }
         else if (GameScript.LevelOutput[7].GetFirstOrNot())
         {
-            levelId = 7;
+            levelId = 8;
         }
         else
         {
@@ -139,7 +139,6 @@ public class GameManager:MonoBehaviour
             //Invoke("LoadCurScene", 2f);
             //else 结束关卡返回关卡选择界面
             //Invoke("LoadGameSelectScene", 2f);
-            GameScript.LevelNotPass(currentSceneIndex - 1, enemiesManager.LevelProcess());
             gameUIController.ShowDeathEnd();
         }
         else
@@ -150,35 +149,7 @@ public class GameManager:MonoBehaviour
                 levelId++;
                 //PlayerPrefs.SetInt("level", levelId);
             }
-            /*
-            else if (currentSceneIndex > levelId && currentSceneIndex < 9) 
-            {
-                levelId = currentSceneIndex;
-                //PlayerPrefs.SetInt("level", levelId);
-            }
-            */
-            GameScript.LevelPass(currentSceneIndex - 1);
             gameUIController.ShowWinEnd();
-            /*
-            currentSceneIndex = getCurrentSceneIndex();
-            if (currentSceneIndex == 3)
-            {
-                //全部通关
-                //if 重开此关卡
-                //Invoke("LoadCurScene", 2f);
-                //else 结束关卡返回关卡选择界面
-                Invoke("LoadGameSelectScene", 2f);
-            }
-            else
-            {
-                //if 进入下一关
-                Invoke("LoadNextScene", 2f);
-                //else if 重开此关卡
-                //Invoke("LoadCurScene", 2f);
-                //else 结束关卡返回关卡选择界面
-                //Invoke("LoadGameSelectScene", 2f);
-            }
-            */
         }
     }
     public void setUIController(GameUIController uic)

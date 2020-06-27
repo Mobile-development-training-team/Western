@@ -17,6 +17,7 @@ public class GameUIController : MonoBehaviour
 
     public GameObject braveAPText;
     public GameObject skillNumText;
+    public GameObject lifeNumText;
 
     public GameObject pauseButton;
     public GameObject pauseFront;
@@ -103,8 +104,13 @@ public class GameUIController : MonoBehaviour
     /////////////////////////////////////////////////////////////<外部使用>
     public void ShowDeathEnd()
     {
-        Time.timeScale = 0.2f;
+        if (endGame)
+        {
+            return;
+        }
         endGame = true;
+        Time.timeScale = 0.2f;
+        GameScript.LevelNotPass(gameManager.getCurrentSceneIndex() - 1, gameManager.getEnemiesManager().LevelProcess());
         ShowEndGameFront();
         DisappearPauseButton();
         SetEndGameMessageText("很遗憾！闯关失败！");
@@ -113,8 +119,13 @@ public class GameUIController : MonoBehaviour
     }
     public void ShowWinEnd()
     {
-        Time.timeScale = 0.2f;
+        if (endGame)
+        {
+            return;
+        }
         endGame = true;
+        Time.timeScale = 0.2f;
+        GameScript.LevelPass(gameManager.getCurrentSceneIndex() - 1);
         ShowEndGameFront();
         DisappearPauseButton();
         SetEndGameMessageText("恭喜你！闯关成功！");
@@ -167,7 +178,8 @@ public class GameUIController : MonoBehaviour
     }
     public void ExitButton()
     {
-        gameManager.LoadGameSelectScene();
+        //gameManager.LoadGameSelectScene();
+        gameManager.LoadMainScene();
         Time.timeScale = 1f;
     }
     /*
@@ -311,6 +323,10 @@ public class GameUIController : MonoBehaviour
     {
         skillNumText.GetComponent<Text>().text = "必杀次数：" + num.ToString();
     }
+    public void SetLifeNumText(int num)
+    {
+        lifeNumText.GetComponent<Text>().text = "生命剩余：" + num.ToString();
+    }
     public void SetCurrentEnemyWavesText(int currentNum, int totalNum) 
     {
         currentEnemyWavesText.GetComponent<Text>().text = "当前敌人波数：" + currentNum.ToString() + "/" + totalNum.ToString();
@@ -333,11 +349,65 @@ public class GameUIController : MonoBehaviour
     }
     public void SetBuffListBuff(int index, int buffIndex)
     {
-
+        switch (buffIndex)
+        {
+            case 0:
+                buffs[index].GetComponent<Image>().sprite = GameScript.GetSprite(DataManager.SkillData[8].GetImagePath());
+                buffs[index].SetActive(true);
+                break;
+            case 1:
+                buffs[index].GetComponent<Image>().sprite = GameScript.GetSprite(DataManager.SkillData[9].GetImagePath());
+                buffs[index].SetActive(true);
+                break;
+            case 2:
+                buffs[index].GetComponent<Image>().sprite = GameScript.GetSprite(DataManager.SkillData[10].GetImagePath());
+                buffs[index].SetActive(true);
+                break;
+            case 3:
+                buffs[index].GetComponent<Image>().sprite = GameScript.GetSprite(DataManager.SkillData[11].GetImagePath());
+                buffs[index].SetActive(true);
+                break;
+            case 4:
+                buffs[index].GetComponent<Image>().sprite = GameScript.GetSprite(DataManager.SkillData[13].GetImagePath());
+                buffs[index].SetActive(true);
+                break;
+            case 5:
+                buffs[index].GetComponent<Image>().sprite = GameScript.GetSprite(DataManager.SkillData[12].GetImagePath());
+                buffs[index].SetActive(true);
+                break;
+            default:
+                buffs[index].GetComponent<Image>().sprite = null;
+                buffs[index].SetActive(false);
+                break;
+        }
+            
     }
     public void SetTheBuff(int buffIndex)
     {
-
+        switch (buffIndex)
+        {
+            case 0:
+                theBuff.GetComponent<Image>().sprite = GameScript.GetSprite(DataManager.SkillData[8].GetImagePath());
+                break;
+            case 1:
+                theBuff.GetComponent<Image>().sprite = GameScript.GetSprite(DataManager.SkillData[9].GetImagePath());
+                break;
+            case 2:
+                theBuff.GetComponent<Image>().sprite = GameScript.GetSprite(DataManager.SkillData[10].GetImagePath());
+                break;
+            case 3:
+                theBuff.GetComponent<Image>().sprite = GameScript.GetSprite(DataManager.SkillData[11].GetImagePath());
+                break;
+            case 4:
+                theBuff.GetComponent<Image>().sprite = GameScript.GetSprite(DataManager.SkillData[13].GetImagePath());
+                break;
+            case 5:
+                theBuff.GetComponent<Image>().sprite = GameScript.GetSprite(DataManager.SkillData[12].GetImagePath());
+                break;
+            default:
+                theBuff.GetComponent<Image>().sprite = null;
+                break;
+        }
     }
     public void SetEndGameMessageText(string message)
     {

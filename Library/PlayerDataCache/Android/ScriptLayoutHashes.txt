@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-F:/UnityTestCode/Western/apkForGameProgram/game29.3.apk
+F:/UnityTestCode/Western/apkForGameProgram/game29.9.apk
 SceneListBegin?
 Assets/Scenes/MainScene_fjj.unity
 Assets/Scenes/Level01.unity
@@ -168,7 +168,7 @@ b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp-firstpass.dll:LeoLuz.PlugAndPlayJoystick.ButtonBase
 b32441fc1d28848e915ee71888fd61ba Assembly-CSharp.dll:RPGCharacterAnims.GUIControls
 79566861074b80c5467fa81dddcf4f5a Assembly-CSharp.dll:MagicArsenal.MagicRotation
-a8421d6793c8cfe3c540028526b44f8d Assembly-CSharp.dll:.GameUIController
+9d58a4b0dd6951f97326c576c9717526 Assembly-CSharp.dll:.GameUIController
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.EnemiesManager04
 56c90168bc19fe9aee4ba7e6b19350e3 Assembly-CSharp.dll:MagicArsenal.MagicBeamScript
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.LottertyMessageBackScript

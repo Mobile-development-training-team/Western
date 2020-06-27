@@ -68,7 +68,7 @@ public class Chip
         float factor = random.Next(min, max) / (float)100;
         if (firstOrNot)
         {
-            return (int)(chipNum_first * factor);
+            return chipNum_first;
         }
         else
         {
@@ -92,7 +92,7 @@ public class Chip
         float factor = random.Next(min, max) / (float)100;
         if (firstOrNot)
         {
-            return (int)(rareEarthNum_first * factor);
+            return rareEarthNum_first;
         }
         else
         {
@@ -116,7 +116,7 @@ public class Chip
         float factor = random.Next(min, max) / (float)100;
         if (firstOrNot)
         {
-            return (int)(skillDebrisNum_first * factor);
+            return skillDebrisNum_first;
         }
         else
         {
