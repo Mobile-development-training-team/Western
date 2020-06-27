@@ -13,6 +13,7 @@ public class SkillEffect : MonoBehaviour
     private bool ButtonSwitch = false;
     private Button ThisButton;
     private float Times = 0f;//累加器
+    private int num = 3;
      private void Awake()
         {
             ThisButton = this.GetComponent<Button>();            
@@ -23,23 +24,16 @@ public class SkillEffect : MonoBehaviour
     void Start()
     {
         Mask.gameObject.SetActive(false);
-        /*Times += Time.deltaTime;
-            Mask.fillAmount = 1-Times/CD_Time;
-            if (Times >= CD_Time)
-                {
-                    ButtonSwitch = false;
-                    Mask.fillAmount = 0;
-                    Times = 0f;
-                    ThisButton.interactable = true;
-                }*/
         //Times = CD_Time;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(ButtonSwitch)//在技能冷却时间
+        if(num>0)
         {
+            if(ButtonSwitch)//在技能冷却时间
+            {
             Mask.gameObject.SetActive(true);
             Times += Time.deltaTime;
             Mask.fillAmount = 1-Times/CD_Time;
@@ -50,13 +44,20 @@ public class SkillEffect : MonoBehaviour
                     Times = 0f;
                     ThisButton.interactable = true;
                 }
+            }
         }
+        else
+        {
+            Mask.gameObject.SetActive(false);
+        }
+        
     }
 
     public void SkillTimeStarts()//按钮的注册方法
         {
             ButtonSwitch = true;
             ThisButton.interactable = false;
+            num--;
         }
 
 
