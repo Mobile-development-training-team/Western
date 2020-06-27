@@ -75,8 +75,6 @@ abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.Tou
 e01f6905e4742cc10204e823c021c618 Assembly-CSharp.dll:RPGCharacterAnims.RPGCharacterWeaponController
 d3c76b14a25eebd3a3323dd43297919c Unity.TextMeshPro.dll:TMPro.TMP_InputField
 beb32a07dd690af1f470894c3aebf12b Assembly-CSharp.dll:RPGCharacterAnims.IKHands
-71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
-71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.SkillSelectedScript
 cf9f5cf2c3145a37ac07f00e50e460f9 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
@@ -152,7 +150,7 @@ c066b6aa1564ad70c37ead364348a818 Assembly-CSharp.dll:.MagicBulletController
 c822ada007d637656603e4c2f7a7f4f6 Assembly-CSharp.dll:.SkillManager
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BagSelectedScript
 2890c468cf196dca883ea02bde96343e Assembly-CSharp.dll:MagicArsenal.MagicLightFade
-2046a769735b5a7196e56bb0bb66cba9 Assembly-CSharp.dll:.EnemyController
+0faf555057a9638210190813315db509 Assembly-CSharp.dll:.EnemyController
 b8a5e8091ab0b8861d2add371082c5e0 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.SkillUILearnMessageBackScript
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.SkillUILearnMessageButtonScript
@@ -255,7 +253,7 @@ dd54d4657875aaa22690ebe9af08240e Assembly-CSharp.dll:.SkillUIListScript
 246c636d12b0a188c75b005e9f2221dd Assembly-CSharp.dll:.Life
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BagUIMessageUpScript
 46280057aba92e5945195d40246a7bdf Assembly-CSharp.dll:MagicArsenal.MagicLoadSceneOnClick
-81876b0c75babcac52ff89059b5a658c Assembly-CSharp.dll:.BraveController
+df6ba1b1c7dbe64144148b9b29351b29 Assembly-CSharp.dll:.BraveController
 38b08a887a876e9c826dee55fc7daca8 Assembly-CSharp.dll:.Gravity
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.EnemiesManager01

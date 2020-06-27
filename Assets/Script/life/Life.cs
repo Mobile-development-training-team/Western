@@ -38,8 +38,11 @@ public class Life : MonoBehaviour
             mHpBar = ObjectPool.GetInstant().GetObj("HpBar", new Vector3(0f, 0f, 0f), new Quaternion(0f, 0f, 0f, 0f));
             mHpBar = Instantiate(mHpBar);
             slider = mHpBar.GetComponent<Slider>();
-            mHpBar.transform.parent = HpCanvas.transform;
+            //mHpBar.transform.parent = HpCanvas.transform;
+            mHpBar.transform.SetParent(HpCanvas.gameObject.transform);
         }
+        mHpBar.SetActive(true);
+        mHp = MAXHP;
         //Debug.Log(mHpBar.transform.position);
     }
     /*

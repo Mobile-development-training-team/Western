@@ -10,8 +10,8 @@ public class EnemyController : MonoBehaviour
     public float range = 0f;    //敌人攻击范围
     public float atk = 20f;
 
-    private Life mLife;
-    private Attack attack;
+    public Life mLife;
+    public Attack attack;
     private LifeCallback callback;
 
     private Animator mAnimator;
@@ -27,7 +27,7 @@ public class EnemyController : MonoBehaviour
     private bool meetBrave = false;
     private float deathTime = 5f;
     private float time1 = 3f;
-    private bool atAir = false;
+    public bool atAir = false;
 
     public GameObject mhit;
 
@@ -50,11 +50,18 @@ public class EnemyController : MonoBehaviour
 
     void Awake()
     {
+        //Debug.Log("Enemy awake");
         attack = new Attack();
-        mLife = GetComponent<Life>();
-        callback = new LifeCallback(this);
-        mLife.registerCallback(callback);
-
+        /*
+        if (attack == null)
+        {
+            Debug.Log("in the awake,attack is null");
+        }
+        else
+        {
+            Debug.Log("in the awake,attack is not null");
+        }
+        */
         mAnimator = GetComponent<Animator>();
         mcollider = GetComponent<CapsuleCollider>();
         mrigidbody = GetComponent<Rigidbody>();
@@ -69,10 +76,15 @@ public class EnemyController : MonoBehaviour
                 ShootingPoint = child.gameObject;
             }
         }
+        //Debug.Log("Enemy awake finished");
     }
 
     void OnEnable()
     {
+        //Debug.Log("Enemy enable");
+        mLife = GetComponent<Life>();
+        callback = new LifeCallback(this);
+        mLife.registerCallback(callback);
         gameManager = GameManager.INSTANCE;
         enemiesManager = gameManager.getEnemiesManager();
         brave = gameManager.getBrave().gameObject;
@@ -92,35 +104,23 @@ public class EnemyController : MonoBehaviour
         mLife.mHp = mLife.MAXHP;
         attack.mTeam = mLife.mTeam;
         attack.mAtk = atk;
+        //Debug.Log("enable atk=" + atk);
         mLife.hasHp = true;
+        /*
+        if (attack == null)
+        {
+            Debug.Log("in the enable,attack is null");
+        }
+        else
+        {
+            Debug.Log("in the enable,attack is not null");
+        }
+        Debug.Log("Enemy enable finished");
+         * */
     }
 
     void Update()
     {
-
-        /*
-        if (atAir)
-        {
-            idle();
-            return;
-        }
-        */
-        ///////////////////////////////<身位高于勇者即在天空>
-        if (transform.position[1] > brave.transform.position[1])
-        {
-            idle();
-            return;
-        }
-        ///////////////////////////////<身位高于勇者即在天空/>
-
-        ///////////////////////////////<掉出场景外回收敌人(保险)>
-        if (transform.position[1] < -100)
-        {
-            //Death();
-            transform.position = new Vector3(brave.transform.position[0] + 20f, brave.transform.position[1] + 2, brave.transform.position[2]);
-        }
-        ///////////////////////////////<掉出场景外回收敌人(保险)/>
-
         if (death)
         {
             mAnimator.SetBool("Death", death);
@@ -141,6 +141,30 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
+
+        ///////////////////////////////<身位高于勇者即在天空>
+        if (transform.position[1] > brave.transform.position[1])
+        {
+            atAir = true;
+        }
+        else
+        {
+            atAir = false;
+        }
+        if (atAir)
+        {
+            idle();
+            return;
+        }
+        ///////////////////////////////<身位高于勇者即在天空/>
+
+        ///////////////////////////////<掉出场景外回收敌人(保险)>
+        if (transform.position[1] < -100)
+        {
+            //Death();
+            transform.position = new Vector3(brave.transform.position[0] + 20f, brave.transform.position[1] + 2, brave.transform.position[2]);
+        }
+        ///////////////////////////////<掉出场景外回收敌人(保险)/>
         if (brave.GetComponent<BraveController>().isDead())
         {
             idle();
@@ -192,6 +216,7 @@ public class EnemyController : MonoBehaviour
     ////////////////////////////////////////////////////////////////////<控制动画>
     public void Attack()
     {
+        //Debug.Log("attacking atk=" + atk);
         mAnimator.SetTrigger("Attacking");
     }
     public void GetHit()
@@ -250,6 +275,10 @@ public class EnemyController : MonoBehaviour
             atAir = false;
             return;
         }
+        else if(atAir)
+        {
+            transform.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(5, 5, 0), ForceMode.Impulse);
+        }
     }
     private void OnCollisionExit(Collision collision)
     {
@@ -298,10 +327,23 @@ public class EnemyController : MonoBehaviour
 
     public void setAttribte(float HP, float Def, float ATK)
     {
+        //Debug.Log("try to setAttribute");
+        mLife = new Life();
         mLife.MAXHP = HP;
         mLife.mHp = mLife.MAXHP;
         mLife.mDef = Def;
+        mLife.mTeam = 2;
+        attack = new Attack();
         attack.mAtk = ATK;
+        attack.mTeam = mLife.mTeam;
+        /*
+        mLife.MAXHP = HP;
+        mLife.mHp = mLife.MAXHP;
+        mLife.mDef = Def;
+        atk = ATK;
+        attack.mAtk = ATK;
+         * */
+        //Debug.Log("setattribute atk=" + atk);
     }
 
 }
