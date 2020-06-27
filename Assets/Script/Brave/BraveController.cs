@@ -64,6 +64,9 @@ namespace LeoLuz.PlugAndPlayJoystick
         public bool Blocking;
         public bool BlockBroken;
 
+        private float groundYPos = 0;
+        private float hight = 0;
+
         private float deathTime = 3f;
         private int deaths = 0;//主角死亡次数
 
@@ -298,7 +301,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             {
                 idle();
             }
-
+            hight = transform.position[1] - groundYPos;
             //手柄向上抬控制跳跃
             if (vertical > 0.5)
             {
@@ -322,7 +325,7 @@ namespace LeoLuz.PlugAndPlayJoystick
                     if (atAir)
                     {
                         //快速下降
-                        if (transform.position[1] >= -4 && mLife.mAp > 20f)        //&&mLife.mAp>20f
+                        if (hight>2 && mLife.mAp > 20f)        //&&mLife.mAp>20f
                         {
                             this.GetComponent<Rigidbody>().AddForce(new Vector3(0, -1000, 0), ForceMode.Impulse);
                             mLife.mAp -= 20f;       //mLife.mAp-=20f
@@ -1040,7 +1043,8 @@ namespace LeoLuz.PlugAndPlayJoystick
             //碰到地面
             if (collision.gameObject.name.Equals("Plane"))
             {
-                
+                groundYPos = transform.position[1];
+                hight = 0;
                 if (atAir&&dashFall&&!death)
                 {
                     if (EarthSlam != null)
