@@ -14,7 +14,7 @@ public class RareEarthTextScirpt : MonoBehaviour
     private void SelfUpdate()
     {
         Buf = DataManager.roleEquipment.GetRareEarthCount();
-        GetComponent<Text>().text = "稀土：" + Buf.ToString();
+        GetComponent<Text>().text = Buf.ToString();
     }
 
     void Update()

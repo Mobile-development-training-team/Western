@@ -10,6 +10,9 @@ namespace LeoLuz.PlugAndPlayJoystick
 */
     public class BraveController : MonoBehaviour
     {
+        public GameManager gameManager;
+        GameUIController gameUIController;
+
         private Animator mAnimator;
         private SkillManager skillManager;
         private BufferManager bufferManager;
@@ -22,18 +25,22 @@ namespace LeoLuz.PlugAndPlayJoystick
         public GameObject Wand;
         private GameObject magicCircle;
         private GameObject magicCircleBack;
+        public GameObject Axe;
+        public GameObject Bow;
+        public GameObject BowArrow;
+        public GameObject Spear;
 
         public GameObject EarthSlam;
         public GameObject EarthSphereBlast;
 
-        public bool beDoingSomethings = false;
+        private bool beDoingSomethings = false;
         private bool walking = false;
         private bool running = false;
         private bool atAir = false;
         private bool death = false;
         private bool reviving = false;
         private bool dashFall = false;
-        private float dashCoolTime = 1.5f;
+        //private float dashCoolTime = 1.5f;
         private int AttackIndex = 0;
         private int WeaponIndex = 0;
         private int Ammunition = 10;
@@ -56,6 +63,9 @@ namespace LeoLuz.PlugAndPlayJoystick
         //public float mBlock;
         public bool Blocking;
         public bool BlockBroken;
+
+        private float groundYPos = 0;
+        private float hight = 0;
 
         private float deathTime = 3f;
         private int deaths = 0;//主角死亡次数
@@ -82,18 +92,25 @@ namespace LeoLuz.PlugAndPlayJoystick
             {
                 //if(!brave.death&&!brave.reviving&&!brave.atAir)
                 brave.GetHit();
-                GameUIController.SubtractRythmCount(20f);
+                //GameUIController.SubtractRythmCount(20f);
             }
             public void onDead()
             {
                 //if (!brave.death && !brave.reviving && !brave.atAir)
                 brave.Death();
-                GameUIController.SubtractRythmCount(999f);
+                //GameUIController.SubtractRythmCount(999f);
             }
         }
         
         void Awake()
         {
+            if (GameManager.INSTANCE == null)
+            {
+                return;
+            }
+            gameManager = GameManager.INSTANCE;
+            gameManager.setBrave(this);
+
             mAnimator = GetComponent<Animator>();
             mAnimator.SetInteger("AttackIndex", 0);
             mAnimator.SetInteger("WeaponIndex", 0);
@@ -113,15 +130,20 @@ namespace LeoLuz.PlugAndPlayJoystick
             attack = new Attack();
             mLife.hasHp = true;
             attack.mTeam = mLife.mTeam;
+
+            deaths = 0;
+            Blocking = false;
+            BlockBroken = false;
+
             //自定义测试数据
             mLife.mHp = mLife.MAXHP;
             baseAtk = 20f;
             currAtk = baseAtk;
             attack.mAtk = currAtk;
-            //skillManager.skill_00_num = 30;
+            skillManager.skill_00_num = 3;
+            
             //mBlock = mLife.MAXHP * 0.2f;
-            Blocking = false;
-            BlockBroken = false;
+
             //从外面拿数据
             /*
             mLife.MAXHP = GameScript.GameRoleAttribute.HealthPointLimit;
@@ -131,6 +153,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             currAtk = baseAtk;
             attack.mAtk = currAtk;
             */
+
             RightHand = GameObject.FindGameObjectWithTag("RightHand");
             //THandSword = RightHand.transform.Find("2Hand-Sword Variant").gameObject;
             //Gun = RightHand.transform.Find("2Hand-Rifle").gameObject;
@@ -145,11 +168,18 @@ namespace LeoLuz.PlugAndPlayJoystick
             Gun.SetActive(false);
             Wand.SetActive(false);
             CrossBow.SetActive(false);
+            Axe.SetActive(false);
+            Spear.SetActive(false);
+            Bow.SetActive(false);
+            BowArrow.SetActive(false);
             THandSword.GetComponent<BoxCollider>().enabled = false;
             muzzle.SetActive(true);
             crossBowMuzzle.SetActive(true);
             magicCircle.SetActive(true);
             magicCircleBack.SetActive(true);
+            Axe.GetComponent<BoxCollider>().enabled = false;
+            Spear.GetComponent<BoxCollider>().enabled = false;
+            BowArrow.GetComponent<BoxCollider>().enabled = false;
 
             ArmdeMyselfe();
             usingMainWeapon = true;
@@ -160,6 +190,14 @@ namespace LeoLuz.PlugAndPlayJoystick
             if (mainWeaponIndex == 0)
             {
                 mainWeapon = THandSword;
+            }
+            else if (mainWeaponIndex == 3)
+            {
+                mainWeapon = Axe;
+            }
+            else if (mainWeaponIndex == 4)
+            {
+                mainWeapon = Spear;
             }
             else
             {
@@ -176,22 +214,31 @@ namespace LeoLuz.PlugAndPlayJoystick
             {
                 secondaryWeapon = Wand;
             }
+            else if (secondaryWeaponIndex == 5)
+            {
+                secondaryWeapon = Bow;
+            }
             else
             {
                 secondaryWeapon = mainWeapon;
                 secondaryWeaponIndex = mainWeaponIndex;
             }
-            mainWeapon.SetActive(true);
+            WeaponIndex = mainWeaponIndex;
+            mAnimator.SetInteger("WeaponIndex", WeaponIndex);
+            //mainWeapon.SetActive(true);
         }
-
-        // Update is called once per frame
+        void Start()
+        {
+            gameUIController = gameManager.getUIController();
+            gameUIController.SetSkillNumText(skillManager.skill_00_num);
+        }
         ////////////////////////////////////////////////////////////////////<监听UI>
         void Update()
         {
             if (death)
             {
                 ///////////////////////////////<3秒后复活>
-                if (deaths < 10)       //10条命
+                if (deaths < 3)       //3条命
                 {
                     deathTime -= Time.deltaTime;
                     if (deathTime <= 0)
@@ -220,6 +267,7 @@ namespace LeoLuz.PlugAndPlayJoystick
                 {
                     run(new Vector3(horizontal, 0, 0));
                 }
+                /*
                 if (walking && running && !beDoingSomethings)
                 {
                     dashCoolTime -= Time.deltaTime;
@@ -228,6 +276,7 @@ namespace LeoLuz.PlugAndPlayJoystick
                 {
                     dashCoolTime = 1.5f;
                 }
+                */
                 if (!atAir)
                 {
                     /*
@@ -252,7 +301,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             {
                 idle();
             }
-
+            hight = transform.position[1] - groundYPos;
             //手柄向上抬控制跳跃
             if (vertical > 0.5)
             {
@@ -263,7 +312,11 @@ namespace LeoLuz.PlugAndPlayJoystick
                     Jump();
                 }
             }
-            //手柄向下拉（未动工）
+            if (!Blocking)
+            {
+                BlockBroken = false;
+            }
+            //手柄向下拉
             if (vertical < -0.95)
             {
                 //Debug.Log("vertical="+vertical);
@@ -272,24 +325,25 @@ namespace LeoLuz.PlugAndPlayJoystick
                     if (atAir)
                     {
                         //快速下降
-                        if (transform.position[1] >= -4 && mLife.mAp > 20f)        //&&mLife.mAp>20f
+                        if (hight>2 && mLife.mAp > 20f)        //&&mLife.mAp>20f
                         {
                             this.GetComponent<Rigidbody>().AddForce(new Vector3(0, -1000, 0), ForceMode.Impulse);
                             mLife.mAp -= 20f;       //mLife.mAp-=20f
                             dashFall = true;
+                            Blocking = true;
                         }
                     }
                     else
                     {
                         //防御
-                        if (mLife.mAp >= 10f && !BlockBroken)       //mBlock >= mLife.MAXHP * 0.2f
+                        if (mLife.mAp >= 20f && !BlockBroken)       //mBlock >= mLife.MAXHP * 0.2f
                         {
                             if (!Blocking)
                             {
                                 mLife.mBlock = mLife.MAXHP * 0.2f;
                                 Blocking = true;
-                                beDoingSomethings = true;
-                                mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
+                                //beDoingSomethings = true;
+                                //mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
                             }
                             else
                             {
@@ -309,10 +363,6 @@ namespace LeoLuz.PlugAndPlayJoystick
                 mLife.mBlock = 0;
             }
             
-            if (!Blocking)
-            {
-                BlockBroken = false;
-            }
             //键盘输入版本（废弃）
 
             /*
@@ -483,11 +533,13 @@ namespace LeoLuz.PlugAndPlayJoystick
             running = true;
             mAnimator.SetBool("Walking", walking);
             mAnimator.SetBool("Running", running);
+            /*
             if (dashCoolTime <= 0 && mLife.mAp > 0f)      //mLife.mAp>0f
             {
                 transform.Translate(Vector3.forward * 2 * Time.deltaTime);
-                mLife.mAp -= Time.deltaTime * 15f;//mLife.mAp-=Time.dealtime*7f
+                mLife.mAp -= Time.deltaTime * 10f;//mLife.mAp-=Time.dealtime*7f
             }
+            */
         }
         public void idle()
         {
@@ -520,7 +572,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             }
             */
 
-            if (!beDoingSomethings && !death && !reviving&&!atAir)
+            if (!beDoingSomethings && !death && !reviving && !atAir && !Blocking) 
             {
                 beDoingSomethings = true;
                 mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
@@ -536,10 +588,17 @@ namespace LeoLuz.PlugAndPlayJoystick
                 {
                     MagicWandShoot();
                 }
-                else
+                else if (WeaponIndex == 3)
                 {
-                    beDoingSomethings = false;
-                    mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
+                    AxeAttack();
+                }
+                else if (WeaponIndex == 4)
+                {
+                    SpearAttack();
+                }
+                else if (WeaponIndex == 5)
+                {
+                    BowShoot();
                 }
             }
 
@@ -563,11 +622,13 @@ namespace LeoLuz.PlugAndPlayJoystick
                 mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
             }
             */
-            if (!beDoingSomethings && !death && !reviving && !atAir && mLife.mAp > 20f)      //&&mLife.mAp>20f
+            if (!beDoingSomethings && !death && !reviving && !atAir && mLife.mAp > 30f && !Blocking)      
             {
                 beDoingSomethings = true;
-                mAnimator.SetBool("beDoingSomethings", beDoingSomethings);      //mLife.mAp-=20f
-                mLife.mAp -= 20f;
+                mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
+                AttackIndex = 0;
+                mAnimator.SetInteger("AttackIndex", AttackIndex);   
+                mLife.mAp -= 30f;
                 if (WeaponIndex == 0)
                 {
                     TwoHandSwordSkill();
@@ -580,10 +641,17 @@ namespace LeoLuz.PlugAndPlayJoystick
                 {
                     MagicWandSkill();
                 }
-                else
+                else if (WeaponIndex == 3)
                 {
-                    beDoingSomethings = false;
-                    mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
+                    AxeSkill();
+                }
+                else if (WeaponIndex == 4)
+                {
+                    SpearSkill();
+                }
+                else if (WeaponIndex == 5)
+                {
+                    BowSkill();
                 }
             }
         }
@@ -595,7 +663,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             ChangeWeapon();
             */
 
-            if (!beDoingSomethings&&!death&&!reviving&&!atAir)      
+            if (!beDoingSomethings && !death && !reviving && !atAir && !Blocking)      
             {
                 beDoingSomethings = true;
                 mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
@@ -612,7 +680,7 @@ namespace LeoLuz.PlugAndPlayJoystick
                 Jump();
             }
             */
-            if (!death)     //&& mLife.mAp >= 50f
+            if (!death)      //&& mLife.mAp >= 50f
             {
                 skillManager.Use_Skill_00();
             }
@@ -631,6 +699,26 @@ namespace LeoLuz.PlugAndPlayJoystick
         {
             mAnimator.SetTrigger("Skill01");
         }
+        public void AxeAttack()
+        {
+            mAnimator.SetInteger("AttackIndex", AttackIndex);
+            mAnimator.SetTrigger("Attacking");
+            AttackIndex = (AttackIndex + 1) % 4;
+        }
+        public void AxeSkill()
+        {
+            mAnimator.SetTrigger("Skill01");
+        }
+        public void SpearAttack()
+        {
+            mAnimator.SetInteger("AttackIndex", AttackIndex);
+            mAnimator.SetTrigger("Attacking");
+            AttackIndex = (AttackIndex + 1) % 4;
+        }
+        public void SpearSkill()
+        {
+            mAnimator.SetTrigger("Skill01");
+        }
         public void TwoHandRifleShoot()
         {
             if (Ammunition > 0)
@@ -639,7 +727,8 @@ namespace LeoLuz.PlugAndPlayJoystick
             }
             else
             {
-                mAnimator.SetTrigger("Reload");
+                    mLife.mAp -= 30f;
+                    mAnimator.SetTrigger("Reload");
             }
         }
         public void TwoHandRifleReload()
@@ -651,6 +740,14 @@ namespace LeoLuz.PlugAndPlayJoystick
             mAnimator.SetTrigger("Attacking");
         }
         public void MagicWandSkill()
+        {
+            mAnimator.SetTrigger("Skill01");
+        }
+        public void BowShoot()
+        {
+            mAnimator.SetTrigger("Attacking");
+        }
+        public void BowSkill()
         {
             mAnimator.SetTrigger("Skill01");
         }
@@ -674,10 +771,10 @@ namespace LeoLuz.PlugAndPlayJoystick
                 mAnimator.SetBool("Death", death);
                 Hit(transform.GetComponent<CapsuleCollider>());
                 deaths++;
-                //暂定主角有10条命。如果死了10次就游戏结束
-                if (deaths >= 10)
+                //暂定主角有3条命。如果死了3次就游戏结束
+                if (deaths >= 3)
                 {
-                    GameManager.INSTANCE.GameOver(false);
+                    gameManager.GameOver(false);
                 }
             }
         }
@@ -718,26 +815,26 @@ namespace LeoLuz.PlugAndPlayJoystick
         {
             //THandSword.GetComponent<BoxCollider>().enabled = false;
             mainWeapon.GetComponent<BoxCollider>().enabled = false;
-            if (!Blocking)
-            {
+            //if (!Blocking)
+            //{
                 beDoingSomethings = false;
                 mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
-            }
+            //}
         }
         public void startShooting()
         {
             //ObjectPool.GetInstant().GetObj("Bullet", muzzle.transform.position, transform.localRotation);
-            ObjectPool.GetInstant().GetObj("BraveCrossBowArrow", crossBowMuzzle.transform.position, transform.localRotation);
+            ObjectPool.GetInstant().GetObj("BraveCrossBowArrow", crossBowMuzzle.transform.position, transform.localRotation).GetComponent<CrossBowArrowController>().atk = currAtk;
         }
         public void endShooting()
         {
             Ammunition = Ammunition - 1;
             mAnimator.SetInteger("Ammunition", Ammunition);
-            if (!Blocking)
-            {
+            //if (!Blocking)
+            //{
                 beDoingSomethings = false;
                 mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
-            }
+            //}
         }
         public void startReload()
         {
@@ -747,26 +844,26 @@ namespace LeoLuz.PlugAndPlayJoystick
         {
             mAnimator.SetInteger("Ammunition", 10);
             Ammunition = 10;
-            if (!Blocking)
-            {
+            //if (!Blocking)
+            //{
                 beDoingSomethings = false;
                 mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
-            }
+            //}
         }
         public void startMagic()
         {
             magicCircle.SetActive(true);
-            ObjectPool.GetInstant().GetObj("Magic01", magicCircle.transform.position, transform.localRotation);
+            ObjectPool.GetInstant().GetObj("Magic01", magicCircle.transform.position, transform.localRotation).GetComponent<MagicBulletController>().atk = currAtk;
             //Instantiate(magic, magicCircle.transform.position, magicCircle.transform.rotation);
         }
         public void endMagic()
         {
-            magicCircle.SetActive(false);
-            if (!Blocking)
-            {
+            //magicCircle.SetActive(false);
+            //if (!Blocking)
+            //{
                 beDoingSomethings = false;
                 mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
-            }
+            //}
         }
         public void startBigMagic()
         {
@@ -778,19 +875,43 @@ namespace LeoLuz.PlugAndPlayJoystick
             Instantiate(magic, new Vector3(pos[0], pos[1] - 0.5f, pos[2]), magicCircle.transform.rotation);
             */
 
-            ObjectPool.GetInstant().GetObj("Magic01", new Vector3(pos[0], pos[1] + 0.5f, pos[2]), transform.localRotation);
-            ObjectPool.GetInstant().GetObj("Magic01", pos, transform.localRotation);
-            ObjectPool.GetInstant().GetObj("Magic01", new Vector3(pos[0], pos[1] - 0.5f, pos[2]), transform.localRotation);
+            ObjectPool.GetInstant().GetObj("Magic01", new Vector3(pos[0], pos[1] + 0.5f, pos[2]), transform.localRotation).GetComponent<MagicBulletController>().atk = currAtk;
+            ObjectPool.GetInstant().GetObj("Magic01", pos, transform.localRotation).GetComponent<MagicBulletController>().atk = currAtk;
+            ObjectPool.GetInstant().GetObj("Magic01", new Vector3(pos[0], pos[1] - 0.5f, pos[2]), transform.localRotation).GetComponent<MagicBulletController>().atk = currAtk;
             
         }
         public void endBigMagic()
         {
-            magicCircle.SetActive(false);
-            if (!Blocking)
-            {
+            //magicCircle.SetActive(false);
+            //if (!Blocking)
+            //{
                 beDoingSomethings = false;
                 mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
-            }
+            //}
+        }
+        public void startBowShooting()
+        {
+            ObjectPool.GetInstant().GetObj("BraveArrow", BowArrow.transform.position, transform.localRotation).gameObject.GetComponent<BowArrowController>().atk = attack.mAtk;
+            BowArrow.SetActive(false);
+        }
+        public void endBowShooting()
+        {
+            BowArrow.SetActive(true);
+            beDoingSomethings = false;
+            mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
+        }
+        public void startBowSkill()
+        {
+            ObjectPool.GetInstant().GetObj("BraveArrow", new Vector3(BowArrow.transform.position[0], BowArrow.transform.position[1] + 0.3f, BowArrow.transform.position[2]), transform.localRotation).gameObject.GetComponent<BowArrowController>().atk = attack.mAtk;
+            ObjectPool.GetInstant().GetObj("BraveArrow", BowArrow.transform.position, transform.localRotation).gameObject.GetComponent<BowArrowController>().atk = attack.mAtk;
+            ObjectPool.GetInstant().GetObj("BraveArrow", new Vector3(BowArrow.transform.position[0], BowArrow.transform.position[1] - 0.3f, BowArrow.transform.position[2]), transform.localRotation).gameObject.GetComponent<BowArrowController>().atk = attack.mAtk;
+            BowArrow.SetActive(false);
+        }
+        public void endBowSkill()
+        {
+            BowArrow.SetActive(true);
+            beDoingSomethings = false;
+            mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
         }
         public void startChangeWeapon()
         {
@@ -805,6 +926,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             else
             {
                 secondaryWeapon.SetActive(false);
+                BowArrow.SetActive(false);
                 WeaponIndex = mainWeaponIndex;
                 mAnimator.SetInteger("WeaponIndex", WeaponIndex);
                 usingMainWeapon = true;
@@ -841,6 +963,10 @@ namespace LeoLuz.PlugAndPlayJoystick
             else
             {
                 secondaryWeapon.SetActive(true);
+                if (WeaponIndex == 5)
+                {
+                    BowArrow.SetActive(true);
+                }
             }
             
 
@@ -866,11 +992,11 @@ namespace LeoLuz.PlugAndPlayJoystick
 
             }
             */
-            if (!Blocking)
-            {
+            //if (!Blocking)
+            //{
                 beDoingSomethings = false;
                 mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
-            }
+            //}
 
         }
         public void startDeath()
@@ -888,11 +1014,11 @@ namespace LeoLuz.PlugAndPlayJoystick
             mLife.mHp = mLife.MAXHP;
             mLife.hasHp = true;
             endChangeWeapon();
-            if (!Blocking)
-            {
+            //if (!Blocking)
+            //{
                 beDoingSomethings = false;
                 mAnimator.SetBool("beDoingSomethings", beDoingSomethings);
-            }
+            //}
         }
         public void startJump()
         {
@@ -917,7 +1043,8 @@ namespace LeoLuz.PlugAndPlayJoystick
             //碰到地面
             if (collision.gameObject.name.Equals("Plane"))
             {
-                
+                groundYPos = transform.position[1];
+                hight = 0;
                 if (atAir&&dashFall&&!death)
                 {
                     if (EarthSlam != null)
@@ -983,12 +1110,12 @@ namespace LeoLuz.PlugAndPlayJoystick
                     Destroy(hitInstance, hitPsParts.main.duration);
                 }
             }
-            GameUIController.AddRythmCount(3f);
+            //GameUIController.AddRythmCount(3f);
         }
         ////////////////////////////////////////////////////////////////////<攻击特效/>
 
 
-        ////////////////////////////////////////////////////////////////////<技能和buff相关>
+        ////////////////////////////////////////////////////////////////////<获取与设定勇者数据>
         public void setAtk(float setatk)
         {
             currAtk = setatk;
@@ -1006,7 +1133,24 @@ namespace LeoLuz.PlugAndPlayJoystick
         {
             return mLife;
         }
-        ////////////////////////////////////////////////////////////////////<技能和buff相关/>
+        public int getSkillNum()
+        {
+            return skillManager.skill_00_num;
+        }
+        public SkillManager getSkillManager()
+        {
+            return skillManager;
+        }
+        public BufferManager getBufferManager()
+        {
+            return bufferManager;
+        }
+        public bool isDead()
+        {
+            return death || reviving;
+        }
+        ////////////////////////////////////////////////////////////////////<获取与设定勇者数据/>
+
     }
 
 //}

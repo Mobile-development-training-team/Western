@@ -62,7 +62,7 @@ public class SkyLightningController : MonoBehaviour
         {
             attack.mAtk = atk * 0.3f;
             attack.attack(otherLife);
-            GameUIController.AddRythmCount(3f);
+            //GameUIController.AddRythmCount(3f);
         }
         if (mhit1 != null&&mhit1_1!=null)
         {
@@ -83,7 +83,7 @@ public class SkyLightningController : MonoBehaviour
         {
             attack.mAtk = atk * 0.6f;
             attack.attack(otherLife);
-            GameUIController.AddRythmCount(3f);
+            //GameUIController.AddRythmCount(3f);
         }
         if (mhit2 != null)
         {
@@ -102,7 +102,7 @@ public class SkyLightningController : MonoBehaviour
         {
             attack.mAtk = atk * 0.9f;
             attack.attack(otherLife);
-            GameUIController.AddRythmCount(3f);
+            //GameUIController.AddRythmCount(3f);
         }
         if (mhit3 != null)
         {
@@ -119,9 +119,10 @@ public class SkyLightningController : MonoBehaviour
         yield return new WaitForSeconds(1.2f);
         if (otherLife != null)
         {
-            attack.mAtk = atk * 1.2f;
+            //attack.mAtk = atk * 1.2f;
+            attack.mAtk = 99999f;
             attack.attack(otherLife);
-            GameUIController.AddRythmCount(3f);
+            //GameUIController.AddRythmCount(3f);
         }
         if (mhit3 != null)
         {

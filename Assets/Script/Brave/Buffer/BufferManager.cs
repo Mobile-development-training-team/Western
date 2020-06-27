@@ -35,19 +35,19 @@ public class BufferManager : MonoBehaviour
                 }
                 buffer_03_timer = buffer_03_coolTime;
                 loadBuffer("heal-sphere");
-                GameUIController.AddRythmCount(1f);
+                //GameUIController.AddRythmCount(1f);
             }
         }
     }
 
-    public void getBuffer()
+    public int getBuffer()
     {
         //int bufferIndex = Random.Range(0, 6);
-        if (bufferIndex == 6)
+        bufferIndex++;
+        if (bufferIndex >= 6 || bufferIndex < 0) 
         {
             bufferIndex = 0;
         }
-
 
         if (bufferIndex == 0)
         {
@@ -55,7 +55,8 @@ public class BufferManager : MonoBehaviour
             float tempAtk = brave.getCurrAtk() * 1.3f;
             brave.setAtk(tempAtk);
             loadBuffer("fist-target-large");
-            GameUIController.AddRythmCount(1f);
+            return 0;
+            //GameUIController.AddRythmCount(1f);
         }
         else if (bufferIndex == 1)
         {
@@ -63,7 +64,8 @@ public class BufferManager : MonoBehaviour
             tempLife.mHp += tempLife.MAXHP * 0.3f;
             tempLife.MAXHP *= 1.3f;
             loadBuffer("heal-target-large");
-            GameUIController.AddRythmCount(1f);
+            return 1;
+            //GameUIController.AddRythmCount(1f);
         }
         else if (bufferIndex == 2)
         {
@@ -77,14 +79,15 @@ public class BufferManager : MonoBehaviour
                 tempLife.mDef *= 1.3f;
             }
             loadBuffer("armor-increase-target-large");
-            GameUIController.AddRythmCount(1f);
+            return 2;
+            //GameUIController.AddRythmCount(1f);
         }
         else if (bufferIndex == 3)
         {
             //圣洁之力
-            tempLife.mShield += tempLife.MAXHP * 2f;
-            GameUIController.AddRythmCount(1f);
-            //特效
+            tempLife.mShield += tempLife.MAXHP * 0.2f;
+            return 3;
+            //GameUIController.AddRythmCount(1f);
         }
         else if (bufferIndex == 4)
         {
@@ -96,16 +99,21 @@ public class BufferManager : MonoBehaviour
                 tempLife.mHp = tempLife.MAXHP;
             }
             loadBuffer("heal-sphere");
-            GameUIController.AddRythmCount(1f);
+            return 4;
+            //GameUIController.AddRythmCount(1f);
         }
         else if (bufferIndex == 5)
         {
             //一刀入魂
             buffer_04 = true;
             loadBuffer("armor-decrease-target-large");
-            GameUIController.AddRythmCount(1f);
+            return 5;
+            //GameUIController.AddRythmCount(1f);
         }
-        bufferIndex++;
+        else
+        {
+            return -1;
+        }
     }
 
     
@@ -118,12 +126,12 @@ public class BufferManager : MonoBehaviour
             bufferAttack.mTeam = attack.mTeam;
             bufferAttack.attack(otherLife);
             loadBuffer("armor-decrease-target-large");
-            GameUIController.AddRythmCount(5f);
+            //GameUIController.AddRythmCount(5f);
         }
         else
         {
             attack.attack(otherLife);
-            GameUIController.AddRythmCount(3f);
+            //GameUIController.AddRythmCount(3f);
         }
     }
 

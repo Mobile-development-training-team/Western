@@ -45,7 +45,7 @@ public class GroundFireController : MonoBehaviour
                     Hit(other);
                 }
                 attack.attack(otherLife);
-                GameUIController.AddRythmCount(3f);
+                //GameUIController.AddRythmCount(3f);
             }
         }
     }
@@ -55,7 +55,7 @@ public class GroundFireController : MonoBehaviour
         if (mhit != null)
         {
             Vector3 pos = collider.transform.position;
-            var hitInstance = Instantiate(mhit, new Vector3(pos[0], pos[1] , pos[2]), Quaternion.identity);
+            var hitInstance = Instantiate(mhit, new Vector3(pos[0], pos[1] + 1f , pos[2]), Quaternion.identity);
             var hitPs = hitInstance.GetComponent<ParticleSystem>();
             if (hitPs != null)
             {

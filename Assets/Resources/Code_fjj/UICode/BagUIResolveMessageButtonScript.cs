@@ -38,6 +38,8 @@ public class BagUIResolveMessageButtonScript : MonoBehaviour
             }   
         }
         DataManager.roleEquipment.SetRareEarthCount(DataManager.roleEquipment.GetRareEarthCount() + Buf);
-        transform.parent.GetComponent<Canvas>().enabled = false;
+
+        transform.parent.parent.GetComponent<Canvas>().enabled = false;
+        transform.parent.parent.parent.GetComponent<Canvas>().enabled = false;
     }
 }

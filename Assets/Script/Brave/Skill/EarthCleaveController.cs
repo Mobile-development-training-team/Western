@@ -46,7 +46,7 @@ public class EarthCleaveController : MonoBehaviour
             }
             */
             other.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0,10, 0), ForceMode.Impulse);
-            GameUIController.AddRythmCount(2f);
+            //GameUIController.AddRythmCount(2f);
         }
     }
 }

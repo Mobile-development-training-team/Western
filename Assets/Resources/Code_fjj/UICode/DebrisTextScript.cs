@@ -14,7 +14,7 @@ public class DebrisTextScript : MonoBehaviour
     private void SelfUpdate()
     {
         Buf = DataManager.roleEquipment.GetSkillDebris();
-        GetComponent<Text>().text = "技能碎片：" + Buf.ToString();
+        GetComponent<Text>().text = Buf.ToString();
     }
 
     void Update()

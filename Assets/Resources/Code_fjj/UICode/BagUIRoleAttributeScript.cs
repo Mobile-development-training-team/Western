@@ -23,8 +23,8 @@ public class BagUIRoleAttributeScript : MonoBehaviour
     private void SelfUpdate()
     {
         Buf = GameScript.GameRoleAttribute;
-        transform.Find("ATK").GetComponent<Text>().text = "攻击:" + Buf.Attack.ToString();
-        transform.Find("HP").GetComponent<Text>().text = "生命:" + Buf.HealthPointLimit.ToString();
-        transform.Find("DEF").GetComponent<Text>().text = "防御:" + Buf.Defence.ToString();
+        transform.Find("ATK").Find("Text").GetComponent<Text>().text = "攻击:" + Buf.Attack.ToString();
+        transform.Find("HP").Find("Text").GetComponent<Text>().text = "生命:" + Buf.HealthPointLimit.ToString();
+        transform.Find("DEF").Find("Text").GetComponent<Text>().text = "防御:" + Buf.Defence.ToString();
     }
 }

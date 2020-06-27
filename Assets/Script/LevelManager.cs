@@ -8,10 +8,18 @@ public class LevelManager : MonoBehaviour
     public GameObject[] LevelButton;
     public GameObject[] LockImage;
     private int levelId;
+    GameManager gameManager;
+
+    void Awake()
+    {
+        gameManager = GameManager.INSTANCE;
+        gameManager.setLevelManager(this);
+    }
     void Start()
     {
         //上次退出游戏时保存的游戏关卡ID，如果第一次进入默认为1
-        levelId = PlayerPrefs.GetInt(PlayerPrefs.GetString("level"), 1);//返回Level的值，如果不存在就返回默认值1
+        //levelId = PlayerPrefs.GetInt(PlayerPrefs.GetString("level"), 1);//返回Level的值，如果不存在就返回默认值1
+        levelId = gameManager.getLevelID();
         LoadLevel();
     }
     private void LoadLevel()
@@ -39,46 +47,53 @@ public class LevelManager : MonoBehaviour
     {
         if (levelId >= 2)
         {
-            GameManager.INSTANCE.LoadTargetScene(2);
+            gameManager.LoadTargetScene(2);
         }
     }
     public void LoadGameScene03()
     {
         if (levelId >= 3)
         {
-            GameManager.INSTANCE.LoadTargetScene(3);
+            gameManager.LoadTargetScene(3);
         }
     }
     public void LoadGameScene04()
     {
-
+        if (levelId >= 4)
+        {
+            gameManager.LoadTargetScene(4);
+        }
     }
     public void LoadGameScene05()
     {
-
+        if (levelId >= 5)
+        {
+            gameManager.LoadTargetScene(5);
+        }
     }
     public void LoadGameScene06()
     {
-
+        if (levelId >= 6)
+        {
+            gameManager.LoadTargetScene(6);
+        }
     }
     public void LoadGameScene07()
     {
-
+        if (levelId >= 7)
+        {
+            gameManager.LoadTargetScene(7);
+        }
     }
     public void LoadGameScene08()
     {
-
+        if (levelId >= 8)
+        {
+            gameManager.LoadTargetScene(8);
+        }
     }
-
     public void LoadMainScene()
     {
-        GameManager.INSTANCE.LoadMainScene();
-    }
-    private void  Reset()
-    {
-      // PlayerPrefs.SetInt(PlayerPrefs.GetString("level"),1);
-      PlayerPrefs.DeleteKey("level");
-      //print(PlayerPrefs.GetInt(PlayerPrefs.GetString("level")));
-      print(PlayerPrefs.HasKey("level"));
+        gameManager.LoadMainScene();
     }
 }

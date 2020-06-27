@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94502dd05f81dcb4e882d5ef59b1b612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atk: 20
+  atk: 15
   speed: 10
   flyTime: 0.7
   mhit: {fileID: 2827453198976755541, guid: 0ee45d90c39c5314f9b1aeeb41e36a42, type: 3}
