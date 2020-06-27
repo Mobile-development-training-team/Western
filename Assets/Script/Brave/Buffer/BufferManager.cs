@@ -70,9 +70,9 @@ public class BufferManager : MonoBehaviour
         else if (bufferIndex == 2)
         {
             //钢筋铁骨
-            if (tempLife.mDef >= 99999)
+            if (tempLife.mDef >= 9999999)
             {
-                tempLife.mDef += (tempLife.mDef - 99999) * 0.3f;
+                tempLife.mDef += (tempLife.mDef - 9999999) * 0.3f;
             }
             else
             {

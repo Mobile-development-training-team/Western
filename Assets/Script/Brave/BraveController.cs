@@ -48,7 +48,7 @@ namespace LeoLuz.PlugAndPlayJoystick
         private float vertical = 0;
 
         public int mainWeaponIndex = 0;
-        public int secondaryWeaponIndex = 1;
+        public int secondaryWeaponIndex = 0;
         private bool usingMainWeapon = true;
         private GameObject mainWeapon;
         private GameObject secondaryWeapon;
@@ -69,6 +69,7 @@ namespace LeoLuz.PlugAndPlayJoystick
 
         private float deathTime = 3f;
         private int deaths = 0;//主角死亡次数
+        private float InvincibleTime = 0;   //复活后无敌时间3秒
 
         //(GUI按钮控制版本-废弃)
         /*
@@ -136,29 +137,22 @@ namespace LeoLuz.PlugAndPlayJoystick
             BlockBroken = false;
 
             //自定义测试数据
+            /*
             mLife.mHp = mLife.MAXHP;
             baseAtk = 20f;
             currAtk = baseAtk;
             attack.mAtk = currAtk;
             skillManager.skill_00_num = 3;
-            
-            //mBlock = mLife.MAXHP * 0.2f;
-
+            */
             //从外面拿数据
-            /*
             mLife.MAXHP = GameScript.GameRoleAttribute.HealthPointLimit;
             mLife.mHp = mLife.MAXHP;
             mLife.mDef = GameScript.GameRoleAttribute.Defence;
             baseAtk = GameScript.GameRoleAttribute.Attack;
             currAtk = baseAtk;
             attack.mAtk = currAtk;
-            */
 
             RightHand = GameObject.FindGameObjectWithTag("RightHand");
-            //THandSword = RightHand.transform.Find("2Hand-Sword Variant").gameObject;
-            //Gun = RightHand.transform.Find("2Hand-Rifle").gameObject;
-            //Wand = RightHand.transform.Find("Wand").gameObject;
-            //Crossbow = RightHand.transform.Find("Crossbow").gameObject;
             muzzle = Gun.transform.Find("muzzle").gameObject;
             crossBowMuzzle = CrossBow.transform.Find("CrossbowMuzzle").gameObject;
             magicCircle = transform.Find("MagicCircle").gameObject;
@@ -180,9 +174,63 @@ namespace LeoLuz.PlugAndPlayJoystick
             Axe.GetComponent<BoxCollider>().enabled = false;
             Spear.GetComponent<BoxCollider>().enabled = false;
             BowArrow.GetComponent<BoxCollider>().enabled = false;
-
+            SelectWeapon();
             ArmdeMyselfe();
             usingMainWeapon = true;
+        }
+
+        public void SelectWeapon()
+        {
+            if (DataManager.roleEquipment.HadMainWeapon())
+            {
+                switch (DataManager.roleEquipment.GetMainWeapon().item.GetQuality())
+                {
+                    case Quality.Normal:
+                        mainWeaponIndex = 0;
+                        break;
+                    case Quality.Excellent:
+                        mainWeaponIndex = 3;
+                        break;
+                    case Quality.Rare:
+                        mainWeaponIndex = 4;
+                        break;
+                    case Quality.Epic:
+                        mainWeaponIndex = 0;
+                        break;
+                    default:
+                        mainWeaponIndex = 0;
+                        break;
+                }
+            }
+            else
+            {
+                mainWeaponIndex = 0;
+            }
+            if (DataManager.roleEquipment.HadAlternateWeapon())
+            {
+                switch (DataManager.roleEquipment.GetAlternateWeapon().item.GetQuality())
+                {
+                    case Quality.Normal:
+                        secondaryWeaponIndex = 5;
+                        break;
+                    case Quality.Excellent:
+                        secondaryWeaponIndex = 1;
+                        break;
+                    case Quality.Rare:
+                        secondaryWeaponIndex = 2;
+                        break;
+                    case Quality.Epic:
+                        secondaryWeaponIndex = 2;
+                        break;
+                    default:
+                        secondaryWeaponIndex = 0;
+                        break;
+                }
+            }
+            else
+            {
+                mainWeaponIndex = 0;
+            }
         }
 
         public void ArmdeMyselfe()
@@ -249,6 +297,14 @@ namespace LeoLuz.PlugAndPlayJoystick
                 }
                 ///////////////////////////////<3秒后复活/>
                 return;
+            }
+            if (InvincibleTime > 0)
+            {
+                InvincibleTime -= Time.deltaTime;
+                if (InvincibleTime <= 0)
+                {
+                    mLife.mShield = 0;
+                }
             }
             //手柄输入版本
             horizontal = Input.GetAxis("Horizontal");
@@ -1011,6 +1067,8 @@ namespace LeoLuz.PlugAndPlayJoystick
         public void endRevive()
         {
             reviving = false;
+            mLife.mShield = 9999999f;
+            InvincibleTime = 3f;
             mLife.mHp = mLife.MAXHP;
             mLife.hasHp = true;
             endChangeWeapon();

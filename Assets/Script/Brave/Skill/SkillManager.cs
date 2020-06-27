@@ -14,7 +14,7 @@ public class SkillManager : MonoBehaviour
 
     //引天雷（大招）
     ///////////////////////////////////////<skill00>
-    public int skill_00_num = 3;
+    public int skill_00_num = DataManager.roleEquipment.GetSlayCount();
     private float skill_00_coolTime = 20f;
     private float skill_00_timer = 20f;//20f
     ///////////////////////////////////////<skill00/>
@@ -22,7 +22,8 @@ public class SkillManager : MonoBehaviour
     //嗜血封魔
     ///////////////////////////////////////<skill01>
     public bool select_skill_01 = true;
-    private float skill_01_num = 0.11f;
+    //private float skill_01_num = 0.11f;
+    private float skill_01_num = (float)DataManager.SkillData[3].GetAttibute().PlusHP;
     //概率型技能实现
     private float skill_01_percent = 10f;
     ///////////////////////////////////////<skill01/>
@@ -30,8 +31,8 @@ public class SkillManager : MonoBehaviour
     //剑气
     ///////////////////////////////////////<skill02>
     public bool select_skill_02 = true ;
-    //private float skill_02_atk = 10f;
-    private float skill_02_num = 0.55f;
+    //private float skill_02_num = 0.55f;
+    private float skill_02_num = (float)DataManager.SkillData[4].GetAttibute().PlusATK;
     //概率型技能实现
     private float skill_02_percent = 40f;
     ///////////////////////////////////////<skill02/>
@@ -39,8 +40,8 @@ public class SkillManager : MonoBehaviour
     //地火
     ///////////////////////////////////////<skill03>
     public bool select_skill_03 = true;
-    //private float skill_03_atk = 10f;
-    private float skill_03_num = 1f;
+    //private float skill_03_num = 1f;
+    private float skill_03_num = (float)DataManager.SkillData[5].GetAttibute().PlusATK;
     //概率型技能实现
     private float skill_03_percent = 15f;
     ///////////////////////////////////////<skill03/>
@@ -48,8 +49,8 @@ public class SkillManager : MonoBehaviour
     //血战天虹
     ///////////////////////////////////////<skill04>
     public bool select_skill_04 = true;
-    private float skill_04_num = 0.2f;
-    //private float skill_04_percent = 10f;
+    //private float skill_04_num = 0.2f;
+    private float skill_04_num = (float)DataManager.SkillData[6].GetAttibute().PlusATK;
     private bool use_skill_04 = false;
     private GameObject skill_04_buff;
     ///////////////////////////////////////<skill04/>
@@ -61,7 +62,7 @@ public class SkillManager : MonoBehaviour
     //冷却+持续型技能实现
     private bool skill_05 = false;
     private float skill_05_coolTime = 30f;
-    private float skill_05_stayedTime = 1.5f;
+    private float skill_05_stayedTime = (float)DataManager.SkillData[7].GetDuration();
     private float skill_05_timer = 30f;
     ///////////////////////////////////////<skill05/>
 
@@ -69,6 +70,29 @@ public class SkillManager : MonoBehaviour
     {
         brave = transform.GetComponent<BraveController>();
         mLife = brave.getLife();
+
+        //判断技能是否可用
+        if (DataManager.SkillData[3].GetLevel() <= 0)
+        {
+            select_skill_01 = false;
+        }
+        if (DataManager.SkillData[4].GetLevel() <= 0)
+        {
+            select_skill_02 = false;
+        }
+
+        if (DataManager.SkillData[5].GetLevel() <= 0)
+        {
+            select_skill_03 = false;
+        }
+        if (DataManager.SkillData[6].GetLevel() <= 0)
+        {
+            select_skill_04 = false;
+        }
+        if (DataManager.SkillData[7].GetLevel() <= 0)
+        {
+            select_skill_05 = false;
+        }
     }
 
     void Update()
@@ -112,13 +136,13 @@ public class SkillManager : MonoBehaviour
                 {
                     skill_05 = false;
                     skill_05_timer = skill_05_coolTime;
-                    mLife.mDef -= 99999;
+                    mLife.mDef -= 9999999;
                 }
                 else
                 {
                     skill_05 = true;
                     skill_05_timer = skill_05_stayedTime;
-                    mLife.mDef += 99999;
+                    mLife.mDef += 9999999;
                     loadBuffer("armor-increase-buff", skill_05_stayedTime);
                     //GameUIController.AddRythmCount(2f);
                     /*
@@ -140,6 +164,7 @@ public class SkillManager : MonoBehaviour
         {
             skill_00_timer = 0;
             skill_00_num--;
+            DataManager.roleEquipment.SetSlayCount(skill_00_num);
             brave.gameManager.getUIController().SetSkillNumText(skill_00_num);
             //if (mLife.mAp >= 50f)
             //{

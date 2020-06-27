@@ -25,8 +25,8 @@ public class GameManager:MonoBehaviour
             INSTANCE = this;
             //ResetLevel();
             currentSceneIndex = getCurrentSceneIndex();
-            //levelId = PlayerPrefs.GetInt(PlayerPrefs.GetString("level"), 1);
-            levelId = PlayerPrefs.GetInt("level", 1);
+            //levelId = PlayerPrefs.GetInt("level", 1);
+            InitLevelID();
             EnemiesLoad();
             //Debug.Log("LevelDatas.Count=" + LevelDatas.Count + "//////LevelDatas[0].Waves.Count=" + LevelDatas[0].Waves.Count);
         }
@@ -41,6 +41,41 @@ public class GameManager:MonoBehaviour
     public int getCurrentSceneIndex()
     {
         return SceneManager.GetActiveScene().buildIndex; ;
+    }
+    public void InitLevelID()
+    {
+        if (GameScript.LevelOutput[7].GetFirstOrNot())
+        {
+            levelId = 8;
+        }
+        else if (GameScript.LevelOutput[6].GetFirstOrNot())
+        {
+            levelId = 7;
+        }
+        else if (GameScript.LevelOutput[5].GetFirstOrNot())
+        {
+            levelId = 6;
+        }
+        else if (GameScript.LevelOutput[4].GetFirstOrNot())
+        {
+            levelId = 5;
+        }
+        else if (GameScript.LevelOutput[3].GetFirstOrNot())
+        {
+            levelId = 4;
+        }
+        else if (GameScript.LevelOutput[2].GetFirstOrNot())
+        {
+            levelId = 3;
+        }
+        else if (GameScript.LevelOutput[1].GetFirstOrNot())
+        {
+            levelId = 2;
+        }
+        else
+        {
+            levelId = 1;
+        }
     }
     public int getLevelID()
     {
@@ -100,6 +135,7 @@ public class GameManager:MonoBehaviour
             //Invoke("LoadCurScene", 2f);
             //else 结束关卡返回关卡选择界面
             //Invoke("LoadGameSelectScene", 2f);
+            GameScript.LevelNotPass(currentSceneIndex - 1, enemiesManager.LevelProcess());
             gameUIController.ShowDeathEnd();
         }
         else
@@ -108,16 +144,16 @@ public class GameManager:MonoBehaviour
             if (currentSceneIndex == levelId)
             {
                 levelId++;
-                //PlayerPrefs.SetInt(PlayerPrefs.GetString("level"), levelId);
-                PlayerPrefs.SetInt("level", levelId);
+                //PlayerPrefs.SetInt("level", levelId);
             }
-                /*
+            /*
             else if (currentSceneIndex > levelId && currentSceneIndex < 9) 
             {
                 levelId = currentSceneIndex;
-                //PlayerPrefs.SetInt(PlayerPrefs.GetString("level"), levelId);
-                PlayerPrefs.SetInt("level", levelId);
-            }*/
+                //PlayerPrefs.SetInt("level", levelId);
+            }
+            */
+            GameScript.LevelPass(currentSceneIndex - 1);
             gameUIController.ShowWinEnd();
             /*
             currentSceneIndex = getCurrentSceneIndex();
@@ -177,7 +213,7 @@ public class GameManager:MonoBehaviour
 
 
 
-    ////////////////////////////////////////////////////////////////<尝试读取CSV文件>
+    ////////////////////////////////////////////////////////////////<读取CSV文件>
     //public static Dictionary<int , List<WaveData>> LevelDatas;
     public static List<LevelData> LevelDatas;
     public void EnemiesLoad()
@@ -292,4 +328,5 @@ public class GameManager:MonoBehaviour
             Atk = atk;
         }
     }
+    ////////////////////////////////////////////////////////////////<读取CSV文件/>
 }

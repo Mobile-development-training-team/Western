@@ -236,4 +236,8 @@ public class Chip
     {
         return skillDebrisNum_first.ToString();
     }
+    public bool GetFirstOrNot()
+    {
+        return firstOrNot;
+    }
 }

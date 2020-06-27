@@ -22,19 +22,19 @@ public class EnemiesManager03 : EnemiesManager
                 bufferIndex = brave.GetComponent<BufferManager>().getBuffer();
                 gameUIController.GetBuff(0, bufferIndex);
                 break;
-            case 4:
+            case 5:
                 bufferIndex = brave.GetComponent<BufferManager>().getBuffer();
                 gameUIController.GetBuff(1, bufferIndex);
                 break;
-            case 6:
+            case 8:
                 bufferIndex = brave.GetComponent<BufferManager>().getBuffer();
                 gameUIController.GetBuff(2, bufferIndex);
                 break;
-            case 8:
+            case 11:
                 bufferIndex = brave.GetComponent<BufferManager>().getBuffer();
                 gameUIController.GetBuff(3, bufferIndex);
                 break;
-            case 10:
+            case 14:
                 bufferIndex = brave.GetComponent<BufferManager>().getBuffer();
                 gameUIController.GetBuff(4, bufferIndex);
                 break;

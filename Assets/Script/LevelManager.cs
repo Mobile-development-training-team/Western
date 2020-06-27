@@ -40,56 +40,80 @@ public class LevelManager : MonoBehaviour
     {
         if (levelId >= 1)
         {
-            GameManager.INSTANCE.LoadTargetScene(1);
+            if (GameScript.ReduceVIT(4))
+            {
+                GameManager.INSTANCE.LoadTargetScene(1);
+            }
         }
     }
     public void LoadGameScene02()
     {
         if (levelId >= 2)
         {
-            gameManager.LoadTargetScene(2);
+            if (GameScript.ReduceVIT(4))
+            {
+                gameManager.LoadTargetScene(2);
+            }
         }
     }
     public void LoadGameScene03()
     {
         if (levelId >= 3)
         {
-            gameManager.LoadTargetScene(3);
+            if (GameScript.ReduceVIT(4))
+            {
+                gameManager.LoadTargetScene(3);
+            }
         }
     }
     public void LoadGameScene04()
     {
         if (levelId >= 4)
         {
-            gameManager.LoadTargetScene(4);
+            if (GameScript.ReduceVIT(4))
+            {
+                gameManager.LoadTargetScene(4);
+            }
         }
     }
     public void LoadGameScene05()
     {
         if (levelId >= 5)
         {
-            gameManager.LoadTargetScene(5);
+            if (GameScript.ReduceVIT(4))
+            {
+                gameManager.LoadTargetScene(5);
+            }
         }
     }
     public void LoadGameScene06()
     {
         if (levelId >= 6)
         {
-            gameManager.LoadTargetScene(6);
+            if (GameScript.ReduceVIT(4))
+            {
+                gameManager.LoadTargetScene(6);
+            }
         }
     }
     public void LoadGameScene07()
     {
         if (levelId >= 7)
         {
-            gameManager.LoadTargetScene(7);
+            if (GameScript.ReduceVIT(4))
+            {
+                gameManager.LoadTargetScene(7);
+            }
         }
     }
     public void LoadGameScene08()
     {
         if (levelId >= 8)
         {
-            gameManager.LoadTargetScene(8);
+            if (GameScript.ReduceVIT(4))
+            {
+                gameManager.LoadTargetScene(8);
+            }
         }
     }
     public void LoadMainScene()

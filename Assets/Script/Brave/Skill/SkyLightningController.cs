@@ -120,7 +120,7 @@ public class SkyLightningController : MonoBehaviour
         if (otherLife != null)
         {
             //attack.mAtk = atk * 1.2f;
-            attack.mAtk = 99999f;
+            attack.mAtk = 9999999f;
             attack.attack(otherLife);
             //GameUIController.AddRythmCount(3f);
         }

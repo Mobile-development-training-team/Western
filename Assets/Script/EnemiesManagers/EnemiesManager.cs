@@ -426,6 +426,10 @@ abstract public class EnemiesManager : MonoBehaviour
             StartCoroutine(generatorEnemy(enemy));
         }
     }
+    public double LevelProcess()
+    {
+        return (double)(waveNum - 1) / totalWaveNum;
+    }
     /*
     abstract protected void wave1();
     abstract protected void wave2();
