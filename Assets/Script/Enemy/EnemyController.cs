@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour
     public float range = 0f;    //敌人攻击范围
     public float atk = 20f;
 
-    public Life mLife;
+    private Life mLife;
     public Attack attack;
     private LifeCallback callback;
 
@@ -328,12 +328,18 @@ public class EnemyController : MonoBehaviour
     public void setAttribte(float HP, float Def, float ATK)
     {
         //Debug.Log("try to setAttribute");
-        mLife = new Life();
+        if (mLife == null)
+        {
+            mLife = new Life();
+        }
         mLife.MAXHP = HP;
         mLife.mHp = mLife.MAXHP;
         mLife.mDef = Def;
         mLife.mTeam = 2;
-        attack = new Attack();
+        if (attack == null)
+        {
+            attack = new Attack();
+        }
         attack.mAtk = ATK;
         attack.mTeam = mLife.mTeam;
         /*

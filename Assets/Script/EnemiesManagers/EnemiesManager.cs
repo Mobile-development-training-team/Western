@@ -132,40 +132,6 @@ abstract public class EnemiesManager : MonoBehaviour
             //GameObject theEnemy = ObjectPool.GetInstant().GetObj("TwoHandsSwordEnemy", new Vector3(brave.transform.position[0] + distance, brave.transform.position[1] + 2, brave.transform.position[2]), new Quaternion());
             //SetEnemyAttribute(theEnemy, MaxHP, Def, Atk);
             //StartCoroutine(SetEnemyAttribute(theEnemy, MaxHP, Def, Atk));
-            /*
-            if (MaxHP == null)
-            {
-                Debug.Log("MaxHP is null");
-            }
-            else
-            {
-                Debug.Log("MaxHP is not null");
-            }
-            if (theEnemy.GetComponent<EnemyController>() == null)
-            {
-                Debug.Log("theEnemy.GetComponent<EnemyController>() is null");
-            }
-            else
-            {
-                Debug.Log("theEnemy.GetComponent<EnemyController>() is not null");
-            }
-            if (theEnemy.GetComponent<EnemyController>().attack == null)
-            {
-                Debug.Log("theEnemy.GetComponent<EnemyController>().attack is null");
-            }
-            else
-            {
-                Debug.Log("theEnemy.GetComponent<EnemyController>().attack is not null");
-            }
-            if (theEnemy.GetComponent<EnemyController>().mLife == null)
-            {
-                Debug.Log("theEnemy.GetComponent<EnemyController>().mLife is null");
-            }
-            else
-            {
-                Debug.Log("theEnemy.GetComponent<EnemyController>().mLife is not null");
-            }
-            
         }
         if (enemyIndex == 1)
         {
@@ -199,73 +165,16 @@ abstract public class EnemiesManager : MonoBehaviour
         gameUIController.SetCurrentEnemyNumText(curDisplayedEnemies);
     }
     */
-    /*
-    protected IEnumerator SetEnemyAttribute(GameObject theEnemy, float MaxHP, float Def, float Atk)
-    {
-        yield return new WaitForSeconds(1f);
-        if (MaxHP == null)
-        {
-            Debug.Log("MaxHP is null");
-        }
-        else
-        {
-            Debug.Log("MaxHP is not null");
-        }
-        if (theEnemy.GetComponent<EnemyController>() == null)
-        {
-            Debug.Log("theEnemy.GetComponent<EnemyController>() is null");
-        }
-        else
-        {
-            Debug.Log("theEnemy.GetComponent<EnemyController>() is not null");
-        }
-        if (theEnemy.GetComponent<EnemyController>().attack == null)
-        {
-            Debug.Log("theEnemy.GetComponent<EnemyController>().attack is null");
-        }
-        else
-        {
-            Debug.Log("theEnemy.GetComponent<EnemyController>().attack is not null");
-        }
-        if (theEnemy.GetComponent<EnemyController>().mLife == null)
-        {
-            Debug.Log("theEnemy.GetComponent<EnemyController>().mLife is null");
-        }
-        else
-        {
-            Debug.Log("theEnemy.GetComponent<EnemyController>().mLife is not null");
-        }
-        theEnemy.GetComponent<EnemyController>().mLife.MAXHP = MaxHP;
-        theEnemy.GetComponent<EnemyController>().mLife.mHp = MaxHP;
-        theEnemy.GetComponent<EnemyController>().mLife.mDef = Def;
-        theEnemy.GetComponent<EnemyController>().attack.mAtk = Atk;
-    }
-    */
     protected IEnumerator generatorEnemy(GameManager.EnemyData enemy)
     {
-        //Debug.Log("enemy genery begin");
-        //Debug.Log("enemy genery wait start");
         yield return new WaitForSeconds(enemy.WaitTime);
-        //Debug.Log("enemy genery wait end");
         if (enemy.EnemyIndex == 0)
         {
             ObjectPool.GetInstant().GetObj("TwoHandsSwordEnemy", new Vector3(brave.transform.position[0] + enemy.Distance, brave.transform.position[1] + 2, brave.transform.position[2]), new Quaternion()).GetComponent<EnemyController>().setAttribte(enemy.MaxHP, enemy.Def, enemy.Atk);
-            /*GameObject theEnemy = ObjectPool.GetInstant().GetObj("TwoHandsSwordEnemy", new Vector3(brave.transform.position[0] + enemy.Distance, brave.transform.position[1] + 2, brave.transform.position[2]), Quaternion.identity);
-            theEnemy.GetComponent<EnemyController>().mLife.MAXHP = enemy.MaxHP;
-            theEnemy.GetComponent<EnemyController>().mLife.mHp = enemy.MaxHP;
-            theEnemy.GetComponent<EnemyController>().mLife.mDef = enemy.Def;
-            theEnemy.GetComponent<EnemyController>().attack.mAtk = enemy.Atk;*/
         }
         if (enemy.EnemyIndex == 1)
         {
             ObjectPool.GetInstant().GetObj("BowEnemy", new Vector3(brave.transform.position[0] + enemy.Distance, brave.transform.position[1] + 2, brave.transform.position[2]), Quaternion.identity).GetComponent<EnemyController>().setAttribte(enemy.MaxHP, enemy.Def, enemy.Atk);
-            /*
-            GameObject theEnemy = ObjectPool.GetInstant().GetObj("BowEnemy", new Vector3(brave.transform.position[0] + enemy.Distance, brave.transform.position[1] + 2, brave.transform.position[2]), Quaternion.identity);
-            theEnemy.GetComponent<EnemyController>().mLife.MAXHP = enemy.MaxHP;
-            theEnemy.GetComponent<EnemyController>().mLife.mHp = enemy.MaxHP;
-            theEnemy.GetComponent<EnemyController>().mLife.mDef = enemy.Def;
-            theEnemy.GetComponent<EnemyController>().attack.mAtk = enemy.Atk;
-            */
         }
         if (enemy.EnemyIndex == 2)
         {
@@ -279,7 +188,6 @@ abstract public class EnemiesManager : MonoBehaviour
         {
             ObjectPool.GetInstant().GetObj("HammerEnemy", new Vector3(brave.transform.position[0] + enemy.Distance, brave.transform.position[1] + 2, brave.transform.position[2]), new Quaternion()).GetComponent<EnemyController>().setAttribte(enemy.MaxHP, enemy.Def, enemy.Atk);
         }
-        Debug.Log("enemy genery finish");
         curDisplayedEnemies++;
         gameUIController.SetCurrentEnemyNumText(curDisplayedEnemies);
     }
