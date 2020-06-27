@@ -14,7 +14,7 @@ public class SkillManager : MonoBehaviour
 
     //引天雷（大招）
     ///////////////////////////////////////<skill00>
-    public int skill_00_num = DataManager.roleEquipment.GetSlayCount();
+    private int skill_00_num = 0;
     private float skill_00_coolTime = 20f;
     private float skill_00_timer = 20f;//20f
     ///////////////////////////////////////<skill00/>
@@ -22,17 +22,15 @@ public class SkillManager : MonoBehaviour
     //嗜血封魔
     ///////////////////////////////////////<skill01>
     public bool select_skill_01 = true;
-    //private float skill_01_num = 0.11f;
-    private float skill_01_num = (float)DataManager.SkillData[3].GetAttibute().PlusHP;
-    //概率型技能实现
+    private float skill_01_num = 0.11f;
+    //概率型技能实现s
     private float skill_01_percent = 10f;
     ///////////////////////////////////////<skill01/>
 
     //剑气
     ///////////////////////////////////////<skill02>
     public bool select_skill_02 = true ;
-    //private float skill_02_num = 0.55f;
-    private float skill_02_num = (float)DataManager.SkillData[4].GetAttibute().PlusATK;
+    private float skill_02_num = 0.55f;
     //概率型技能实现
     private float skill_02_percent = 40f;
     ///////////////////////////////////////<skill02/>
@@ -40,8 +38,7 @@ public class SkillManager : MonoBehaviour
     //地火
     ///////////////////////////////////////<skill03>
     public bool select_skill_03 = true;
-    //private float skill_03_num = 1f;
-    private float skill_03_num = (float)DataManager.SkillData[5].GetAttibute().PlusATK;
+    private float skill_03_num = 1f;
     //概率型技能实现
     private float skill_03_percent = 15f;
     ///////////////////////////////////////<skill03/>
@@ -49,8 +46,7 @@ public class SkillManager : MonoBehaviour
     //血战天虹
     ///////////////////////////////////////<skill04>
     public bool select_skill_04 = true;
-    //private float skill_04_num = 0.2f;
-    private float skill_04_num = (float)DataManager.SkillData[6].GetAttibute().PlusATK;
+    private float skill_04_num = 0.2f;
     private bool use_skill_04 = false;
     private GameObject skill_04_buff;
     ///////////////////////////////////////<skill04/>
@@ -62,9 +58,19 @@ public class SkillManager : MonoBehaviour
     //冷却+持续型技能实现
     private bool skill_05 = false;
     private float skill_05_coolTime = 30f;
-    private float skill_05_stayedTime = (float)DataManager.SkillData[7].GetDuration();
+    private float skill_05_stayedTime = 1f;
     private float skill_05_timer = 30f;
     ///////////////////////////////////////<skill05/>
+
+    void Awake()
+    {
+        skill_00_num = DataManager.roleEquipment.GetSlayCount(); 
+        skill_01_num = (float)DataManager.SkillData[3].GetAttibute().PlusHP;
+        skill_02_num = (float)DataManager.SkillData[4].GetAttibute().PlusATK;
+        skill_03_num = (float)DataManager.SkillData[5].GetAttibute().PlusATK;
+        skill_04_num = (float)DataManager.SkillData[6].GetAttibute().PlusATK;
+        skill_05_stayedTime = (float)DataManager.SkillData[7].GetDuration();
+    }
 
     void Start()
     {
@@ -269,6 +275,15 @@ public class SkillManager : MonoBehaviour
     public static bool judgePercent(float percent)
     {
         return Random.Range(0, 100) <= percent;
+    }
+
+    public int getSkill_00_Num()
+    {
+        if (skill_00_num == null)
+        {
+            return 0;
+        }
+        return skill_00_num;
     }
 
 }

@@ -44,37 +44,41 @@ public class GameManager:MonoBehaviour
     }
     public void InitLevelID()
     {
-        if (GameScript.LevelOutput[7].GetFirstOrNot())
+        if (GameScript.LevelOutput[0].GetFirstOrNot())
         {
-            levelId = 8;
-        }
-        else if (GameScript.LevelOutput[6].GetFirstOrNot())
-        {
-            levelId = 7;
-        }
-        else if (GameScript.LevelOutput[5].GetFirstOrNot())
-        {
-            levelId = 6;
-        }
-        else if (GameScript.LevelOutput[4].GetFirstOrNot())
-        {
-            levelId = 5;
-        }
-        else if (GameScript.LevelOutput[3].GetFirstOrNot())
-        {
-            levelId = 4;
-        }
-        else if (GameScript.LevelOutput[2].GetFirstOrNot())
-        {
-            levelId = 3;
+            levelId = 1;
         }
         else if (GameScript.LevelOutput[1].GetFirstOrNot())
         {
+            levelId = 1;
+        }
+        else if (GameScript.LevelOutput[2].GetFirstOrNot())
+        {
             levelId = 2;
+        }
+        else if (GameScript.LevelOutput[3].GetFirstOrNot())
+        {
+            levelId = 3;
+        }
+        else if (GameScript.LevelOutput[4].GetFirstOrNot())
+        {
+            levelId = 4;
+        }
+        else if (GameScript.LevelOutput[5].GetFirstOrNot())
+        {
+            levelId = 5;
+        }
+        else if (GameScript.LevelOutput[6].GetFirstOrNot())
+        {
+            levelId = 6;
+        }
+        else if (GameScript.LevelOutput[7].GetFirstOrNot())
+        {
+            levelId = 7;
         }
         else
         {
-            levelId = 1;
+            levelId = 8;
         }
     }
     public int getLevelID()

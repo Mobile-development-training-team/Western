@@ -229,7 +229,7 @@ namespace LeoLuz.PlugAndPlayJoystick
             }
             else
             {
-                mainWeaponIndex = 0;
+                secondaryWeaponIndex = 0;
             }
         }
 
@@ -278,7 +278,7 @@ namespace LeoLuz.PlugAndPlayJoystick
         void Start()
         {
             gameUIController = gameManager.getUIController();
-            gameUIController.SetSkillNumText(skillManager.skill_00_num);
+            gameUIController.SetSkillNumText(skillManager.getSkill_00_Num());
         }
         ////////////////////////////////////////////////////////////////////<监听UI>
         void Update()
@@ -1193,7 +1193,7 @@ namespace LeoLuz.PlugAndPlayJoystick
         }
         public int getSkillNum()
         {
-            return skillManager.skill_00_num;
+            return skillManager.getSkill_00_Num();
         }
         public SkillManager getSkillManager()
         {
