@@ -6,7 +6,12 @@ public class EnemiesManager07 : EnemiesManager
 {
     protected override void setTotalWaveNum()
     {
-        totalWaveNum = 3;
+        thisLevel = GameManager.LevelDatas[6];
+        totalWaveNum = thisLevel.Waves.Count;
+        if (totalWaveNum > 14)
+        {
+            totalWaveNum = 14;
+        }
     }
     public override void getBuffer()
     {
@@ -36,69 +41,5 @@ public class EnemiesManager07 : EnemiesManager
             default:
                 break;
         }
-    }
-    protected override void wave1()
-    {
-        StartCoroutine(generatorEnemy(0, -8, 1f));
-        StartCoroutine(generatorEnemy(0, -8, 2f));
-        StartCoroutine(generatorEnemy(0, -8, 3f));
-        StartCoroutine(generatorEnemy(0, -8, 4f));
-        curWaveStillHaveEnemies = 4;
-    }
-    protected override void wave2()
-    {
-        StartCoroutine(generatorEnemy(1, -8, 1f));
-        StartCoroutine(generatorEnemy(1, -8, 2f));
-        StartCoroutine(generatorEnemy(2, -8, 3f));
-        StartCoroutine(generatorEnemy(2, -8, 1f));
-        StartCoroutine(generatorEnemy(0, -8, 2f));
-        StartCoroutine(generatorEnemy(0, -8, 4f));
-        curWaveStillHaveEnemies = 6;
-    }
-    protected override void wave3()
-    {
-        StartCoroutine(generatorEnemy(0, -8, 1f));
-        StartCoroutine(generatorEnemy(0, -8, 2f));
-        StartCoroutine(generatorEnemy(1, -8, 1f));
-        StartCoroutine(generatorEnemy(1, -8, 2f));
-        StartCoroutine(generatorEnemy(2, -8, 3f));
-        StartCoroutine(generatorEnemy(2, -8, 4f));
-        curWaveStillHaveEnemies = 6;
-    }
-    protected override void wave4()
-    {
-    }
-    protected override void wave5()
-    {
-    }
-    protected override void wave6()
-    {
-    }
-    protected override void wave7()
-    {
-    }
-    protected override void wave8()
-    {
-    }
-    protected override void wave9()
-    {
-    }
-    protected override void wave10()
-    {
-    }
-    protected override void wave11()
-    {
-    }
-    protected override void wave12()
-    {
-    }
-    protected override void wave13()
-    {
-    }
-    protected override void wave14()
-    {
-    }
-    protected override void wave15()
-    {
     }
 }

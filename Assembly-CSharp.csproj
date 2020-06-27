@@ -147,6 +147,7 @@
     <Compile Include="Assets\Script\Background\CamController.cs" />
     <Compile Include="Assets\Script\Background\Parallax.cs" />
     <Compile Include="Assets\Script\Background\ShakeCamera.cs" />
+    <Compile Include="Assets\Script\Brave\Ammunition\BowArrowController.cs" />
     <Compile Include="Assets\Script\Brave\Ammunition\BulletController.cs" />
     <Compile Include="Assets\Script\Brave\Ammunition\CrossBowArrowController.cs" />
     <Compile Include="Assets\Script\Brave\Ammunition\MagicBallController.cs" />
