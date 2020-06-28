@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-F:/UnityTestCode/Western/apkForGameProgram/game29.9.apk
+/Users/fengjiajun/Desktop/NewAlpha.apk
 SceneListBegin?
 Assets/Scenes/MainScene_fjj.unity
 Assets/Scenes/Level01.unity
